@@ -1,39 +1,28 @@
-// var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
-//     to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
-//     mapping = {};
+var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç",
+    to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc",
+    mapping = {};
  
-// for(var i = 0, j = from.length; i < j; i++ )
-//   mapping[ from.charAt( i ) ] = to.charAt( i );
+for(var i = 0, j = from.length; i < j; i++ )
+  mapping[ from.charAt( i ) ] = to.charAt( i );
 
-// function normalize(str) {
-//       var ret = [];
-//       for( var i = 0, j = str.length; i < j; i++ ) {
-//           var c = str.charAt( i );
-//           if( mapping.hasOwnProperty( str.charAt( i ) ) )
-//               ret.push( mapping[ c ] );
-//           else
-//               ret.push( c );
-//       }
-//       return ret.join( '' );
-// }
+function normalize(str) {
+      var ret = [];
+      for( var i = 0, j = str.length; i < j; i++ ) {
+          var c = str.charAt( i );
+          if( mapping.hasOwnProperty( str.charAt( i ) ) )
+              ret.push( mapping[ c ] );
+          else
+              ret.push( c );
+      }
+      return ret.join( '' );
+}
 
-
-// function clearTagBox(filter){
-// 	$('.tagbox [ckan-facet="'+filter+'"]').appendTo('.tagbox .all');
-// }
-
-
-// function toggleQuery(eventObject) {
-// 	kwd = $(this).val();
-// 	$.bbq.pushState( $.param( { 
-// 		query: kwd
-// 	} ));
-// 	return true;
-// }
-
-
-
-
+function initSearch() {
+	$.expr[':'].contains = function(a, i, m) {
+	  return normalize($(a).text().toUpperCase())
+	      .indexOf(normalize(m[3].toUpperCase())) >= 0;
+	};
+}
 
 function unique(array){
     return $.grep(array,function(el,index){
@@ -71,6 +60,14 @@ function getAllFacetCategories(facet, selectedCategories, onlyVisible) {
 function getFacetOperationDefault(facet)
 {
 	return "and"
+}
+
+function toggleQuery(eventObject) {
+	kwd = $(this).val();
+	$.bbq.pushState( $.param( { 
+		query: kwd
+	} ));
+	return true;
 }
 
 function toggleSort(eventObject) {
@@ -238,7 +235,11 @@ function filterDatasets() {
 			}
 		}	
 	}
+	
 	or_filter = recursiveFilter(big_table);
+	if (hashOptions.query) {
+		or_filter = $.map(or_filter, function(value, index){ return value + ":contains('" + hashOptions.query + "')"; } );
+	}
 
 	$('.elementos').isotope( {
 		filter: or_filter.join(),
@@ -303,11 +304,13 @@ function initSelectors() {
 function initFisotope() {
 
   	initSelectors();
+  	initSearch();
    	$(window).bind( 'hashchange', urlChanged).trigger('hashchange');
   	$('a.fiso-toggle-category').click(toggleFacetCategoryUrl);
 	$('a.fiso-clear-facet').click(clearFacet);
 	$('a.fiso-toggle-facet').click(toggleFacet);
 	$('a.fiso-sort-facet').click(toggleSort);
+	$('input.fiso-search').keyup(toggleQuery) ;
 }
 
 $( document ).ready( function() {
