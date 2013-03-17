@@ -4,11 +4,15 @@
 	width: 256px;
 }
 
-.fiso-category-toggle.and.selected {
+.fiso-toggle-category.selected {
 	text-decoration: line-through;
 }
 
 
-.fiso-category-toggle.and.available {
+.fiso-toggle-category.and.available {
 	color: blue;
+}
+
+.fiso-toggle-category.or.available {
+	color: green;
 }

@@ -79,18 +79,47 @@ function getFacetOperationDefault(facet)
 	return "and"
 }
 
-function clearFilter(eventObject) {
+function toggleFacet(eventObject) {
+	var facet = $(eventObject.currentTarget).attr('fiso-facet');
+	var default_facet_operator = getFacetOperationDefault(facet);
+	var hashOptions = $.deparam.fragment();
+	var facet_op = facet + "_op";
+	var actual_facet_operator = hashOptions[facet_op] ? hashOptions[facet_op] : default_facet_operator
+	var new_facet_operator = ""
+	switch (actual_facet_operator) {
+		case 'and':
+			new_facet_operator = 'or';
+			break;
+		case 'or':
+			new_facet_operator = 'and';
+			break;
+		default:
+			new_facet_operator = default_facet_operator
+			break;
+	} 
+	var parametros = {};
+	parametros[facet_op] = new_facet_operator;
+	$.bbq.pushState( $.param( parametros ));
+	return false;
+}
+
+function clearFacet(eventObject) {
 	var facet = $(eventObject.currentTarget).attr('fiso-facet');
 	switch(facet){
 		case 'all':
 			var hashOptions = $.deparam.fragment();
-			for ( facet_cats in hashOptions ) {
-				var cat_index = facet_cats.indexOf('_cats');
+			for ( facet_param in hashOptions ) {
+				var cat_index = facet_param.indexOf('_cats');
+				var op_index = facet_param.indexOf('_op');
 				if (cat_index > 0) {
 					var parametros = {};
-					parametros[facet_cats] = '';
+					parametros[facet_param] = '';
 					$.bbq.pushState( $.param( parametros ));
-				}	
+				} else if (op_index > 0) {
+					var parametros = {}
+					parametros[facet_param] = '';
+					$.bbq.pushState( $.param(parametros) );
+				}
 			}
 		default: 
 			var hashOptions = $.deparam.fragment();
@@ -110,7 +139,7 @@ function updateSelectors() {
 
 	$('.fiso-selector').each(function(value, index) {
 		var selectorObj = $(this);
-		var toggleables = selectorObj.find('.fiso-category-toggle');
+		var toggleables = selectorObj.find('.fiso-toggle-category');
 
 		var facet = selectorObj.attr('fiso-facet');
 		var facet_cats = facet + "_cats";
@@ -148,42 +177,62 @@ function updateSelectors() {
 		toggleables.addClass(operator);
 
 		// Update Toggleable Selected
-		selectedSelectors = $.map(selectedCategories, function(value, index){ return '.fiso-category-toggle[fiso-category="' + value + '"]'; });
+		selectedSelectors = $.map(selectedCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
 		selectorObj.find(selectedSelectors.join()).addClass('selected');
 
 		// Update Toggleable Available
-		availableSelectors = $.map(availableCategories, function(value, index){ return '.fiso-category-toggle[fiso-category="' + value + '"]'; });
+		availableSelectors = $.map(availableCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
 		selectorObj.find(availableSelectors.join()).addClass('available');
 
 	});
+}
+
+function recursiveFilter(big_table) {
+	if (big_table.length == 0) {
+		return []
+	} else if (big_table.length == 1 ) {
+		return big_table[0];
+	} else {
+		var actualFacets = big_table.pop();
+		var otherFacets = recursiveFilter(big_table);
+		var answer=[]
+		for (filter_x in actualFacets) {
+			for (filter_y in otherFacets) {
+				answer.push(actualFacets[filter_x] + otherFacets[filter_y])
+			}
+		}
+		return answer 
+	}
 }
 
 function filterDatasets() {
 	var hashOptions = $.deparam.fragment();
 	var or_filter = [];
 	var filter = "";
+	var big_table = [];
 	for ( facet_cats in hashOptions ) {
 		var cat_index = facet_cats.indexOf('_cats');
 		if (cat_index > 0) {
 			var facet = facet_cats.split('_')[0];
-			var facet_op = hashOptions[facet + "_op"]
+			var facet_op = facet + "_op";
 			var operator = hashOptions[facet_op] ? hashOptions[facet_op] : getFacetOperationDefault(facet);
 			var categories = hashOptions[facet_cats].split('.');
 			categories.splice(0,1);
 			var categories_mapped = $.map(categories, function(value, index){ return '[fiso-'+ facet+'*=",' + value + ',"]'; });
 			switch (operator) {
 				case 'or':
-					or_filter = or_filter.concat(categories_mapped);
+					big_table.push(categories_mapped);
 					break;
 				case 'and':
-					filter += categories_mapped.join('');
+					big_table.push([categories_mapped.join('')])
 					break;
 			}
 		}	
 	}
-	or_filter = $.map(or_filter, function(value, index){ return filter + value; });
+	// or_filter = $.map(or_filter, function(value, index){ return filter + value; });
+	or_filter = recursiveFilter(big_table);
 	$('.elementos').isotope( {
-		filter: or_filter.length > 0 ? or_filter.join():filter
+		filter: or_filter.join()
 	});
 }
 
@@ -231,7 +280,7 @@ function initSelectors() {
 				newEle.removeClass('fiso-example');
 				newEleLink = newEle.find('a');
 				newEleLink.text(category);
-				newEleLink.addClass('fiso-category-toggle');
+				newEleLink.addClass('fiso-toggle-category');
 				newEleLink.attr('fiso-facet', facet);
 				newEleLink.attr('fiso-category', category);
 				parentExampleObj.prepend(newEle);
@@ -245,8 +294,9 @@ function initFisotope() {
 
   	initSelectors();
    	$(window).bind( 'hashchange', urlChanged).trigger('hashchange');
-  	$('a.fiso-category-toggle').click(toggleFacetCategoryUrl);
-	$('a.fiso-clear-facet').click(clearFilter);
+  	$('a.fiso-toggle-category').click(toggleFacetCategoryUrl);
+	$('a.fiso-clear-facet').click(clearFacet);
+	$('a.fiso-toggle-facet').click(toggleFacet);
 }
 
 $( document ).ready( function() {
@@ -260,5 +310,6 @@ $( document ).ready( function() {
 
 });
 
-
+// Toggle Sort
+// Toggle Query
 // Queda por hacer el tema del elemento tipo isotope $('.elemento').fisotope();
