@@ -18,175 +18,9 @@
 // }
 
 
-
-
-
-
-
-
-
-// function updateSelector(facet, selectedCategories, parentObj, operator) {
-// 	var categories = getAllFacetCategories(facet, selectedCategories, true)
-// 	var all_categories = getAllFacetCategories(facet, selectedCategories, false);
-// 	var toggleables = parentObj.find('.toggleable');
-// 	var hideableObj = parentObj.find('.hideable')
-// 	var counterObj = parentObj.find('.facet-counter');
-// 	var allObj = parentObj.find('.clear-element')
-// 	var counter = 0;
-// 	var activeSelectors = []
-
-// 	parentObj.removeClass('no-options');
-// 	parentObj.removeClass('no-actives');
-// 	toggleables.removeClass('selectable active');
-// 	toggleables.addClass(operator);
-
-// 	switch (operator) {
-// 		case 'or':
-// 			if ( selectedCategories.length == 0 ){
-// 				allObj.addClass('active');
-// 			} else {
-// 				allObj.addClass('selectable');
-// 			}
-// 			counter = all_categories.length;
-// 			break
-// 		case 'and':
-// 			if ( selectedCategories.length > 0 ){
-// 				allObj.addClass('selectable');
-// 			} 
-// 			if ( categories.length > 0 ){
-// 				selectors = $.map(categories, function(value, index){ return '.toggleable[ckan-category="' + value + '"]'; });
-// 				parentObj.find(selectors.join()).addClass('selectable');
-// 			} 
-// 			counter = categories.length;
-// 			break;
-// 	}
-
-// 	if (selectedCategories.length > 0 ){
-// 		activeSelectors = $.map(selectedCategories, function(value, index){ return '.toggleable[ckan-category="' + value + '"]'; });
-// 		parentObj.find(activeSelectors.join()).addClass('active');
-// 	}
-	
-// 	// counter
-// 	if (counter == 0 ) {
-// 		parentObj.addClass('no-options')
-// 	}
-
-// 	if (selectedCategories.length == 0) {
-// 		parentObj.addClass('no-actives')
-// 	}
- 	
-// 	if (counterObj) {
-// 		counterObj.text(counter);
-// 	}
-// }
-
-// function updateSelectors() {
-//  	var hashOptions = $.deparam.fragment();
-
-// 	$('[ckan-category-selector]').each(function(value, index) {
-// 		var theObj = $(this);
-// 		var facet = theObj.attr('ckan-facet');
-// 		var default_op = theObj.attr('ckan-default-operator');
-// 		var categories = hashOptions[facet] ? hashOptions[facet].split('.') : []
-// 		var operator = hashOptions[facet + '_op'] == 'or' || hashOptions[facet + '_op'] == 'and' ? hashOptions[facet + '_op'] : default_op;
-// 		updateSelector(facet, categories, theObj, operator);
-// 	});
-// }
-
 // function clearTagBox(filter){
 // 	$('.tagbox [ckan-facet="'+filter+'"]').appendTo('.tagbox .all');
 // }
-
-
-// function clearFilter(eventObject) {
-// 	var filter = $(eventObject.currentTarget).attr('ckan-facet');
-// 	clearTagBox(filter);
-// 	switch(filter){
-// 		case 'groups':
-// 			$.bbq.pushState( $.param( {groups: ""} ));
-// 			break;
-// 		case 'tags':
-// 			$.bbq.pushState( $.param( {tags: ""} ));
-// 			break;
-// 		case 'res_format':
-// 			$.bbq.pushState( $.param( {res_format: ""} ));
-// 			break;
-// 		case 'query':
-// 			$.bbq.pushState( $.param( {query: ""} ));
-// 			$('#search').val('');
-// 			break;
-// 		case 'sort':
-// 			$.bbq.pushState( $.param( {sort: "original-order"} ));
-// 			break;
-// 		case 'all':
-// 			$.bbq.pushState( $.param( {groups: ""} ));
-// 			$.bbq.pushState( $.param( {tags: ""} ));
-// 			$.bbq.pushState( $.param( {res_format: ""} ));
-// 			$.bbq.pushState( $.param( {query: ""} ));
-// 			$.bbq.pushState( $.param( {sort: "original-order"} ));
-// 			break;
-// 	}
-//   	closeDropdowns();
-
-// 	return false;
-// }
-
-// function toggleUrlGroup(facet) {
-// 	var hashOptions = $.deparam.fragment();
-// 	if (hashOptions.groups) {
-// 		index = hashOptions.groups.indexOf(facet);
-// 		length = facet.length;
-// 		if ( index < 0 ) {
-// 			hashOptions.groups = hashOptions.groups + "." + facet;
-// 		} else {
-// 			hashOptions.groups = hashOptions.groups.replace("." + facet, "");
-// 		}
-// 	}
-// 	else {
-// 		hashOptions.groups = "." + facet;
-// 	}
-// 	$.bbq.pushState( $.param( { 
-// 		groups: hashOptions.groups
-// 	} ));
-// }
-
-// function toggleUrlTag(facet) {
-// 	var hashOptions = $.deparam.fragment();
-// 	if (hashOptions.tags) {
-// 		index = hashOptions.tags.indexOf(facet);
-// 		if ( index < 0 ) {
-// 			hashOptions.tags = hashOptions.tags + "." + facet;
-// 		} else {
-// 			hashOptions.tags = hashOptions.tags.replace("." + facet, "");
-// 		}
-// 	}
-// 	else {
-// 		hashOptions.tags = "." + facet;
-// 	}
-// 	$.bbq.pushState( $.param( { 
-// 		tags: hashOptions.tags
-// 	} ));
-// }
-
-// function toggleUrlFormat(facet) {
-// 	var hashOptions = $.deparam.fragment();
-// 	if (hashOptions.res_format) {
-// 		index = hashOptions.res_format.indexOf(facet);
-// 		length = facet.length;
-// 		if ( index < 0 ) {
-// 			hashOptions.res_format = hashOptions.res_format + "." + facet;
-// 		} else {
-// 			hashOptions.res_format = hashOptions.res_format.replace("." + facet, "");
-// 		}
-// 	}
-// 	else {
-// 		hashOptions.res_format = "." + facet;
-// 	}
-// 	$.bbq.pushState( $.param( { 
-// 		res_format: hashOptions.res_format
-// 	} ));
-// }
-
 
 
 // function toggleQuery(eventObject) {
@@ -220,7 +54,7 @@ function getAllFacetCategories(facet, selectedCategories, onlyVisible) {
 		if ( !onlyVisible || !theObj.hasClass('isotope-hidden') ){
 			atributo = theObj.attr('fiso-' + facet);
 			elementos = atributo.split(',');
-			for ( var i = 0; i < elementos.length; i++) {
+			for ( var i = 1 ; i < elementos.length - 1; i++) {
 				var elemento = elementos[i];
 				if ( elemento.length > 0) {
 					answer.push(elemento);
@@ -240,24 +74,108 @@ function getAllFacetCategories(facet, selectedCategories, onlyVisible) {
 	return final_answer.reverse();
 }
 
+function getFacetOperationDefault(facet)
+{
+	return "and"
+}
+
+function clearFilter(eventObject) {
+	var facet = $(eventObject.currentTarget).attr('fiso-facet');
+	switch(facet){
+		case 'all':
+			var hashOptions = $.deparam.fragment();
+			for ( facet_cats in hashOptions ) {
+				var cat_index = facet_cats.indexOf('_cats');
+				if (cat_index > 0) {
+					var parametros = {};
+					parametros[facet_cats] = '';
+					$.bbq.pushState( $.param( parametros ));
+				}	
+			}
+		default: 
+			var hashOptions = $.deparam.fragment();
+			var facet_cats = facet + "_cats";
+			if ( hashOptions[facet_cats] ){
+				var parametros = {}
+				parametros[facet_cats] = ''
+				$.bbq.pushState( $.param( parametros ));
+			}
+	}
+
+	return false;
+}
+
+function updateSelectors() {
+ 	var hashOptions = $.deparam.fragment();
+
+	$('.fiso-selector').each(function(value, index) {
+		var selectorObj = $(this);
+		var toggleables = selectorObj.find('.fiso-category-toggle');
+
+		var facet = selectorObj.attr('fiso-facet');
+		var facet_cats = facet + "_cats";
+		var facet_op = facet + "_op";
+
+		var selectedCategories = hashOptions[facet_cats] ? hashOptions[facet_cats].split('.') : []
+		selectedCategories.splice(0,1);
+		var availableCategories = getAllFacetCategories(facet, selectedCategories, true)
+		var allCategories = getAllFacetCategories(facet, [], false);
+
+		var operator = hashOptions[facet_op] ? hashOptions[facet_op] : getFacetOperationDefault(facet);
+
+		// Clean
+		selectorObj.removeClass('or and fiso-no-categories fiso-no-selected fiso-no-available')
+		toggleables.removeClass('or and selected available');
+
+		// Update selector
+		selectorObj.addClass(operator);
+		if ( allCategories.length == 0){
+			selectorObj.addClass('fiso-no-categories')
+		}
+		if ( selectedCategories.length == 0) {
+			selectorObj.addClass('fiso-no-selected');
+		}
+		if ( availableCategories.length == 0 ) {
+			selectorObj.addClass('fiso-no-available');
+		}
+
+		// Update counters
+		selectorObj.find('.fiso-counter-all').text(allCategories.length);
+		selectorObj.find('.fiso-counter-selected').text(selectedCategories.length);
+		selectorObj.find('.fiso-counter-available').text(availableCategories.length);
+
+		// Update Toggleable Operators
+		toggleables.addClass(operator);
+
+		// Update Toggleable Selected
+		selectedSelectors = $.map(selectedCategories, function(value, index){ return '.fiso-category-toggle[fiso-category="' + value + '"]'; });
+		selectorObj.find(selectedSelectors.join()).addClass('selected');
+
+		// Update Toggleable Available
+		availableSelectors = $.map(availableCategories, function(value, index){ return '.fiso-category-toggle[fiso-category="' + value + '"]'; });
+		selectorObj.find(availableSelectors.join()).addClass('available');
+
+	});
+}
+
 function filterDatasets() {
 	var hashOptions = $.deparam.fragment();
 	var or_filter = [];
 	var filter = "";
-	for ( facet_url in hashOptions ) {
-		var cat_index = facet_url.indexOf('_cat');
+	for ( facet_cats in hashOptions ) {
+		var cat_index = facet_cats.indexOf('_cats');
 		if (cat_index > 0) {
-			var facet = facet_url.split('_')[0];
-			var operator = hashOptions[facet + "_op"];
-			var categories = hashOptions[facet_url].split('.');
+			var facet = facet_cats.split('_')[0];
+			var facet_op = hashOptions[facet + "_op"]
+			var operator = hashOptions[facet_op] ? hashOptions[facet_op] : getFacetOperationDefault(facet);
+			var categories = hashOptions[facet_cats].split('.');
 			categories.splice(0,1);
-			var categories_mapped = $.map(categories, function(value, index){ return '[fiso-'+ facet+'*="' + value + '"]'; });
+			var categories_mapped = $.map(categories, function(value, index){ return '[fiso-'+ facet+'*=",' + value + ',"]'; });
 			switch (operator) {
 				case 'or':
 					or_filter = or_filter.concat(categories_mapped);
 					break;
 				case 'and':
-				default:
 					filter += categories_mapped.join('');
 					break;
 			}
@@ -271,29 +189,29 @@ function filterDatasets() {
 
 function urlChanged() {
   	filterDatasets();
-  	//updateSelectors();
+  	updateSelectors();
 }
 
 function toggleFacetCategoryUrl(eventElement) {
 	var theObj = $(this);
 	var facet = theObj.attr('fiso-facet');
-	var facet_url = facet + "_cats";
+	var facet_cats = facet + "_cats";
 	var category = theObj.attr('fiso-category');
 
 	var hashOptions = $.deparam.fragment();
-	if (hashOptions[facet_url]) {
-		var index = hashOptions[facet_url].indexOf(category);
+	if (hashOptions[facet_cats]) {
+		var index = hashOptions[facet_cats].indexOf(category);
 		if ( index < 0 ) {
-			hashOptions[facet_url] = hashOptions[facet_url] + "." + category;
+			hashOptions[facet_cats] = hashOptions[facet_cats] + "." + category;
 		} else {
-			hashOptions[facet_url] = hashOptions[facet_url].replace("." + category, "");
+			hashOptions[facet_cats] = hashOptions[facet_cats].replace("." + category, "");
 		}
 	}
 	else {
-		hashOptions[facet_url] = "." + category;
+		hashOptions[facet_cats] = "." + category;
 	}
 	var parametros = {};
-	parametros[facet_url] = hashOptions[facet_url];
+	parametros[facet_cats] = hashOptions[facet_cats];
 	$.bbq.pushState( $.param( parametros ));
 
 	return false;
@@ -310,7 +228,7 @@ function initSelectors() {
 			for ( var i = 0; i < categories.length; i++ ) {
 				var category = categories[i];
 				var newEle = exampleObj.clone();
-				newEle.removeClass('example');
+				newEle.removeClass('fiso-example');
 				newEleLink = newEle.find('a');
 				newEleLink.text(category);
 				newEleLink.addClass('fiso-category-toggle');
@@ -326,11 +244,9 @@ function initSelectors() {
 function initFisotope() {
 
   	initSelectors();
-  	$('a.fiso-category-toggle').click(toggleFacetCategoryUrl);
    	$(window).bind( 'hashchange', urlChanged).trigger('hashchange');
-	// $('a[ckan-clear]').click(clearFilter);
-	
-
+  	$('a.fiso-category-toggle').click(toggleFacetCategoryUrl);
+	$('a.fiso-clear-facet').click(clearFilter);
 }
 
 $( document ).ready( function() {
@@ -344,4 +260,5 @@ $( document ).ready( function() {
 
 });
 
-// queda por hacer el tema del elemento tipo isotope $('.elemento').fisotope();
+
+// Queda por hacer el tema del elemento tipo isotope $('.elemento').fisotope();

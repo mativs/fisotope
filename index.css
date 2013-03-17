@@ -3,3 +3,12 @@
 	border: 1px solid;
 	width: 256px;
 }
+
+.fiso-category-toggle.and.selected {
+	text-decoration: line-through;
+}
+
+
+.fiso-category-toggle.and.available {
+	color: blue;
+}

@@ -7,36 +7,38 @@
     <link href="index.css"  rel="stylesheet" type="text/css"  />
   </head>
   <body>
-    
     <div class="filtros">
       <div class="fiso-selector" fiso-facet="letras" >
-        <h2>Letras</h2>
+        <h2>Letras <span class="fiso-counter-selected"></span>/<span class="fiso-counter-available"></span>/<span class="fiso-counter-all"></span></h2>
         <ul>
           <li class="fiso-example"><a href="#"></a></li>
           <li><a href="#" class="fiso-toggle">Cambiar Operación</a></li>
-          <li><a href="#" class="fiso-clear">Clear</a></li>
+          <li><a href="#" class="fiso-clear-facet" fiso-facet="letras">Clear</a></li>
         </ul>
       </div>
       <div class="fiso-selector" fiso-facet="numeros" >
-        <h2>Numeros</h2>
+        <h2>Numeros <span class="fiso-counter-selected"></span>/<span class="fiso-counter-available"></span>/<span class="fiso-counter-all"></span></h2>
         <ul>
           <li class="fiso-example"><a href="#"></a></li>
           <li><a href="#" class="fiso-toggle">Cambiar Operación</a></li>
-          <li><a href="#" class="fiso-clear">Clear</a></li>
+          <li><a href="#" class="fiso-clear-facet" fiso-facet="numeros">Clear</a></li>
         </ul>
       </div>
     </div>
     <div>
-      <h2>Listado</h2>
+      <a href="#" class="fiso-clear-facet" fiso-facet="all">Clear All</a>
+    </div>
+    <div>
+      <h2>Listado </h2>
       <div  class="elementos">
-        <div class="item" fiso-letras="a,c,d,f,g,e,r,y" fiso-numeros="4,3,2,1,6,7,32">a,c,d,f,g,e,r,y 4,3,2,1,6,7,32</div>
-        <div class="item" fiso-letras="q,d,e,k" fiso-numeros="44,4,234,1,6,7,8">q,d,e,k 44,4,234,1,6,7,8</div>
-        <div class="item" fiso-letras="i,k,a,e,l" fiso-numeros="8,7,6,4,6,89,7">i,k,a,e,l 8,7,6,4,6,89,7</div>
-        <div class="item" fiso-letras="d,y,j,u,k,h" fiso-numeros="9,8,7,6,4,3">d,y,j,u,k,h 9,8,7,6,4,3</div>
-        <div class="item" fiso-letras="k,j,h,j,u" fiso-numeros="2,9,6,3,1,8,0,7,45">k,j,h,j,u 2,9,6,3,1,8,0,7,45</div>
-        <div class="item" fiso-letras="c,n,t,f,b" fiso-numeros="67,5,3,5,890,9,6">c,n,t,f,b 67,5,3,5,890,9,6</div>
-        <div class="item" fiso-letras="m,h,v,f,b,r" fiso-numeros="0,98,7,5,4,3">m,h,v,f,b,r 0,98,7,5,4,3</div>
-        <div class="item" fiso-letras="p,o,k,h,f,v" fiso-numeros="9,8,7,6,5,4">p,o,k,h,f,v 9,8,7,6,5,4</div>
+        <div class="item" fiso-letras=",a,c,d,f,g,e,r,y," fiso-numeros=",4,3,2,1,6,7,32,">a,c,d,f,g,e,r,y 4,3,2,1,6,7,32</div>
+        <div class="item" fiso-letras=",q,d,e,k," fiso-numeros=",44,9,234,1,6,7,8,">q,d,e,k 44,4,234,1,6,7,8</div>
+        <div class="item" fiso-letras=",i,k,a,e,l," fiso-numeros=",8,7,6,4,6,89,7,">i,k,a,e,l 8,7,6,4,6,89,7</div>
+        <div class="item" fiso-letras=",d,y,j,u,k,h," fiso-numeros=",9,8,7,6,4,3,">d,y,j,u,k,h 9,8,7,6,4,3</div>
+        <div class="item" fiso-letras=",k,j,h,j,u," fiso-numeros=",2,9,6,3,1,8,0,7,45,">k,j,h,j,u 2,9,6,3,1,8,0,7,45</div>
+        <div class="item" fiso-letras=",c,n,t,f,b," fiso-numeros=",67,5,3,5,890,9,6,">c,n,t,f,b 67,5,3,5,890,9,6</div>
+        <div class="item" fiso-letras=",m,h,v,f,b,r," fiso-numeros=",0,98,7,5,4,3,">m,h,v,f,b,r 0,98,7,5,4,3</div>
+        <div class="item" fiso-letras=",p,o,k,h,f,v," fiso-numeros=",9,8,7,6,5,4,">p,o,k,h,f,v 9,8,7,6,5,4</div>
       </div>
     </div>
 
