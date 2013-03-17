@@ -16,3 +16,8 @@
 .fiso-toggle-category.or.available {
 	color: green;
 }
+
+.selectors li {
+	display:inline-block;
+	margin: 0px 5px;
+}

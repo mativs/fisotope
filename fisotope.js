@@ -31,13 +31,7 @@
 // 	return true;
 // }
 
-// function toggleSort(eventObject) {
-// 	sort_str = $(eventObject.currentTarget).attr('ckan-sort');
-// 	$.bbq.pushState( $.param( { 
-// 		sort: sort_str
-// 	} ));
-// 	return false;
-// }
+
 
 
 
@@ -79,6 +73,14 @@ function getFacetOperationDefault(facet)
 	return "and"
 }
 
+function toggleSort(eventObject) {
+	sort_str = $(this).attr('fiso-sort');
+	$.bbq.pushState( $.param( { 
+		sort: sort_str
+	} ));
+	return false;
+}
+
 function toggleFacet(eventObject) {
 	var facet = $(eventObject.currentTarget).attr('fiso-facet');
 	var default_facet_operator = getFacetOperationDefault(facet);
@@ -106,6 +108,9 @@ function toggleFacet(eventObject) {
 function clearFacet(eventObject) {
 	var facet = $(eventObject.currentTarget).attr('fiso-facet');
 	switch(facet){
+		case 'sort':
+			$.bbq.pushState( { sort: "" });
+			break;
 		case 'all':
 			var hashOptions = $.deparam.fragment();
 			for ( facet_param in hashOptions ) {
@@ -121,6 +126,8 @@ function clearFacet(eventObject) {
 					$.bbq.pushState( $.param(parametros) );
 				}
 			}
+			$.bbq.pushState( { sort: "" });
+			break;
 		default: 
 			var hashOptions = $.deparam.fragment();
 			var facet_cats = facet + "_cats";
@@ -129,6 +136,7 @@ function clearFacet(eventObject) {
 				parametros[facet_cats] = ''
 				$.bbq.pushState( $.param( parametros ));
 			}
+			break;
 	}
 
 	return false;
@@ -210,6 +218,7 @@ function filterDatasets() {
 	var or_filter = [];
 	var filter = "";
 	var big_table = [];
+	var sort_str = hashOptions['sort'] ? hashOptions['sort'] : 'original-order';
 	for ( facet_cats in hashOptions ) {
 		var cat_index = facet_cats.indexOf('_cats');
 		if (cat_index > 0) {
@@ -229,10 +238,11 @@ function filterDatasets() {
 			}
 		}	
 	}
-	// or_filter = $.map(or_filter, function(value, index){ return filter + value; });
 	or_filter = recursiveFilter(big_table);
+
 	$('.elementos').isotope( {
-		filter: or_filter.join()
+		filter: or_filter.join(),
+		sortBy : sort_str
 	});
 }
 
@@ -297,13 +307,25 @@ function initFisotope() {
   	$('a.fiso-toggle-category').click(toggleFacetCategoryUrl);
 	$('a.fiso-clear-facet').click(clearFacet);
 	$('a.fiso-toggle-facet').click(toggleFacet);
+	$('a.fiso-sort-facet').click(toggleSort);
 }
 
 $( document ).ready( function() {
 	$('.elementos').isotope({
 		itemSelector : '.item',
 		layoutMode : 'fitRows',
-		masonry: {columnWidth: 267 }
+		masonry: {columnWidth: 267 },
+		getSortData : {
+		    letras_count : function ( $elem ) {
+		    	return $elem.attr('fiso-letras').split(',').length - 2;
+		    },
+		    numeros_count : function ( $elem ) {
+		    	return $elem.attr('fiso-numeros').split(',').length - 2;
+		    },
+		    title : function ( $elem ) {
+		      return $elem.find('h1').text();
+		    }
+	  	}
 	});
 
 	initFisotope();
