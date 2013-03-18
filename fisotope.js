@@ -10,6 +10,7 @@
   		mapping: {
 
   		},
+  		theElement: null,
      	init : function( options ) {
 	  		
 
@@ -53,6 +54,9 @@
 	  		// Init Settings
 	  		methods.settings = $.extend({}, methods.defaults, options);
 
+	  		// Save element
+			methods.theElement = this;
+
 	        // Bindings
 	        $(window).bind( 'hashchange.fisotope', methods.urlChanged).trigger('hashchange');
 		  	$('a.fiso-toggle-category').bind( 'click.fisotope', methods.toggleFacetCategoryUrl);
@@ -60,6 +64,8 @@
 			$('a.fiso-toggle-facet').bind( 'click.fisotope', methods.toggleFacet);
 			$('a.fiso-sort-facet').bind( 'click.fisotope', methods.toggleSort);
 			$('input.fiso-search').bind( 'keyup.fisotope', methods.toggleQuery) ;
+
+
 
        		return this;
     	},
@@ -299,7 +305,7 @@
 				}
 			}
 
-			$('.elementos').isotope( {
+			methods.theElement.isotope( {
 				filter: or_filter.join(),
 				sortBy : sort_str
 			});
