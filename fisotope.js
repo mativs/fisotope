@@ -73,8 +73,8 @@
 			var ret = [];
 			for( var i = 0, j = str.length; i < j; i++ ) {
 				var c = str.charAt( i );
-				if( mapping.hasOwnProperty( str.charAt( i ) ) )
-					ret.push( mapping[ c ] );
+				if( methods.mapping.hasOwnProperty( str.charAt( i ) ) )
+					ret.push( methods.mapping[ c ] );
 				else
 					ret.push( c );
 			}	
@@ -291,7 +291,12 @@
 			
 			or_filter = methods.recursiveFilter(big_table);
 			if (hashOptions.query) {
-				or_filter = $.map(or_filter, function(value, index){ return value + ":contains('" + hashOptions.query + "')"; } );
+				var containsStr = ":contains('" + hashOptions.query + "')";
+				if ( or_filter.length > 0) {
+					or_filter = $.map(or_filter, function(value, index){ return value + containsStr; } );
+				} else {
+					or_filter = [containsStr];
+				}
 			}
 
 			$('.elementos').isotope( {
@@ -311,15 +316,17 @@
 
 			var hashOptions = $.deparam.fragment();
 			if (hashOptions[facet_cats]) {
-				var index = hashOptions[facet_cats].indexOf(category);
+				var index = hashOptions[facet_cats].indexOf("." + category + ".");
 				if ( index < 0 ) {
-					hashOptions[facet_cats] = hashOptions[facet_cats] + "." + category;
+					hashOptions[facet_cats] = hashOptions[facet_cats] + category + '.';
 				} else {
-					hashOptions[facet_cats] = hashOptions[facet_cats].replace("." + category, "");
+					hashOptions[facet_cats] = hashOptions[facet_cats].replace("." + category + ".", ".");
+					if ( hashOptions[facet_cats] == '.' )
+						hashOptions[facet_cats] = ''
 				}
 			}
 			else {
-				hashOptions[facet_cats] = "." + category;
+				hashOptions[facet_cats] = "." + category + ".";
 			}
 			var parametros = {};
 			parametros[facet_cats] = hashOptions[facet_cats];
