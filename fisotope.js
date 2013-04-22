@@ -26,8 +26,8 @@
 						var category = categories[i];
 						var newEle = exampleObj.clone();
 						newEle.removeClass('fiso-example');
-						newEleLink = newEle.find('a');
-						newEleLink.text(category);
+						newEleLink = newEle.find('a').andSelf().filter('a');
+						newEleLink.append(category);
 						newEleLink.addClass('fiso-toggle-category');
 						newEleLink.attr('fiso-facet', facet);
 						newEleLink.attr('fiso-category', category);
@@ -92,12 +92,12 @@
 		    });
 		},
 		getAllFacetCategories: function(facet, selectedCategories, onlyVisible) {
-			answer = []
+			var answer = []
 			$('.isotope-item').each(function(index, value) {
 				var theObj = $(value);
 				if ( !onlyVisible || !theObj.hasClass('isotope-hidden') ){
 					atributo = theObj.attr('fiso-' + facet);
-					elementos = atributo.split(',');
+					elementos = atributo.split('.');
 					for ( var i = 1 ; i < elementos.length - 1; i++) {
 						var elemento = elementos[i];
 						if ( elemento.length > 0) {
@@ -107,23 +107,25 @@
 				}
 			});
 
-			all_elementos = methods.unique(answer);
-			final_answer = []
+			var all_elementos = methods.unique(answer);
+			var final_answer = []
 			for ( var i = 0; i < all_elementos.length; i++ ) {
 				var elemento = all_elementos[i];
 				if (  $.inArray(elemento, selectedCategories ) < 0) {
 					final_answer.push(elemento);
 				}
 			}
-			return final_answer.reverse();
+			final_answer.sort();
+			final_answer.reverse();
+			return final_answer;
 		},
 		getFacetOperationDefault: function(facet)
 		{
 			var operator = null;
 			if (methods.settings.default_facet_operator) {
 			 	operator = methods.settings.default_facet_operator[facet];
-			 }
-			return operator ? operator : data.settings.default_operator;
+			}
+			return operator ? operator : methods.settings.default_operator;
 		},
 		toggleQuery: function(eventObject) {
 			kwd = $(this).val();
@@ -165,6 +167,9 @@
 		clearFacet: function(eventObject) {
 			var facet = $(eventObject.currentTarget).attr('fiso-facet');
 			switch(facet){
+				case 'query':
+					$.bbq.pushState( { query: "" });	
+					break;
 				case 'sort':
 					$.bbq.pushState( { sort: "" });
 					break;
@@ -183,6 +188,7 @@
 							$.bbq.pushState( $.param(parametros) );
 						}
 					}
+					$.bbq.pushState( { query: "" });
 					$.bbq.pushState( { sort: "" });
 					break;
 				default: 
@@ -201,16 +207,46 @@
 		updateSelectors: function() {
 		 	var hashOptions = $.deparam.fragment();
 
+		 	var allObj = $('.fiso-all');
+		 	allObj.removeClass('fiso-all-no-categories fiso-all-no-operators fiso-all-no-query fiso-all-no-sort');
+		 	var noContent = {
+		 		categories: true,
+		 		operators: true,
+		 		query: true,
+		 		sort: true
+		 	};
+		 	for ( facet_param in hashOptions ) {
+		 		var hasContent = hashOptions[facet_param].length > 0;
+				var facet_param = facet_param.indexOf('_cats') > 0 ? 'categories' : facet_param;
+				var facet_param = facet_param.indexOf('_op') > 0 ? 'operators' : facet_param;
+				if ( hasContent ) {
+					noContent[facet_param] = false;
+				}
+			}
+			for ( content in noContent ) {
+				if ( noContent[content] ) {
+					allObj.addClass('fiso-all-no-' + content );
+				}
+			}
+
 			$('.fiso-selector').each(function(value, index) {
 				var selectorObj = $(this);
-				var toggleables = selectorObj.find('.fiso-toggle-category');
 
 				var facet = selectorObj.attr('fiso-facet');
 				var facet_cats = facet + "_cats";
 				var facet_op = facet + "_op";
 
+				
+				var toggleables = $('.fiso-toggle-category[fiso-facet="' +  facet + '"]');
+				var totalCounterObj = $('.fiso-total-counter');
+				var totalHiddenCounterObj = $('.fiso-total-hidden');
+				var totalVisibleCounterObj = $('.fiso-total-visible');
+				var toggleOperatorObj = $('.fiso-toggle-facet[fiso-facet="' + facet + '"]')
+				
+
 				var selectedCategories = hashOptions[facet_cats] ? hashOptions[facet_cats].split('.') : []
 				selectedCategories.splice(0,1);
+				selectedCategories.splice(selectedCategories.length-1,1);
 				var availableCategories = methods.getAllFacetCategories(facet, selectedCategories, true)
 				var allCategories = methods.getAllFacetCategories(facet, [], false);
 
@@ -218,7 +254,21 @@
 
 				// Clean
 				selectorObj.removeClass('or and fiso-no-categories fiso-no-selected fiso-no-available')
+				selectorObj.removeClass (function (index, css) {
+					var allClass = $(this).attr('class').split(' ')
+					var answerClass = []
+					for ( index in allClass ) {
+						var theClass = allClass[index];
+						if  ( theClass.indexOf('fiso-selected') == 0 || 
+							theClass.indexOf('fiso-all') == 0 || 
+							theClass.indexOf('fiso-available') == 0 ) {
+							answerClass.push(theClass);
+						}
+					}
+					return answerClass.join(' ');
+				});
 				toggleables.removeClass('or and selected available');
+				toggleOperatorObj.removeClass('or and');
 
 				// Update selector
 				selectorObj.addClass(operator);
@@ -234,20 +284,36 @@
 
 				// Update counters
 				selectorObj.find('.fiso-counter-all').text(allCategories.length);
+				selectorObj.addClass('fiso-all-' + allCategories.length);
 				selectorObj.find('.fiso-counter-selected').text(selectedCategories.length);
+				selectorObj.addClass('fiso-selected-' + selectedCategories.length);
 				selectorObj.find('.fiso-counter-available').text(availableCategories.length);
+				selectorObj.addClass('fiso-available-' + availableCategories.length);
+				var totalItems = $('.isotope-item').length;
+				var totalHidden = $('.isotope-item.isotope-hidden').length;
+				var totalVisible = totalItems - totalHidden
+				totalCounterObj.text(totalItems);
+				totalHiddenCounterObj.text(totalHidden);
+				totalVisibleCounterObj.text(totalVisible);
 
-				// Update Toggleable Operators
+				// Update Toggle Operator
+				toggleOperatorObj.addClass(operator);
+
+				// Update fiso-toggle-category Operators
 				toggleables.addClass(operator);
 
-				// Update Toggleable Selected
+				// Update fiso-toggle-category Selected
 				selectedSelectors = $.map(selectedCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
-				selectorObj.find(selectedSelectors.join()).addClass('selected');
+				$(selectedSelectors.join()).addClass('selected');
 
-				// Update Toggleable Available
+				// Update fiso-toggle-category Available
 				availableSelectors = $.map(availableCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
-				selectorObj.find(availableSelectors.join()).addClass('available');
+				$(availableSelectors.join()).addClass('available');
 
+				if ( $('input.fiso-search').val() == '' && hashOptions.query != '' )
+				{
+					$('input.fiso-search').val(hashOptions.query);
+				}
 			});
 		},
 		recursiveFilter: function(big_table) {
@@ -281,8 +347,9 @@
 					var operator = hashOptions[facet_op] ? hashOptions[facet_op] : methods.getFacetOperationDefault(facet);
 					var categories = hashOptions[facet_cats].split('.');
 					categories.splice(0,1);
+					categories.splice(categories.length-1,1);
 					if (categories.length > 0) {
-						var categories_mapped = $.map(categories, function(value, index){ return '[fiso-'+ facet+'*=",' + value + ',"]'; });
+						var categories_mapped = $.map(categories, function(value, index){ return '[fiso-'+ facet+'*=".' + value + '."]'; });
 						switch (operator) {
 							case 'or':
 								big_table.push(categories_mapped);
