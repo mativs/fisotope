@@ -9,33 +9,124 @@
   <body>
     <div>
       <h2>Listado </h2>
-      <div  class="elementos">
-        <div class="item" fiso-letras=",a,c,d,f,g,e,r,y," fiso-numeros=",4,3,2,1,6,7,32,"><h1>Título a</h1><p>a,c,d,f,g,e,r,y 4,3,2,1,6,7,32</p></div>
-        <div class="item" fiso-letras=",q,d,e,k," fiso-numeros=",44,9,234,1,6,7,8,"><h1>Título z</h1><p>q,d,e,k 44,4,234,1,6,7,8</p></div>
-        <div class="item" fiso-letras=",i,k,a,e,l," fiso-numeros=",8,7,6,4,6,89,7,"><h1>Título r</h1><p>i,k,a,e,l 8,7,6,4,6,89,7</p></div>
-        <div class="item" fiso-letras=",d,y,j,u,k,h," fiso-numeros=",9,8,7,6,4,3,"><h1>Título e</h1><p>d,y,j,u,k,h 9,8,7,6,4,3</p></div>
-        <div class="item" fiso-letras=",k,j,h,j,u," fiso-numeros=",2,9,6,3,1,8,0,7,45,"><h1>Título m</h1><p>k,j,h,j,u 2,9,6,3,1,8,0,7,45</p></div>
-        <div class="item" fiso-letras=",c,n,t,f,b," fiso-numeros=",67,5,3,5,890,9,6,"><h1>Título j</h1><p>c,n,t,f,b 67,5,3,5,890,9,6</p></div>
-        <div class="item" fiso-letras=",m,h,v,f,b,r," fiso-numeros=",0,98,7,5,4,3,"><h1>Título ñ</h1><p>m,h,v,f,b,r 0,98,7,5,4,3</p></div>
-        <div class="item" fiso-letras=",p,o,k,h,f,v," fiso-numeros=",9,8,7,6,5,4,"><h1>Título v</h1><p>p,o,k,h,f,v 9,8,7,6,5,4</p></div>
-      </div>
+      <ul class="elementos">
+        <li class="item"
+            fiso-tags=".alojamiento.comercio.registros.servicios.turismo."
+            fiso-res-format=".csv."
+            >
+          <h3> Agencias de Viajes </h3>
+          <p>Listado de agencias registradas en el Ministerio de Turismo de la Nación y bajo la resolución de receptivas. </p>
+        </li>
+        <li class="item"
+        fiso-tags=".arte.cine.cursos.entretenimiento.feria.festival.servicios.turismo."
+        fiso-res-format=".rss.api.pdf."
+        >
+          <h3> Agenda Cultural </h3>
+          <p>Información de los eventos culturales organizados en la Ciudad. Cine, música, visitas guiadas, artes visuales, teatro,  aire...</p>
+        </li>
+        <li class="item"
+        fiso-tags=".alojamiento.hostel.mapa.registros.servicios.turismo."
+        fiso-res-format=".csv."
+        >
+          <h3> Alojamientos Turísticos </h3>
+          <p>Listado de alojamientos categorizados por el Ente de Turismo e inscriptos en el Registro de Prestadores Turísticos. </p>
+        </li>
+        <li class="item"
+        fiso-tags=".división-territorial.hospital.mapa."
+        fiso-res-format=".csv.shp."
+        >
+          <h3> Áreas Hospitalarias </h3>
+          <p>Alcance geográfico de las áreas programáticas de salud, las cuales recaen sobre los Hospitales Generales de Agudos del Ministerio de Salud. </p>
+              
+                </li>
+        <li class="item"
+        fiso-tags=".mapa.patrimonio.registros.turismo."
+        fiso-res-format=".csv."
+        >
+            <h3> Áreas de Protección Histórica </h3>
+            <p>Información sobre las zonas de la Ciudad consultadas para ser consideradas áreas con valor patrimonial que poseen gran calidad urbana y...</p>
+        </li>
+        <li class="item"
+        fiso-tags=".congestión.mapa.tránsito."
+        fiso-res-format=".csv.shp."
+        >
+          <h3>Mapa de autopistas </h3>
+          <p>Mapa de las autopistas de la Ciudad. Datasets Relacionados: Estado de la Autopista. </p>
+        </li>
+        <li class="item"
+        fiso-tags=".arte.entretenimiento.festival.turismo."
+        fiso-res-format=".csv."
+        >
+          <h3> Buenos Aires Danza Contemporánea </h3>
+          <p>El Festival propone un encuentro de experimentación que combina múltiples eventos y actividades donde puede apreciarse la danza...</p>
+        </li>
+        <li class="item"
+        fiso-tags=".arte.audiovisual.cine.entretenimiento.festival.turismo."
+        fiso-res-format=".zip.csv."
+        >
+          <h3> BAFICI </h3>
+          <p>El Festival Internacional de Cine Independiente se encuentra entre los más destacados del mundo y es el evento más grande y prestigioso...</p>
+        </li>
+        <li class="item"
+        fiso-tags=".arte.audiovisual.cine.entretenimiento.festival.turismo."
+        fiso-res-format=".csv."
+        >
+          <h3> BAFICI Animado </h3>
+          <p>BAFICI Animado es una expansión del Buenos Aires Festival Internacional de Cine Independiente. A diferencia del BAFICI tradicional, este...</p>
+        </li>
+        <li class="item"
+        fiso-tags=".división-territorial.mapa."
+        fiso-res-format=".csv.shp."
+        >
+          <h3>Barrios</h3>
+          <p>Límites y ubicación geográfica de los barrios de la Ciudad. </p>
+        </li>
+        <li class="item"
+        fiso-tags=".mapa.servicios."
+        fiso-res-format=".csv.shp."
+        >
+          <h3> Bibliotecas </h3>
+          <p>Ubicación geográfica de las bibliotecas municipales y comunitarias de la Ciudad. </p>
+        </li>
+        <li class="item"
+        fiso-tags=".bicicletas.servicios.tránsito."
+        fiso-res-format=".csv.zip."
+        >
+          <h3> Bicicletas Públicas </h3>
+          <p>Información del sistema de transporte público de bicicletas desde sus inicios hasta la actualidad. Recorrido, horarios, detalles de...</p>
+        </li>
+        <li class="item"
+        fiso-tags=".bicicletas.mapa.servicios."
+        fiso-res-format=".csv."
+        >
+          <h3> Bicicleterías </h3>
+          <p>Listado de bicicleterías de la Ciudad. Incluye nombre, dirección, teléfono, pagina web, barrio y comuna. </p>
+        </li>
+        <li class="item"
+        fiso-tags=".bicicletas.estacionamiento.mapa.mobiliario-urbano.servicios.tránsito."
+        fiso-res-format=".csv."
+        >
+          <h3> Bicicleteros en Vía Pública </h3>
+          <p>Listado de los bicicleteros instalados en la Ciudad de Buenos Aires con su respectiva dirección. Datasets Relacionados: Bicicletas...</p>
+        </li>
+      </ul>
     </div>
     <div class="selectors">
       <div class="filtros">
-        <div class="fiso-selector" fiso-facet="letras" >
-          <h2>Letras <span class="fiso-counter-selected"></span>/<span class="fiso-counter-available"></span>/<span class="fiso-counter-all"></span></h2>
+        <div class="fiso-selector" fiso-facet="tags" >
+          <h2>Tags <span class="fiso-counter-selected"></span>/<span class="fiso-counter-available"></span>/<span class="fiso-counter-all"></span></h2>
           <ul>
             <li class="fiso-example"><a href="#"></a></li>
-            <li><a href="#" class="fiso-toggle-facet" fiso-facet="letras">Cambiar Operación</a></li>
-            <li><a href="#" class="fiso-clear-facet" fiso-facet="letras">Clear</a></li>
+            <li><a href="#" class="fiso-toggle-facet" fiso-facet="tags">Cambiar Operación</a></li>
+            <li><a href="#" class="fiso-clear-facet" fiso-facet="tags">Clear</a></li>
           </ul>
         </div>
-        <div class="fiso-selector" fiso-facet="numeros" >
-          <h2>Numeros <span class="fiso-counter-selected"></span>/<span class="fiso-counter-available"></span>/<span class="fiso-counter-all"></span></h2>
+        <div class="fiso-selector" fiso-facet="res-format" >
+          <h2>Formato <span class="fiso-counter-selected"></span>/<span class="fiso-counter-available"></span>/<span class="fiso-counter-all"></span></h2>
           <ul>
             <li class="fiso-example"><a href="#"></a></li>
-            <li><a href="#" class="fiso-toggle-facet" fiso-facet="numeros">Cambiar Operación</a></li>
-            <li><a href="#" class="fiso-clear-facet" fiso-facet="numeros">Clear</a></li>
+            <li><a href="#" class="fiso-toggle-facet" fiso-facet="res-format">Cambiar Operación</a></li>
+            <li><a href="#" class="fiso-clear-facet" fiso-facet="res-format">Clear</a></li>
           </ul>
         </div>
       </div>
@@ -54,7 +145,6 @@
         <a href="#" class="fiso-clear-facet" fiso-facet="all">Clear All</a>
       </div>
     </div>
-    
 
     <script type="text/javascript" src="jquery.js"></script>
     <script type="text/javascript" src="jquery.isotope.min.js"></script>

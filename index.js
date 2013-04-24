@@ -5,10 +5,10 @@ $( document ).ready( function() {
 		masonry: {columnWidth: 267 },
 		getSortData : {
 		    letras_count : function ( $elem ) {
-		    	return $elem.attr('fiso-letras').split(',').length - 2;
+		    	return $elem.attr('fiso-tags').split('.').length - 2;
 		    },
 		    numeros_count : function ( $elem ) {
-		    	return $elem.attr('fiso-numeros').split(',').length - 2;
+		    	return $elem.attr('fiso-res-format').split('.').length - 2;
 		    },
 		    title : function ( $elem ) {
 		      return $elem.find('h1').text();
