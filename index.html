@@ -112,9 +112,14 @@
       </ul>
     </div>
     <div class="selectors">
+      <div class="datos">
+        <div>Items: <span class="fiso-total-counter"></span></div>
+        <div>Hidden Items: <span class="fiso-total-hidden"></span></div>
+        <div>Visible Items: <span class="fiso-total-visible"></span></div>
+      </div>
       <div class="filtros">
         <div class="fiso-selector" fiso-facet="tags" >
-          <h2>Tags <span class="fiso-counter-selected"></span>/<span class="fiso-counter-available"></span>/<span class="fiso-counter-all"></span></h2>
+          <h2>Tags <span class="fiso-counter-selected" fiso-facet="tags"></span>/<span class="fiso-counter-available" fiso-facet="tags"></span>/<span class="fiso-counter-all" fiso-facet="tags"></span></h2>
           <ul>
             <li class="fiso-example"><a href="#"></a></li>
             <li><a href="#" class="fiso-toggle-facet" fiso-facet="tags">Cambiar Operación</a></li>
@@ -122,7 +127,7 @@
           </ul>
         </div>
         <div class="fiso-selector" fiso-facet="res-format" >
-          <h2>Formato <span class="fiso-counter-selected"></span>/<span class="fiso-counter-available"></span>/<span class="fiso-counter-all"></span></h2>
+          <h2>Formato <span class="fiso-counter-selected" fiso-facet="res-format"></span>/<span class="fiso-counter-available" fiso-facet="res-format"></span>/<span class="fiso-counter-all" fiso-facet="res-format"></span></h2>
           <ul>
             <li class="fiso-example"><a href="#"></a></li>
             <li><a href="#" class="fiso-toggle-facet" fiso-facet="res-format">Cambiar Operación</a></li>

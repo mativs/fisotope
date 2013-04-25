@@ -238,6 +238,17 @@
 					}
 				}
 
+			// Update totals
+			var totalCounterObj = $('.fiso-total-counter');
+			var totalHiddenCounterObj = $('.fiso-total-hidden');
+			var totalVisibleCounterObj = $('.fiso-total-visible');
+			var totalItems = $('.isotope-item').length;
+			var totalHidden = $('.isotope-item.isotope-hidden').length;
+			var totalVisible = totalItems - totalHidden
+			totalCounterObj.text(totalItems);
+			totalHiddenCounterObj.text(totalHidden);
+			totalVisibleCounterObj.text(totalVisible);
+
 			$('.fiso-selector').each(function(value, index) {
 				var selectorObj = $(this);
 
@@ -247,9 +258,9 @@
 
 				
 				var toggleables = $('.fiso-toggle-category[fiso-facet="' +  facet + '"]');
-				var totalCounterObj = $('.fiso-total-counter');
-				var totalHiddenCounterObj = $('.fiso-total-hidden');
-				var totalVisibleCounterObj = $('.fiso-total-visible');
+				var facetTotalCounter = $('.fiso-counter-all[fiso-facet="' +  facet + '"]');
+				var facetSelectedCounter = $('.fiso-counter-selected[fiso-facet="' +  facet + '"]');
+				var facetAvailableCounter = $('.fiso-counter-available[fiso-facet="' +  facet + '"]');
 				var toggleOperatorObj = $('.fiso-toggle-facet[fiso-facet="' + facet + '"]')
 				
 
@@ -292,18 +303,13 @@
 				}
 
 				// Update counters
-				selectorObj.find('.fiso-counter-all').text(allCategories.length);
+				facetTotalCounter.text(allCategories.length);
 				selectorObj.addClass('fiso-all-' + allCategories.length);
-				selectorObj.find('.fiso-counter-selected').text(selectedCategories.length);
+				facetSelectedCounter.text(selectedCategories.length);
 				selectorObj.addClass('fiso-selected-' + selectedCategories.length);
-				selectorObj.find('.fiso-counter-available').text(availableCategories.length);
+				facetAvailableCounter.text(availableCategories.length);
 				selectorObj.addClass('fiso-available-' + availableCategories.length);
-				var totalItems = $('.isotope-item').length;
-				var totalHidden = $('.isotope-item.isotope-hidden').length;
-				var totalVisible = totalItems - totalHidden
-				totalCounterObj.text(totalItems);
-				totalHiddenCounterObj.text(totalHidden);
-				totalVisibleCounterObj.text(totalVisible);
+				
 
 				// Update Toggle Operator
 				toggleOperatorObj.addClass(operator);
