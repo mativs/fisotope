@@ -66,7 +66,7 @@ Yo can filter your cards by any number of facets. For each facet, you need to ad
           proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     </li>
 
-By only setting this values you can now filter your cards by using, for example the following url that filter by the tag 'foo'
+By only setting this values you can now filter your cards by using, for example the following url that filter by the tag 'sports'
     
     #tags_cats=.sports.
 
@@ -94,5 +94,58 @@ If you set some class and attributes to your filter links, fisotope will do all 
 * or: the fisotope filter for this facet is using the or operator
 * and: the fisotope filter for this facet is using the and operator 
 * selected: the filter for this facet/category is activated.
-* available: this filter for this facet/category is an available option. For example, if there are no more visible cards with this facet, this class will not be set.
+* available: this filter for this facet/category is an available option. For example, if there are no more visible cards with this facet, that this class will not be set.
 
+### Clear Filter Link
+
+You can set a link that clears the different filters. This is an example link line.
+
+    <a href="#" class="fiso-clear-facet" fiso-facet="tags">Clear</a>
+
+#### Class
+
+* fiso-clear-facet: The needed class to tell fisotope that this is a clear filter link
+
+#### Attributes
+      
+* fiso-facet: you must set it's value with the facet name to clear or some of the following default options.
+
+  * query: Clean the text query filter
+  * sort: Clean the sort setting.
+  * all: Clean all the posible, filters and sort setting.
+
+### Toggle Filter Operator Link
+
+You can set a link that changes the operator asigned to the filter of an specific facet. Also the 'html a' element class will be updated in order to match the facet operator status. This is an example link line.
+
+    <a href="#" class="fiso-toggle-facet" fiso-facet="tags">Cambiar Operación</a>
+
+#### Class
+
+* fiso-toggle-facet: The needed class to tell fisotope that this is a toggle filter operator link
+
+#### Attributes
+      
+* fiso-facet: you must set it's value with the facet name to toggle it's operator
+
+#### Status Classes
+
+* or: the fisotope filter for this facet is using the or operator
+* and: the fisotope filter for this facet is using the and operator 
+
+### Fisotope Selector
+
+Fisotope let you handle and create all the different elements related to a facet. It's better to start with an example.
+
+    <div class="fiso-selector" fiso-facet="tags" >
+        <h2>Tags 
+            <span class="fiso-counter-selected"></span>/
+            <span class="fiso-counter-available"></span>/
+            <span class="fiso-counter-all"></span>
+        </h2>
+        <ul>
+        	<li class="fiso-example"><a href="#"></a></li>
+            <li><a href="#" class="fiso-toggle-facet" fiso-facet="tags">Cambiar Operación</a></li>
+            <li><a href="#" class="fiso-clear-facet" fiso-facet="tags">Clear</a></li>
+         </ul>
+    </div>
