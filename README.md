@@ -74,78 +74,93 @@ Or for example two categories
 
 	#tags_cats=.sports.&formats_cats='.csv'
 
-### Toggle Filter Links
+### Toggle Filter Links (*fiso-toggle-category*)
 
-If you set some class and attributes to your filter links, fisotope will do all the filtering for you. If the filter is activated it will be removed and if not it will be activated. Also the 'html a' element class will be updated in order to match the facet category status. This is an example link line.
+A link that lets you toggle between adding or removing a category from a facet filter.
 
     <a href="#" class="fiso-toggle-category" fiso-facet="tags" fiso-category="sports">
 
-#### Class
-
-* fiso-toggle-category: The needed class to tell fisotope this is a toggle filter link
-
-#### Attributes
+#### Needed Attributes
       
-* fiso-facet: you must set it's value with the facet name. Following our example we can use 'tags'
-* fiso-category: you must set it's value with one of the possible facet values. Following our example we can use 'sports'
+* **fiso-facet** - Set this attribute with the facet name. For example, *tags*.
+* **fiso-category** - Set this attribute with one of the possible facet values. For example, *sports*.
 
-#### Status Classes
+#### Populated Classes
 
-* or: the fisotope filter for this facet is using the or operator
-* and: the fisotope filter for this facet is using the and operator 
-* selected: the filter for this facet/category is activated.
-* available: this filter for this facet/category is an available option. For example, if there are no more visible cards with this facet, that this class will not be set.
+* **or** - The filter for this facet is using the *or* operator.
+* **and** (default) - The filter for this facet is using the *and* operator.
+* **selected** - The filter for this category is activated.
+* **available** - This category is an available option for filtering. 
 
-### Clear Filter Link
+#### Direct Filter Link Example
 
-You can set a link that clears the different filters. This is an example link line.
+[http://mativs.github.com/fisotope/index.html#tags_cats=.alojamiento.](http://mativs.github.com/fisotope/index.html#tags_cats=.alojamiento.)
 
-    <a href="#" class="fiso-clear-facet" fiso-facet="tags">Clear</a>
+### Toggle Filter Operator Links (*fiso-toggle-facet*)
 
-#### Class
-
-* fiso-clear-facet: The needed class to tell fisotope that this is a clear filter link
-
-#### Attributes
-      
-* fiso-facet: you must set it's value with the facet name to clear or some of the following default options.
-
-  * query: Clean the text query filter
-  * sort: Clean the sort setting.
-  * all: Clean all the posible, filters and sort setting.
-
-### Toggle Filter Operator Link
-
-You can set a link that changes the operator asigned to the filter of an specific facet. Also the 'html a' element class will be updated in order to match the facet operator status. This is an example link line.
+ While filtering a list by setting many categories from an specific facet you could be searching for the intersection of all categories (*and*) or for the union of all categories (*or*). This link lets you toggle the facet operator.
 
     <a href="#" class="fiso-toggle-facet" fiso-facet="tags">Cambiar Operación</a>
 
-#### Class
-
-* fiso-toggle-facet: The needed class to tell fisotope that this is a toggle filter operator link
-
-#### Attributes
+#### Needed Attributes
       
-* fiso-facet: you must set it's value with the facet name to toggle it's operator
+* **fiso-facet** - Set this attribute with the facet name to change it's opeator.
 
-#### Status Classes
+#### Populated Classes
 
-* or: the fisotope filter for this facet is using the or operator
-* and: the fisotope filter for this facet is using the and operator 
+* **or** - The filter for this facet is using the *or* operator.
+* **and** (default) - The filter for this facet is using the *and* operator.
 
-### Fisotope Selector
+#### Direct Operator Link Example
 
-Fisotope let you handle and create all the different elements related to a facet. It's better to start with an example.
+[http://mativs.github.com/fisotope/index.html#tags_cats=.alojamiento.&tags_op=or](http://mativs.github.com/fisotope/index.html#tags_cats=.alojamiento.&tags_op=or)
+
+### Clear Filter Links (*fiso-clear-facet*)
+
+A link that lets you clear all the selected categories for an specific facet or some generic options.
+
+    <a href="#" class="fiso-clear-facet" fiso-facet="tags">Clear</a>
+
+#### Needed Attributes
+      
+* **fiso-facet** - Set this attribute with the facet name to clear or some of the following generic options.
+
+  * **query** - Cleans the text query filter.
+  * **sort** - Cleans the sort setting.
+  * **all** - Cleans all type of filtering, querying or sorting.
+
+### Text Information Classes
+
+Yo can set any of the following classes to an html element and the text for that element will be updated with the correct numeric information.
+
+#### Facet Classes
+
+This classes need to have the attribute **fiso-facet** setted with the corresponding facet name.
+
+    <span class="fiso-counter-selected" fiso-facet="tags"></span>
+    <span class="fiso-counter-available" fiso-facet="tags"></span>
+    <span class="fiso-counter-all" fiso-facet="tags"></span>
+
+* **fiso-counter-all** - The element text will be setted with the total categories number
+* **fiso-counter-selected** - The element text will be updated with the number of categories selected for that facet.
+* **fiso-counter-available** - The element text will be updated with the nubmer of categories available to filter.
+
+#### Global Classes
+
+    <span class="fiso-total-counter"></span>
+    <span class="fiso-total-hidden"></span>
+    <span class="fiso-total-visible"></span>
+
+* **fiso-total-counter** - The element text will be setted with the total number of isotope items.
+* **fiso-total-hidden** - The element text will be updated with the nubmer of hidden items.
+* **fiso-total-visible** - The element text will be updated with the number of visible items.
+
+### Fisotope Selector (*fiso-selector*)
+
+You can generate a list of [toggle filter links] categories for an specific facet based on all the isotope items. 
 
     <div class="fiso-selector" fiso-facet="tags" >
-        <h2>Tags 
-            <span class="fiso-counter-selected"></span>/
-            <span class="fiso-counter-available"></span>/
-            <span class="fiso-counter-all"></span>
-        </h2>
-        <ul>
+      <ul>
         	<li class="fiso-example"><a href="#"></a></li>
-            <li><a href="#" class="fiso-toggle-facet" fiso-facet="tags">Cambiar Operación</a></li>
-            <li><a href="#" class="fiso-clear-facet" fiso-facet="tags">Clear</a></li>
-         </ul>
+      </ul>
     </div>
