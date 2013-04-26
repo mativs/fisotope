@@ -2,6 +2,8 @@
 	margin: 10px;
 	border: 1px solid;
 	width: 256px;
+	padding: 4px;
+	list-style-type: none;
 }
 
 .fiso-toggle-category.selected {
