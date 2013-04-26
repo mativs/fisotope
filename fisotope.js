@@ -13,10 +13,26 @@
   		theElement: null,
      	init : function( options ) {
 	  		
+	  		// Save element
+			methods.theElement = this;
 
+			// Init Isotope
+			methods.defaults.getSortData[]
+			$('.elementos').isotope({});
+			this.find('.item')[0].attributes.each(function(value, index) {
+				if ( value.indexOf('fiso-') == 0 ) {
+					name = value.substr(value.length - 5)
+					methods.defaults.getSortData[name + "_count"]  = function ( elem ) {
+				    	return elem.attr(value).split('.').length - 2;
+				    };
+				}
+			});
+			this.isotope(methods.defaults);
+				
 		    // Init Selectors
 	  		$('.fiso-selector').each(function(value, index) {
 				var selectorObj = $(this);
+
 				var facet = selectorObj.attr('fiso-facet');
 				var exampleObj = selectorObj.find('.fiso-example');
 				if ( facet && exampleObj.length > 0 ) {
@@ -54,8 +70,7 @@
 	  		// Init Settings
 	  		methods.settings = $.extend({}, methods.defaults, options);
 
-	  		// Save element
-			methods.theElement = this;
+	  		
 
 	        // Bindings
 	        $(window).bind( 'hashchange.fisotope', methods.urlChanged).trigger('hashchange');
