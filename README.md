@@ -33,7 +33,7 @@ You need to initialize isotope, for example like this
 		layoutMode : 'fitRows',
 		masonry: {columnWidth: 267 },
 		getSortData : {
-		    letras_count : function ( $elem ) {
+		    tags_count : function ( $elem ) {
 		    	return $elem.attr('fiso-tags').split('.').length - 2;
 		    },
 		    numeros_count : function ( $elem ) {
@@ -155,12 +155,69 @@ This classes need to have the attribute **fiso-facet** setted with the correspon
 * **fiso-total-hidden** - The element text will be updated with the nubmer of hidden items.
 * **fiso-total-visible** - The element text will be updated with the number of visible items.
 
-### Fisotope Selector (*fiso-selector*)
+### Fisotope Selector (*fiso-selector*/*fiso-example*/)
 
-You can generate a list of [toggle filter links] categories for an specific facet based on all the isotope items. 
+You can generate a list of toggle filter links categories for an specific facet based on all the isotope items. This code on startup
 
     <div class="fiso-selector" fiso-facet="tags" >
       <ul>
         	<li class="fiso-example"><a href="#"></a></li>
       </ul>
     </div>
+
+will change to this one
+
+    <div class="fiso-selector and fiso-no-selected fiso-all-6 fiso-selected-0 fiso-available-6" fiso-facet="tags">
+      <ul>
+          <li class="">
+            <a href="#" class="fiso-toggle-category and available" fiso-facet="tags" fiso-category="sports">sports</a>
+          </li>
+          <li class="">
+            <a href="#" class="fiso-toggle-category and available" fiso-facet="tags" fiso-category="events">events</a>
+          </li>
+          <li class="">
+            <a href="#" class="fiso-toggle-category and available" fiso-facet="tags" fiso-category="parties">parties</a>
+          </li>
+      </ul>
+    </div>
+
+Fisotope will look for all html elemets with the class *fiso-selector*. Inside each one will look for an html element with the class *fiso-example* and will clone it as many times as categories can found for that facet in all items. In each one will search for a link element and transform it into a toggle filter link.
+
+#### Needed Attributes
+      
+* **fiso-facet** - Set this attribute with the facet to generate it's categories.
+
+#### Populated Classes
+
+* **or** - The filter for this facet is using the *or* operator.
+* **and** (default) - The filter for this facet is using the *and* operator.
+* **fiso-no-categories** - There are no categories for this facet.
+* **fiso-no-selected** - There are no selected categories for this facet.
+* **fiso-no-available** - There are no available categories for this facet.
+* **fiso-all-`number`** - The number part of the class is completed with the categories count for this facet.
+* **fiso-selected-`number`** - The number part of the class is completed with the selected categories count for this facet.
+* **fiso-available-`number`** - The number part of the class is completed with the available categories count for this facet.
+
+### Sort Links (*fiso-sort-facet*)
+
+A link that lets you sort your items. You have to previously configure it on your isotope setup.
+
+    <a href="#" class="fiso-sort-facet" fiso-sort="tags">
+
+#### Needed Attributes
+      
+* **fiso-facet** - Set this attribute with the facet name. For example, *tags*.
+
+#### Sort Link Example
+
+[http://mativs.github.com/fisotope/index.html#sort=title](http://mativs.github.com/fisotope/index.html#sort=title)
+
+### Query Input (*fiso-search*)
+
+An html input where you can search for any text element inside any of your items.
+
+    <input type="text" class="fiso-search" name="query" placeholder="Search" />
+
+#### Input Query Example
+
+[http://mativs.github.com/fisotope/index.html#query=agencias](http://mativs.github.com/fisotope/index.html#query=agencias)
