@@ -1,6 +1,4 @@
 $( document ).ready( function() {
-
-
 	$('.elementos').fisotope({
 		itemSelector : '.item',
 		layoutMode : 'fitRows',
@@ -11,8 +9,8 @@ $( document ).ready( function() {
 		    }
 	  	},
 		default_facet_operator: {
-			letras:'or',
-			numeros:'and'
+			tags:'or',
+			res_format:'and'
 		}
 	});
 

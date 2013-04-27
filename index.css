@@ -11,11 +11,11 @@
 }
 
 
-.fiso-toggle-category.and.available {
+.fiso-toggle-category.or.available {
 	color: blue;
 }
 
-.fiso-toggle-category.or.available {
+.fiso-toggle-category.and.available {
 	color: green;
 }
 

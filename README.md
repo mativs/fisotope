@@ -26,28 +26,37 @@ Git clone and load index.html on your favorite browser.
 
 ### Initialize Isotope 
 
-You need to initialize isotope, for example like this
+You need to initialize fisotope, with the same parameters as [Isotope](http://isotope.metafizzy.co).
 
-	$('.elementos').isotope({
-		itemSelector : '.item',
-		layoutMode : 'fitRows',
-		masonry: {columnWidth: 267 },
-		getSortData : {
-		    tags_count : function ( $elem ) {
-		    	return $elem.attr('fiso-tags').split('.').length - 2;
-		    },
-		    numeros_count : function ( $elem ) {
-		    	return $elem.attr('fiso-res-format').split('.').length - 2;
-		    },
-		    title : function ( $elem ) {
-		      return $elem.find('h1').text();
-		    }
-	  	}
-	});
+  	$('.elementos').fisotope({
+  		itemSelector : '.item',
+  		layoutMode : 'fitRows',
+  		masonry: {columnWidth: 267 },
+  		getSortData : {
+  		    tags_count : function ( $elem ) {
+  		    	return $elem.attr('fiso-tags').split('.').length - 2;
+  		    },
+  		    numeros_count : function ( $elem ) {
+  		    	return $elem.attr('fiso-res-format').split('.').length - 2;
+  		    },
+  		    title : function ( $elem ) {
+  		      return $elem.find('h1').text();
+  		    }
+  	  	}
+  	});
 
-and the initialize fisotope using the same selector.
+### Extra Configurations
+     
+    $('.elementos').fisotope({
+      default_facet_operator: {
+        tags:'or',
+        res_format:'and'
+      }
+    });
 
-	$('.elementos').fisotope();
+#### default_fact_operator
+
+This configuration lets you change your default operator for your specific facets. If nothing is set the default operator will be the *and* operator
 
 ### Filters
 
@@ -90,7 +99,7 @@ A link that lets you toggle between adding or removing a category from a facet f
 * **or** - The filter for this facet is using the *or* operator.
 * **and** (default) - The filter for this facet is using the *and* operator.
 * **selected** - The filter for this category is activated.
-* **available** - This category is an available option for filtering. 
+* **available** - This category appear in any of the visible items. 
 
 #### Direct Filter Link Example
 
