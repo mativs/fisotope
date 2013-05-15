@@ -1,160 +1,218 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Fisotope Example </title>
+<!-- saved from url=(0065)http://twitter.github.io/bootstrap/examples/starter-template.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Fisotope</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="../assets/js/html5shiv.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="http://twitter.github.io/bootstrap/assets/ico/favicon.png">
     <link href="index.css"  rel="stylesheet" type="text/css"  />
   </head>
+
   <body>
-    <div>
-      <h2>Listado </h2>
-      <ul class="elementos">
-        <li class="item"
-            fiso-tags=".alojamiento.comercio.registros.servicios.turismo."
-            fiso-res-format=".csv."
-            >
-          <h3> Agencias de Viajes </h3>
-          <p>Listado de agencias registradas en el Ministerio de Turismo de la Nación y bajo la resolución de receptivas. </p>
-        </li>
-        <li class="item"
-        fiso-tags=".arte.cine.cursos.entretenimiento.feria.festival.servicios.turismo."
-        fiso-res-format=".rss.api.pdf."
-        >
-          <h3> Agenda Cultural </h3>
-          <p>Información de los eventos culturales organizados en la Ciudad. Cine, música, visitas guiadas, artes visuales, teatro,  aire...</p>
-        </li>
-        <li class="item"
-        fiso-tags=".alojamiento.hostel.mapa.registros.servicios.turismo."
-        fiso-res-format=".csv."
-        >
-          <h3> Alojamientos Turísticos </h3>
-          <p>Listado de alojamientos categorizados por el Ente de Turismo e inscriptos en el Registro de Prestadores Turísticos. </p>
-        </li>
-        <li class="item"
-        fiso-tags=".división-territorial.hospital.mapa."
-        fiso-res-format=".csv.shp."
-        >
-          <h3> Áreas Hospitalarias </h3>
-          <p>Alcance geográfico de las áreas programáticas de salud, las cuales recaen sobre los Hospitales Generales de Agudos del Ministerio de Salud. </p>
-              
-                </li>
-        <li class="item"
-        fiso-tags=".mapa.patrimonio.registros.turismo."
-        fiso-res-format=".csv."
-        >
-            <h3> Áreas de Protección Histórica </h3>
-            <p>Información sobre las zonas de la Ciudad consultadas para ser consideradas áreas con valor patrimonial que poseen gran calidad urbana y...</p>
-        </li>
-        <li class="item"
-        fiso-tags=".congestión.mapa.tránsito."
-        fiso-res-format=".csv.shp."
-        >
-          <h3>Mapa de autopistas </h3>
-          <p>Mapa de las autopistas de la Ciudad. Datasets Relacionados: Estado de la Autopista. </p>
-        </li>
-        <li class="item"
-        fiso-tags=".arte.entretenimiento.festival.turismo."
-        fiso-res-format=".csv."
-        >
-          <h3> Buenos Aires Danza Contemporánea </h3>
-          <p>El Festival propone un encuentro de experimentación que combina múltiples eventos y actividades donde puede apreciarse la danza...</p>
-        </li>
-        <li class="item"
-        fiso-tags=".arte.audiovisual.cine.entretenimiento.festival.turismo."
-        fiso-res-format=".zip.csv."
-        >
-          <h3> BAFICI </h3>
-          <p>El Festival Internacional de Cine Independiente se encuentra entre los más destacados del mundo y es el evento más grande y prestigioso...</p>
-        </li>
-        <li class="item"
-        fiso-tags=".arte.audiovisual.cine.entretenimiento.festival.turismo."
-        fiso-res-format=".csv."
-        >
-          <h3> BAFICI Animado </h3>
-          <p>BAFICI Animado es una expansión del Buenos Aires Festival Internacional de Cine Independiente. A diferencia del BAFICI tradicional, este...</p>
-        </li>
-        <li class="item"
-        fiso-tags=".división-territorial.mapa."
-        fiso-res-format=".csv.shp."
-        >
-          <h3>Barrios</h3>
-          <p>Límites y ubicación geográfica de los barrios de la Ciudad. </p>
-        </li>
-        <li class="item"
-        fiso-tags=".mapa.servicios."
-        fiso-res-format=".csv.shp."
-        >
-          <h3> Bibliotecas </h3>
-          <p>Ubicación geográfica de las bibliotecas municipales y comunitarias de la Ciudad. </p>
-        </li>
-        <li class="item"
-        fiso-tags=".bicicletas.servicios.tránsito."
-        fiso-res-format=".csv.zip."
-        >
-          <h3> Bicicletas Públicas </h3>
-          <p>Información del sistema de transporte público de bicicletas desde sus inicios hasta la actualidad. Recorrido, horarios, detalles de...</p>
-        </li>
-        <li class="item"
-        fiso-tags=".bicicletas.mapa.servicios."
-        fiso-res-format=".csv."
-        >
-          <h3> Bicicleterías </h3>
-          <p>Listado de bicicleterías de la Ciudad. Incluye nombre, dirección, teléfono, pagina web, barrio y comuna. </p>
-        </li>
-        <li class="item"
-        fiso-tags=".bicicletas.estacionamiento.mapa.mobiliario-urbano.servicios.tránsito."
-        fiso-res-format=".csv."
-        >
-          <h3> Bicicleteros en Vía Pública </h3>
-          <p>Listado de los bicicleteros instalados en la Ciudad de Buenos Aires con su respectiva dirección. Datasets Relacionados: Bicicletas...</p>
-        </li>
-      </ul>
-    </div>
-    <div class="selectors">
-      <div class="datos">
-        <div>Items: <span class="fiso-total-counter"></span></div>
-        <div>Hidden Items: <span class="fiso-total-hidden"></span></div>
-        <div>Visible Items: <span class="fiso-total-visible"></span></div>
-      </div>
-      <div class="filtros">
-        <div class="fiso-selector" fiso-facet="tags" >
-          <h2>Tags <span class="fiso-counter-selected" fiso-facet="tags"></span>/<span class="fiso-counter-available" fiso-facet="tags"></span>/<span class="fiso-counter-all" fiso-facet="tags"></span></h2>
-          <ul>
-            <li class="fiso-example"><a href="#"></a></li>
-            <li><a href="#" class="fiso-toggle-facet" fiso-facet="tags">Cambiar Operación</a></li>
-            <li><a href="#" class="fiso-clear-facet" fiso-facet="tags">Clear</a></li>
-          </ul>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="http://twitter.github.io/bootstrap/examples/starter-template.html#">Fisotope</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="#about">About</a></li>
+              <li><a href="http://github.com/mativs/fisotope">Source</a></li>
+              <li><a href="https://twitter.com/intent/tweet?hashtags=fisotope&related=mativs&text=@mativs" target="_blank">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
         </div>
-        <div class="fiso-selector" fiso-facet="res-format" >
-          <h2>Formato <span class="fiso-counter-selected" fiso-facet="res-format"></span>/<span class="fiso-counter-available" fiso-facet="res-format"></span>/<span class="fiso-counter-all" fiso-facet="res-format"></span></h2>
-          <ul>
-            <li class="fiso-example"><a href="#"></a></li>
-            <li><a href="#" class="fiso-toggle-facet" fiso-facet="res-format">Cambiar Operación</a></li>
-            <li><a href="#" class="fiso-clear-facet" fiso-facet="res-format">Clear</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="sort">
-        <h2>Ordenar</h2>
-        <ul>
-          <li><a href="#" class="fiso-sort-facet" fiso-sort="title">By Title</a></li>
-          <li><a href="#" class="fiso-sort-facet" fiso-sort="letras_count">Cantidad Letras</a></li>
-          <li><a href="#" class="fiso-sort-facet" fiso-sort="numeros_count">Cantidad Numeros</a></li>
-        </ul>
-      </div>
-      <div class="query">
-         <input type="text" class="fiso-search" name="query" placeholder="Buscar" />
-      </div>
-      <div>
-        <a href="#" class="fiso-clear-facet" fiso-facet="all">Clear All</a>
       </div>
     </div>
 
+    <div class="container">
+
+     
+
+      <div>
+        <h2>Listado </h2>
+        <ul class="elementos">
+          <li class="item"
+              fiso-tags=".alojamiento.comercio.registros.servicios.turismo."
+              fiso-res-format=".csv."
+              >
+            <h3> Agencias de Viajes </h3>
+            <p>Listado de agencias registradas en el Ministerio de Turismo de la Nación y bajo la resolución de receptivas. </p>
+          </li>
+          <li class="item"
+          fiso-tags=".arte.cine.cursos.entretenimiento.feria.festival.servicios.turismo."
+          fiso-res-format=".rss.api.pdf."
+          >
+            <h3> Agenda Cultural </h3>
+            <p>Información de los eventos culturales organizados en la Ciudad. Cine, música, visitas guiadas, artes visuales, teatro,  aire...</p>
+          </li>
+          <li class="item"
+          fiso-tags=".alojamiento.hostel.mapa.registros.servicios.turismo."
+          fiso-res-format=".csv."
+          >
+            <h3> Alojamientos Turísticos </h3>
+            <p>Listado de alojamientos categorizados por el Ente de Turismo e inscriptos en el Registro de Prestadores Turísticos. </p>
+          </li>
+          <li class="item"
+          fiso-tags=".división-territorial.hospital.mapa."
+          fiso-res-format=".csv.shp."
+          >
+            <h3> Áreas Hospitalarias </h3>
+            <p>Alcance geográfico de las áreas programáticas de salud, las cuales recaen sobre los Hospitales Generales de Agudos del Ministerio de Salud. </p>
+                
+                  </li>
+          <li class="item"
+          fiso-tags=".mapa.patrimonio.registros.turismo."
+          fiso-res-format=".csv."
+          >
+              <h3> Áreas de Protección Histórica </h3>
+              <p>Información sobre las zonas de la Ciudad consultadas para ser consideradas áreas con valor patrimonial que poseen gran calidad urbana y...</p>
+          </li>
+          <li class="item"
+          fiso-tags=".congestión.mapa.tránsito."
+          fiso-res-format=".csv.shp."
+          >
+            <h3>Mapa de autopistas </h3>
+            <p>Mapa de las autopistas de la Ciudad. Datasets Relacionados: Estado de la Autopista. </p>
+          </li>
+          <li class="item"
+          fiso-tags=".arte.entretenimiento.festival.turismo."
+          fiso-res-format=".csv."
+          >
+            <h3> Buenos Aires Danza Contemporánea </h3>
+            <p>El Festival propone un encuentro de experimentación que combina múltiples eventos y actividades donde puede apreciarse la danza...</p>
+          </li>
+          <li class="item"
+          fiso-tags=".arte.audiovisual.cine.entretenimiento.festival.turismo."
+          fiso-res-format=".zip.csv."
+          >
+            <h3> BAFICI </h3>
+            <p>El Festival Internacional de Cine Independiente se encuentra entre los más destacados del mundo y es el evento más grande y prestigioso...</p>
+          </li>
+          <li class="item"
+          fiso-tags=".arte.audiovisual.cine.entretenimiento.festival.turismo."
+          fiso-res-format=".csv."
+          >
+            <h3> BAFICI Animado </h3>
+            <p>BAFICI Animado es una expansión del Buenos Aires Festival Internacional de Cine Independiente. A diferencia del BAFICI tradicional, este...</p>
+          </li>
+          <li class="item"
+          fiso-tags=".división-territorial.mapa."
+          fiso-res-format=".csv.shp."
+          >
+            <h3>Barrios</h3>
+            <p>Límites y ubicación geográfica de los barrios de la Ciudad. </p>
+          </li>
+          <li class="item"
+          fiso-tags=".mapa.servicios."
+          fiso-res-format=".csv.shp."
+          >
+            <h3> Bibliotecas </h3>
+            <p>Ubicación geográfica de las bibliotecas municipales y comunitarias de la Ciudad. </p>
+          </li>
+          <li class="item"
+          fiso-tags=".bicicletas.servicios.tránsito."
+          fiso-res-format=".csv.zip."
+          >
+            <h3> Bicicletas Públicas </h3>
+            <p>Información del sistema de transporte público de bicicletas desde sus inicios hasta la actualidad. Recorrido, horarios, detalles de...</p>
+          </li>
+          <li class="item"
+          fiso-tags=".bicicletas.mapa.servicios."
+          fiso-res-format=".csv."
+          >
+            <h3> Bicicleterías </h3>
+            <p>Listado de bicicleterías de la Ciudad. Incluye nombre, dirección, teléfono, pagina web, barrio y comuna. </p>
+          </li>
+          <li class="item"
+          fiso-tags=".bicicletas.estacionamiento.mapa.mobiliario-urbano.servicios.tránsito."
+          fiso-res-format=".csv."
+          >
+            <h3> Bicicleteros en Vía Pública </h3>
+            <p>Listado de los bicicleteros instalados en la Ciudad de Buenos Aires con su respectiva dirección. Datasets Relacionados: Bicicletas...</p>
+          </li>
+        </ul>
+      </div>
+      <div class="selectors">
+        <div class="datos">
+          <div>Items: <span class="fiso-total-counter"></span></div>
+          <div>Hidden Items: <span class="fiso-total-hidden"></span></div>
+          <div>Visible Items: <span class="fiso-total-visible"></span></div>
+        </div>
+        <div class="filtros">
+          <div class="fiso-selector" fiso-facet="tags" >
+            <h2>Tags <span class="fiso-counter-selected" fiso-facet="tags"></span>/<span class="fiso-counter-available" fiso-facet="tags"></span>/<span class="fiso-counter-all" fiso-facet="tags"></span></h2>
+            <ul>
+              <li class="fiso-example"><a href="#"></a></li>
+              <li><a href="#" class="fiso-toggle-facet" fiso-facet="tags">Cambiar Operación</a></li>
+              <li><a href="#" class="fiso-clear-facet" fiso-facet="tags">Clear</a></li>
+            </ul>
+          </div>
+          <div class="fiso-selector" fiso-facet="res-format" >
+            <h2>Formato <span class="fiso-counter-selected" fiso-facet="res-format"></span>/<span class="fiso-counter-available" fiso-facet="res-format"></span>/<span class="fiso-counter-all" fiso-facet="res-format"></span></h2>
+            <ul>
+              <li class="fiso-example"><a href="#"></a></li>
+              <li><a href="#" class="fiso-toggle-facet" fiso-facet="res-format">Cambiar Operación</a></li>
+              <li><a href="#" class="fiso-clear-facet" fiso-facet="res-format">Clear</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="sort">
+          <h2>Ordenar</h2>
+          <ul>
+            <li><a href="#" class="fiso-sort-facet" fiso-sort="title">By Title</a></li>
+            <li><a href="#" class="fiso-sort-facet" fiso-sort="letras_count">Cantidad Letras</a></li>
+            <li><a href="#" class="fiso-sort-facet" fiso-sort="numeros_count">Cantidad Numeros</a></li>
+          </ul>
+        </div>
+        <div class="query">
+           <input type="text" class="fiso-search" name="query" placeholder="Buscar" />
+        </div>
+        <div>
+          <a href="#" class="fiso-clear-facet" fiso-facet="all">Clear All</a>
+        </div>
+      </div>
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="lib/jquery.js"></script>
     <script type="text/javascript" src="lib/jquery.isotope.min.js"></script>
     <script type="text/javascript" src="lib/jquery.ba-bbq.min.js"></script>
     <script type="text/javascript" src="fisotope.js"></script>
     <script type="text/javascript" src="index.js"></script>
-  </body>
+
+  
+
+<div id="sbi_camera_button" class="sbi_search" style="left:0px;top:0px;position:absolute;width:29px;height:27px;border:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;z-index:2147483647;display:none;"></div>
+</body>
 </html>
