@@ -1,7 +1,5 @@
 .item {
 	margin: 10px;
-	border: 1px solid;
-	width: 256px;
 	padding: 4px;
 	list-style-type: none;
 }
@@ -22,4 +20,11 @@
 .selectors li {
 	display:inline-block;
 	margin: 0px 5px;
+}
+
+.item small {
+	font-size: 75%;
+	line-height: 15px;
+	display: block;
+	text-align: center;
 }

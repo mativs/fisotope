@@ -31,7 +31,6 @@
   </head>
 
   <body>
-
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container">
@@ -43,7 +42,7 @@
           <a class="brand" href="http://twitter.github.io/bootstrap/examples/starter-template.html#">Fisotope</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
+              <li class="active"><a href="#">Filter Links</a></li>
               <li class="active"><a href="#about">About</a></li>
               <li><a href="http://github.com/mativs/fisotope">Source</a></li>
               <li><a href="https://twitter.com/intent/tweet?hashtags=fisotope&related=mativs&text=@mativs" target="_blank">Contact</a></li>
@@ -54,145 +53,198 @@
     </div>
 
     <div class="container">
+      <div id="links">
+        <h4>Toggle Filter Links</h4>
+        <p>This link filters by 
+          <a href="#" class="btn btn-primary fiso-toggle-category" fiso-facet="genres" fiso-category="Drama">Drama</a>. 
+          Read the docs <a href="https://github.com/mativs/fisotope#toggle-filter-links-fiso-toggle-category" target="_blank">about it</a>.
+        </p>
+        
+        <h4>Toggle Filter Operator Links</h4>
+        <p>This link changes the filter operator. To understand it first try filtering by drama in the previous line, and the filter by
+          <a href="#" class="fiso-toggle-category" fiso-facet="genres" fiso-category="Comedy">Comedy</a>.
+          Alright, now toggle the <a href="#" class="fiso-toggle-facet" fiso-facet="genres">operator</a> 
+          as many times you as need. ¿Can you see de difference? Read the docs <a href="https://github.com/mativs/fisotope#toggle-filter-operator-links-fiso-toggle-facet" target="_blank">about it</a>.
+        </p>
 
-     
+        <h4>Clear Filter Links</h4>
+        <p>This link clears all type of filtering for an specific category, 
+          <a href="#" class="fiso-clear-facet" fiso-facet="genres">try it</a>. 
+          Read the docs <a href="https://github.com/mativs/fisotope#clear-filter-links-fiso-clear-facet" target="_blank">about it</a>.
+        </p>
+        
+        <div class="row-fluid">
 
-      <div>
-        <h2>Listado </h2>
+          
+        </div>
+
         <ul class="elementos">
-          <li class="item"
-              fiso-tags=".alojamiento.comercio.registros.servicios.turismo."
-              fiso-res-format=".csv."
-              >
-            <h3> Agencias de Viajes </h3>
-            <p>Listado de agencias registradas en el Ministerio de Turismo de la Nación y bajo la resolución de receptivas. </p>
-          </li>
-          <li class="item"
-          fiso-tags=".arte.cine.cursos.entretenimiento.feria.festival.servicios.turismo."
-          fiso-res-format=".rss.api.pdf."
+          <li class="item" 
+            fiso-genres=".Action.Adventure.Fantasy.Science Fiction.Family."
           >
-            <h3> Agenda Cultural </h3>
-            <p>Información de los eventos culturales organizados en la Ciudad. Cine, música, visitas guiadas, artes visuales, teatro,  aire...</p>
+            <img src="img/jx5p0aHlbPXqe3AH9G15NvmWaqQ.jpg"/>
+            <h1 class="hide">Star Wars: Episode VI - Return of the Jedi</h1>
+            <span class="hide popularity">6.62161651853325</span>
+            <small>Action</small> <small>Adventure</small> <small>Fantasy</small> <small>Science Fiction</small> <small>Family</small>
           </li>
-          <li class="item"
-          fiso-tags=".alojamiento.hostel.mapa.registros.servicios.turismo."
-          fiso-res-format=".csv."
+          <li class="item" 
+            fiso-genres=".Action.Adventure.Thriller.War."
           >
-            <h3> Alojamientos Turísticos </h3>
-            <p>Listado de alojamientos categorizados por el Ente de Turismo e inscriptos en el Registro de Prestadores Turísticos. </p>
+            <img src="img/v0sPtM5lGkLwtfDlWpn07nqJPyf.jpg"/>
+            <h1 class="hide">First Blood</h1>
+            <span class="hide popularity">2.80698395939911</span>
+            <small>Action</small><small>Adventure</small><small>Thriller</small><small>War</small>
           </li>
-          <li class="item"
-          fiso-tags=".división-territorial.hospital.mapa."
-          fiso-res-format=".csv.shp."
+          <li class="item" 
+            fiso-genres=".Drama.Mistery.Foreign.Fantasy."
           >
-            <h3> Áreas Hospitalarias </h3>
-            <p>Alcance geográfico de las áreas programáticas de salud, las cuales recaen sobre los Hospitales Generales de Agudos del Ministerio de Salud. </p>
-                
-                  </li>
-          <li class="item"
-          fiso-tags=".mapa.patrimonio.registros.turismo."
-          fiso-res-format=".csv."
-          >
-              <h3> Áreas de Protección Histórica </h3>
-              <p>Información sobre las zonas de la Ciudad consultadas para ser consideradas áreas con valor patrimonial que poseen gran calidad urbana y...</p>
+            <img src="img/heMf02wkJBa4BH1wEK2b9TAfGfQ.jpg"/>
+            <h1 class="hide">Fanny och Alexander</h1>
+            <span class="hide popularity">3.64420501537384</span>
+            <small>Drama</small><small>Mistery</small><small>Foreign</small><small>Fantasy</small>
           </li>
-          <li class="item"
-          fiso-tags=".congestión.mapa.tránsito."
-          fiso-res-format=".csv.shp."
+          <li class="item" 
+            fiso-genres=".Crime.Drama."
           >
-            <h3>Mapa de autopistas </h3>
-            <p>Mapa de las autopistas de la Ciudad. Datasets Relacionados: Estado de la Autopista. </p>
+            <img src="img/u8X6d72tKila3BDblA5IzE04dIU.jpg"/>
+            <h1 class="hide">The Outsiders</h1>
+            <span class="hide popularity">3.16981022888939</span>
+            <small>Crime</small><small>Drama</small>
           </li>
-          <li class="item"
-          fiso-tags=".arte.entretenimiento.festival.turismo."
-          fiso-res-format=".csv."
+          <li class="item" 
+            fiso-genres=".Comedy."
           >
-            <h3> Buenos Aires Danza Contemporánea </h3>
-            <p>El Festival propone un encuentro de experimentación que combina múltiples eventos y actividades donde puede apreciarse la danza...</p>
+            <img src="img/nopK3L1aJYCuEiSQTqwpZD7uff7.jpg"/>
+            <h1 class="hide">Eddie Murphy: Delirious</h1>
+            <span class="hide popularity">2.96026436487971</span>
+            <small>Comedy</small>
           </li>
-          <li class="item"
-          fiso-tags=".arte.audiovisual.cine.entretenimiento.festival.turismo."
-          fiso-res-format=".zip.csv."
+          <li class="item" 
+            fiso-genres=".Action.Adventure.Thriller.Foreign."
           >
-            <h3> BAFICI </h3>
-            <p>El Festival Internacional de Cine Independiente se encuentra entre los más destacados del mundo y es el evento más grande y prestigioso...</p>
+            <img src="img/r8WbgQvQxO3Z92AnosCXq582Q8V.jpg"/>
+            <h1 class="hide">Never Say Never Again</h1>
+            <span class="hide popularity">2.38418144259963</span>
+            <small>Action</small><small>Adventure</small><small>Thriller</small><small>Foreign</small>
           </li>
-          <li class="item"
-          fiso-tags=".arte.audiovisual.cine.entretenimiento.festival.turismo."
-          fiso-res-format=".csv."
+          <li class="item" 
+            fiso-genres=".Drama.History."
           >
-            <h3> BAFICI Animado </h3>
-            <p>BAFICI Animado es una expansión del Buenos Aires Festival Internacional de Cine Independiente. A diferencia del BAFICI tradicional, este...</p>
+            <img src="img/o2t9jnHHJL0j4P7GDuGmovc1lAH.jpg"/>
+            <h1 class="hide">The Right Stuff</h1>
+            <span class="hide popularity">4.17121480005103</span>
+            <small>Drama</small><small>History</small>
           </li>
-          <li class="item"
-          fiso-tags=".división-territorial.mapa."
-          fiso-res-format=".csv.shp."
+          <li class="item" 
+            fiso-genres=".Comedy.Romance."
           >
-            <h3>Barrios</h3>
-            <p>Límites y ubicación geográfica de los barrios de la Ciudad. </p>
+            <img src="img/9758Lxrg24xBRDELlbHcstvvjlK.jpg"/>
+            <h1 class="hide">The Man with Two Brains</h1>
+            <span class="hide popularity">2.3646845986</span>
+            <small>Comedy</small><small>Romance</small>
           </li>
-          <li class="item"
-          fiso-tags=".mapa.servicios."
-          fiso-res-format=".csv.shp."
+          <li class="item" 
+            fiso-genres=".Comedy.Drama.Foreign."
           >
-            <h3> Bibliotecas </h3>
-            <p>Ubicación geográfica de las bibliotecas municipales y comunitarias de la Ciudad. </p>
+            <img src="img/fcv3neVtagJNOeZTxHso3GqN4jt.jpg">
+            <h1 class="hide">Entre tinieblas</h1>
+            <span class="hide popularity">0.2</span>
+            <small>Comedy</small><small>Drama</small><small>Foreign</small>
           </li>
-          <li class="item"
-          fiso-tags=".bicicletas.servicios.tránsito."
-          fiso-res-format=".csv.zip."
+          <li class="item" 
+            fiso-genres=".Horror."
           >
-            <h3> Bicicletas Públicas </h3>
-            <p>Información del sistema de transporte público de bicicletas desde sus inicios hasta la actualidad. Recorrido, horarios, detalles de...</p>
+            <img src="img/AfUxqlRUTqLKAS9quduZ1G2WLzD.jpg"/>
+            <h1 class="hide">The Evil Dead</h1>
+            <span class="hide popularity">1.44463048882522</span>
+            <small>Horror</small>
           </li>
-          <li class="item"
-          fiso-tags=".bicicletas.mapa.servicios."
-          fiso-res-format=".csv."
+          <li class="item" 
+            fiso-genres=".Action.Drama.History.Thriller."
           >
-            <h3> Bicicleterías </h3>
-            <p>Listado de bicicleterías de la Ciudad. Incluye nombre, dirección, teléfono, pagina web, barrio y comuna. </p>
+            <img src="img/xYgjUpEXa6JMHqpI1YkMnxsjtVg.jpg"/>
+            <h1 class="hide">Southern Comfort</h1>
+            <span class="hide popularity">2.0716836</span>
+            <small>Action</small><small>Drama</small><small>History</small><small>Thriller</small>
           </li>
-          <li class="item"
-          fiso-tags=".bicicletas.estacionamiento.mapa.mobiliario-urbano.servicios.tránsito."
-          fiso-res-format=".csv."
+          <li class="item" 
+            fiso-genres=".Action.Adventure.Crime.Drama.Thriller."
           >
-            <h3> Bicicleteros en Vía Pública </h3>
-            <p>Listado de los bicicleteros instalados en la Ciudad de Buenos Aires con su respectiva dirección. Datasets Relacionados: Bicicletas...</p>
+            <img src="img/zr2p353wrd6j3wjLgDT4TcaestB.jpg"/>
+            <h1 class="hide">Scarface</h1>
+            <span class="hide popularity">2.17528246193726</span>
+            <small>Action</small><small>Adventure</small><small>Crime</small><small>Drama</small><small>Thriller</small>
           </li>
+          <li class="item" 
+            fiso-genres=".Drama.History.Foreign."
+          >
+            <img src="img/2z9A4FSu1YySrhhcuqkdMIXpgyN.jpg"/>
+            <h1 class="hide">Gandhi</h1>
+            <span class="hide popularity">2.16497746732166</span>
+            <small>Drama</small><small>History</small><small>Foreign</small>
+          </li>
+          <li class="item" 
+            fiso-genres=".Action.Adventure.Comedy."
+          >
+            <img src="img/uBq4SQkKrqGyafGFPJosdj9gWTt.jpg">
+            <h1 class="hide">Nati con la camicia</h1>
+            <span class="hide popularity">1.25</span>
+            <small>Action</small><small>Adventure</small><small>Comedy</small>
+          </li>
+          <li class="item" 
+            fiso-genres=".Horror.Mistery.Science Fiction."
+          >
+            <img src="img/5uBGnab5nt9UfSPyH40M4PW4pZG.jpg"/>
+            <h1 class="hide">Halloween III: Season of the Witch</h1>
+            <span class="hide popularity">0.878576530099388</span>
+            <small>Horror</small><small>Mistery</small><small>Science Fiction</small>
+          </li>
+          <li class="item" 
+            fiso-genres=".Drama."
+          >
+            <img src="img/pEEVePNMmCyDbCtfo2ThqMLUpHF.jpg"/>
+            <h1 class="hide">Les îles</h1>
+            <span class="hide popularity">1.550552402</span>
+            <small>Drama</small>
+          </li>
+          <li class="item" 
+            fiso-genres=".Action.Horror.Thriller."
+          >
+            <img src="img/jQa0nQvbjwDT79WFi7wt1rAtKRT.jpg"/>
+            <h1 class="hide">Jaws 3</h1>
+            <span class="hide popularity">1.06249837258991</span>
+            <small>Action</small><small>Horror</small><small>Thriller</small>
+          </li>
+          <li class="item" 
+            fiso-genres=".Comedy.Foreign."
+          >
+            <img src="img/c8gtBDwwiFIUkMun4Cc62zLkD2N.jpg"/>
+            <h1 class="hide">The Meaning of Life</h1>
+            <span class="hide popularity">0.905844670635526</span>
+            <small>Comedy</small><small>Foreign</small>
+          </li>
+          <li class="item" 
+            fiso-genres=".Comedy.Drama.Holiday.Familiy."
+          >
+            <img src="img/p2yuFxAyaBjdGrU2UBAqaE02NYG.jpg"/>
+            <h1 class="hide">A Christmas Story</h1>
+            <span class="hide popularity">1.0929421280786</span>
+            <small>Comedy</small><small>Drama</small><small>Holiday</small><small>Familiy</small>
+          </li>
+          <li class="item" 
+            fiso-genres=".Drama.Music.Romance."
+          >
+            <img src="img/wOwSJWEMBqpWWdd3jNyhDwz0Cyd.jpg"/>
+            <h1 class="hide">Flashdance</h1>
+            <span class="hide popularity">1.44896584867618</span>
+            <small>Drama</small><small>Music</small><small>Romance</small>
+          </li>
+
         </ul>
       </div>
-      <div class="selectors">
-        <div class="datos">
-          <div>Items: <span class="fiso-total-counter"></span></div>
-          <div>Hidden Items: <span class="fiso-total-hidden"></span></div>
-          <div>Visible Items: <span class="fiso-total-visible"></span></div>
-        </div>
-        <div class="filtros">
-          <div class="fiso-selector" fiso-facet="tags" >
-            <h2>Tags <span class="fiso-counter-selected" fiso-facet="tags"></span>/<span class="fiso-counter-available" fiso-facet="tags"></span>/<span class="fiso-counter-all" fiso-facet="tags"></span></h2>
-            <ul>
-              <li class="fiso-example"><a href="#"></a></li>
-              <li><a href="#" class="fiso-toggle-facet" fiso-facet="tags">Cambiar Operación</a></li>
-              <li><a href="#" class="fiso-clear-facet" fiso-facet="tags">Clear</a></li>
-            </ul>
-          </div>
-          <div class="fiso-selector" fiso-facet="res-format" >
-            <h2>Formato <span class="fiso-counter-selected" fiso-facet="res-format"></span>/<span class="fiso-counter-available" fiso-facet="res-format"></span>/<span class="fiso-counter-all" fiso-facet="res-format"></span></h2>
-            <ul>
-              <li class="fiso-example"><a href="#"></a></li>
-              <li><a href="#" class="fiso-toggle-facet" fiso-facet="res-format">Cambiar Operación</a></li>
-              <li><a href="#" class="fiso-clear-facet" fiso-facet="res-format">Clear</a></li>
-            </ul>
-          </div>
-        </div>
-        <div class="sort">
-          <h2>Ordenar</h2>
-          <ul>
-            <li><a href="#" class="fiso-sort-facet" fiso-sort="title">By Title</a></li>
-            <li><a href="#" class="fiso-sort-facet" fiso-sort="letras_count">Cantidad Letras</a></li>
-            <li><a href="#" class="fiso-sort-facet" fiso-sort="numeros_count">Cantidad Numeros</a></li>
-          </ul>
-        </div>
+
+
+      <div 
         <div class="query">
            <input type="text" class="fiso-search" name="query" placeholder="Buscar" />
         </div>

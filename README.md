@@ -87,7 +87,7 @@ Or for example two categories
 
 A link that lets you toggle between adding or removing a category from a facet filter.
 
-    <a href="#" class="fiso-toggle-category" fiso-facet="tags" fiso-category="sports">
+    <a href="#" class="fiso-toggle-category" fiso-facet="tags" fiso-category="sports">Sports</a>
 
 #### Needed Attributes
       
