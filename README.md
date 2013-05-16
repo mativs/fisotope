@@ -101,10 +101,6 @@ A link that lets you toggle between adding or removing a category from a facet f
 * **selected** - The filter for this category is activated.
 * **available** - This category appear in any of the visible items. 
 
-#### Direct Filter Link Example
-
-[http://mativs.github.com/fisotope/index.html#tags_cats=.alojamiento.](http://mativs.github.com/fisotope/index.html#tags_cats=.alojamiento.)
-
 ### Toggle Filter Operator Links (*fiso-toggle-facet*)
 
  While filtering a list by setting many categories from an specific facet you could be searching for the intersection of all categories (*and*) or for the union of all categories (*or*). This link lets you toggle the facet operator.
@@ -119,10 +115,6 @@ A link that lets you toggle between adding or removing a category from a facet f
 
 * **or** - The filter for this facet is using the *or* operator.
 * **and** (default) - The filter for this facet is using the *and* operator.
-
-#### Direct Operator Link Example
-
-[http://mativs.github.com/fisotope/index.html#tags_cats=.alojamiento.&tags_op=or](http://mativs.github.com/fisotope/index.html#tags_cats=.alojamiento.&tags_op=or)
 
 ### Clear Filter Links (*fiso-clear-facet*)
 
@@ -211,15 +203,17 @@ Fisotope will look for all html elemets with the class *fiso-selector*. Inside e
 
 A link that lets you sort your items. You have to previously configure it on your isotope setup.
 
-    <a href="#" class="fiso-sort-facet" fiso-sort="tags">
+    <a href="#" class="fiso-sort-facet" fiso-sort="tags_count" fiso-sort-order="desc">
 
 #### Needed Attributes
       
-* **fiso-facet** - Set this attribute with the facet name. For example, *tags*.
+* **fiso-sort** - Set this attribute with the facet name plus *_count*. For example, *tags_count* or some of the following generic options.
 
-#### Sort Link Example
+  * **random** - Random Order
+  * **original-order** - Html original Order
+  * **(your_defined_sort)** - You can set a new order in isotope configuration.
 
-[http://mativs.github.com/fisotope/index.html#sort=title](http://mativs.github.com/fisotope/index.html#sort=title)
+* **fiso-sort-order** - This attribute sets the order. Posible values are **desc**, **asc** (default).
 
 ### Query Input (*fiso-search*)
 
@@ -227,6 +221,3 @@ An html input where you can search for any text element inside any of your items
 
     <input type="text" class="fiso-search" name="query" placeholder="Search" />
 
-#### Input Query Example
-
-[http://mativs.github.com/fisotope/index.html#query=agencias](http://mativs.github.com/fisotope/index.html#query=agencias)

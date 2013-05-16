@@ -74,9 +74,6 @@
 	  			methods.mapping[ from.charAt( i ) ] = to.charAt( i );
 	  		}
 
-	  		
-	  		
-
 	        // Bindings
 	        $(window).bind( 'hashchange.fisotope', methods.urlChanged).trigger('hashchange');
 		  	$('a.fiso-toggle-category').bind( 'click.fisotope', methods.toggleFacetCategoryUrl);
@@ -147,6 +144,10 @@
 			}
 			return operator ? operator : methods.settings.default_operator;
 		},
+		getSortDefault: function()
+		{
+			return "asc";
+		},
 		toggleQuery: function(eventObject) {
 			kwd = $(this).val();
 			$.bbq.pushState( $.param( { 
@@ -156,10 +157,14 @@
 		},
 		toggleSort: function(eventObject) {
 			sort_str = $(this).attr('fiso-sort');
+			order_srt = $(this).attr('fiso-sort-order');
+			order = order_srt ? order_srt : methods.getSortDefault();
 			$.bbq.pushState( $.param( { 
-				sort: sort_str
+				sort: sort_str,
+				sort_order: order
 			} ));
-			return false;
+			eventObject.preventDefault();
+			return true;
 		},
 		toggleFacet: function(eventObject) {
 			var facet = $(eventObject.currentTarget).attr('fiso-facet');
@@ -182,7 +187,8 @@
 			var parametros = {};
 			parametros[facet_op] = new_facet_operator;
 			$.bbq.pushState( $.param( parametros ));
-			return false;
+			eventObject.preventDefault();
+			return true;
 		},
 		clearFacet: function(eventObject) {
 			var facet = $(eventObject.currentTarget).attr('fiso-facet');
@@ -221,8 +227,8 @@
 					}
 					break;
 			}
-
-			return false;
+			eventObject.preventDefault();
+			return true;
 		},
 		updateSelectors: function() {
 		 	var hashOptions = $.deparam.fragment();
@@ -249,14 +255,15 @@
 				}
 			}
 
+			// Update search
 			if ( $('input.fiso-search').val() == '' && hashOptions.query != '' )
-				{
-					$('input.fiso-search').val(hashOptions.query);
-				} else {
-					if ( $('input.fiso-search').val() != '' && ( !hashOptions.query || hashOptions.query == '')) {
-						$('input.fiso-search').val('');
-					}
+			{
+				$('input.fiso-search').val(hashOptions.query);
+			} else {
+				if ( $('input.fiso-search').val() != '' && ( !hashOptions.query || hashOptions.query == '')) {
+					$('input.fiso-search').val('');
 				}
+			}
 
 			// Update totals
 			var totalCounterObj = $('.fiso-total-counter');
@@ -303,6 +310,7 @@
 					facet = value.substr(5)
 					var facet_cats = facet + "_cats";
 					var facet_op = facet + "_op";
+					var operator = hashOptions[facet_op] ? hashOptions[facet_op] : methods.getFacetOperationDefault(facet);
 					var selectedCategories = hashOptions[facet_cats] ? hashOptions[facet_cats].split('.') : []
 					selectedCategories.splice(0,1);
 					selectedCategories.splice(selectedCategories.length-1,1);
@@ -316,58 +324,59 @@
 					// Update fiso-toggle-category Available
 					availableSelectors = $.map(availableCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
 					$(availableSelectors.join()).addClass('available');
+
+					// Update fiso-counter-all text
+					var facetTotalCounter = $('.fiso-counter-all[fiso-facet="' +  facet + '"]');
+					facetTotalCounter.text(allCategories.length);
+
+					// Update fiso-counter-selected text
+					var facetSelectedCounter = $('.fiso-counter-selected[fiso-facet="' +  facet + '"]');
+					facetSelectedCounter.text(selectedCategories.length);
+
+					// Update fiso-counter-available text
+					var facetAvailableCounter = $('.fiso-counter-available[fiso-facet="' +  facet + '"]');
+					facetAvailableCounter.text(availableCategories.length);
+
+					$('.fiso-selector[fiso-facet="' + facet + '"]').each(function(value, index) {
+						var selectorObj = $(this);
+
+						// Clean
+						selectorObj.removeClass('or and fiso-no-categories fiso-no-selected fiso-no-available')
+						selectorObj.removeClass (function (index, css) {
+							var allClass = $(this).attr('class').split(' ')
+							var answerClass = []
+							for ( index in allClass ) {
+								var theClass = allClass[index];
+								if  ( theClass.indexOf('fiso-selected') == 0 || 
+									theClass.indexOf('fiso-all') == 0 || 
+									theClass.indexOf('fiso-available') == 0 ) {
+									answerClass.push(theClass);
+								}
+							}
+							return answerClass.join(' ');
+						});
+
+						// Update selector
+						selectorObj.addClass(operator);
+						if ( allCategories.length == 0){
+							selectorObj.addClass('fiso-no-categories')
+						}
+						if ( selectedCategories.length == 0) {
+							selectorObj.addClass('fiso-no-selected');
+						}
+						if ( availableCategories.length == 0 ) {
+							selectorObj.addClass('fiso-no-available');
+						}
+
+						selectorObj.addClass('fiso-all-' + allCategories.length);
+						selectorObj.addClass('fiso-selected-' + selectedCategories.length);
+						selectorObj.addClass('fiso-available-' + availableCategories.length);
+					});
+
 				}
 			}
 
-			$('.fiso-selector').each(function(value, index) {
-				var selectorObj = $(this);
-
-				var facet = selectorObj.attr('fiso-facet');
-				var facet_cats = facet + "_cats";
-				var facet_op = facet + "_op";
-
-				var facetTotalCounter = $('.fiso-counter-all[fiso-facet="' +  facet + '"]');
-				var facetSelectedCounter = $('.fiso-counter-selected[fiso-facet="' +  facet + '"]');
-				var facetAvailableCounter = $('.fiso-counter-available[fiso-facet="' +  facet + '"]');
-
-				var operator = hashOptions[facet_op] ? hashOptions[facet_op] : methods.getFacetOperationDefault(facet);
-
-				// Clean
-				selectorObj.removeClass('or and fiso-no-categories fiso-no-selected fiso-no-available')
-				selectorObj.removeClass (function (index, css) {
-					var allClass = $(this).attr('class').split(' ')
-					var answerClass = []
-					for ( index in allClass ) {
-						var theClass = allClass[index];
-						if  ( theClass.indexOf('fiso-selected') == 0 || 
-							theClass.indexOf('fiso-all') == 0 || 
-							theClass.indexOf('fiso-available') == 0 ) {
-							answerClass.push(theClass);
-						}
-					}
-					return answerClass.join(' ');
-				});
-
-				// Update selector
-				selectorObj.addClass(operator);
-				if ( allCategories.length == 0){
-					selectorObj.addClass('fiso-no-categories')
-				}
-				if ( selectedCategories.length == 0) {
-					selectorObj.addClass('fiso-no-selected');
-				}
-				if ( availableCategories.length == 0 ) {
-					selectorObj.addClass('fiso-no-available');
-				}
-
-				// Update counters
-				facetTotalCounter.text(allCategories.length);
-				selectorObj.addClass('fiso-all-' + allCategories.length);
-				facetSelectedCounter.text(selectedCategories.length);
-				selectorObj.addClass('fiso-selected-' + selectedCategories.length);
-				facetAvailableCounter.text(availableCategories.length);
-				selectorObj.addClass('fiso-available-' + availableCategories.length);
-			});
+			
 		},
 		recursiveFilter: function(big_table) {
 			if (big_table.length == 0) {
@@ -392,6 +401,7 @@
 			var filter = "";
 			var big_table = [];
 			var sort_str = hashOptions['sort'] ? hashOptions['sort'] : 'original-order';
+			var sort_order = hashOptions['sort_order'] ? hashOptions['sort_order'] : methods.getSortDefault();
 			for ( facet_cats in hashOptions ) {
 				var cat_index = facet_cats.indexOf('_cats');
 				if (cat_index > 0) {
@@ -427,14 +437,15 @@
 
 			methods.theElement.isotope( {
 				filter: or_filter.join(),
-				sortBy : sort_str
+				sortBy : sort_str,
+				sortAscending: !(sort_order == 'desc')
 			});
 		},
 		urlChanged: function() {
 		  	methods.filterDatasets();
 		  	methods.updateSelectors();
 		},
-		toggleFacetCategoryUrl: function(eventElement) {
+		toggleFacetCategoryUrl: function(eventObject) {
 			var theObj = $(this);
 			var facet = theObj.attr('fiso-facet');
 			var facet_cats = facet + "_cats";
@@ -457,8 +468,8 @@
 			var parametros = {};
 			parametros[facet_cats] = hashOptions[facet_cats];
 			$.bbq.pushState( $.param( parametros ));
-
-			return false;
+			eventObject.preventDefault();
+			return true;
 		},
  	};
 
