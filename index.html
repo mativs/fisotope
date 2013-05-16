@@ -1,19 +1,16 @@
 <!DOCTYPE html>
-<!-- saved from url=(0065)http://twitter.github.io/bootstrap/examples/starter-template.html -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en">
+  <head>
     <meta charset="utf-8">
     <title>Fisotope</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="Isotope Wrapper ">
+    <meta name="author" content="Matias Saguir">
 
     <!-- Le styles -->
     <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-      }
-    </style>
+    <link href="index.css" rel="stylesheet">
+
     <link href="http://twitter.github.io/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -26,245 +23,88 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="http://twitter.github.io/bootstrap/assets/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="http://twitter.github.io/bootstrap/assets/ico/favicon.png">
-    <link href="index.css"  rel="stylesheet" type="text/css"  />
+     <link rel="shortcut icon" href="http://twitter.github.io/bootstrap/assets/ico/favicon.png">
   </head>
 
   <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="brand" href="http://twitter.github.io/bootstrap/examples/starter-template.html#">Fisotope</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Filter Links</a></li>
-              <li class="active"><a href="#about">About</a></li>
-              <li><a href="http://github.com/mativs/fisotope">Source</a></li>
-              <li><a href="https://twitter.com/intent/tweet?hashtags=fisotope&related=mativs&text=@mativs" target="_blank">Contact</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
 
-    <div class="container">
-      <div id="links">
-        <h4>Toggle Filter Links</h4>
-        <p>This link filters by 
-          <a href="#" class="btn btn-primary fiso-toggle-category" fiso-facet="genres" fiso-category="Drama">Drama</a>. 
-          Read the docs <a href="https://github.com/mativs/fisotope#toggle-filter-links-fiso-toggle-category" target="_blank">about it</a>.
-        </p>
-        
-        <h4>Toggle Filter Operator Links</h4>
-        <p>This link changes the filter operator. To understand it first try filtering by drama in the previous line, and the filter by
-          <a href="#" class="fiso-toggle-category" fiso-facet="genres" fiso-category="Comedy">Comedy</a>.
-          Alright, now toggle the <a href="#" class="fiso-toggle-facet" fiso-facet="genres">operator</a> 
-          as many times you as need. ¿Can you see de difference? Read the docs <a href="https://github.com/mativs/fisotope#toggle-filter-operator-links-fiso-toggle-facet" target="_blank">about it</a>.
-        </p>
+    <div class="container-narrow">
 
-        <h4>Clear Filter Links</h4>
-        <p>This link clears all type of filtering for an specific category, 
-          <a href="#" class="fiso-clear-facet" fiso-facet="genres">try it</a>. 
-          Read the docs <a href="https://github.com/mativs/fisotope#clear-filter-links-fiso-clear-facet" target="_blank">about it</a>.
-        </p>
-        
-        <div class="row-fluid">
-
-          
-        </div>
-
-        <ul class="elementos">
-          <li class="item" 
-            fiso-genres=".Action.Adventure.Fantasy.Science Fiction.Family."
-          >
-            <img src="img/jx5p0aHlbPXqe3AH9G15NvmWaqQ.jpg"/>
-            <h1 class="hide">Star Wars: Episode VI - Return of the Jedi</h1>
-            <span class="hide popularity">6.62161651853325</span>
-            <small>Action</small> <small>Adventure</small> <small>Fantasy</small> <small>Science Fiction</small> <small>Family</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Action.Adventure.Thriller.War."
-          >
-            <img src="img/v0sPtM5lGkLwtfDlWpn07nqJPyf.jpg"/>
-            <h1 class="hide">First Blood</h1>
-            <span class="hide popularity">2.80698395939911</span>
-            <small>Action</small><small>Adventure</small><small>Thriller</small><small>War</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Drama.Mistery.Foreign.Fantasy."
-          >
-            <img src="img/heMf02wkJBa4BH1wEK2b9TAfGfQ.jpg"/>
-            <h1 class="hide">Fanny och Alexander</h1>
-            <span class="hide popularity">3.64420501537384</span>
-            <small>Drama</small><small>Mistery</small><small>Foreign</small><small>Fantasy</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Crime.Drama."
-          >
-            <img src="img/u8X6d72tKila3BDblA5IzE04dIU.jpg"/>
-            <h1 class="hide">The Outsiders</h1>
-            <span class="hide popularity">3.16981022888939</span>
-            <small>Crime</small><small>Drama</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Comedy."
-          >
-            <img src="img/nopK3L1aJYCuEiSQTqwpZD7uff7.jpg"/>
-            <h1 class="hide">Eddie Murphy: Delirious</h1>
-            <span class="hide popularity">2.96026436487971</span>
-            <small>Comedy</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Action.Adventure.Thriller.Foreign."
-          >
-            <img src="img/r8WbgQvQxO3Z92AnosCXq582Q8V.jpg"/>
-            <h1 class="hide">Never Say Never Again</h1>
-            <span class="hide popularity">2.38418144259963</span>
-            <small>Action</small><small>Adventure</small><small>Thriller</small><small>Foreign</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Drama.History."
-          >
-            <img src="img/o2t9jnHHJL0j4P7GDuGmovc1lAH.jpg"/>
-            <h1 class="hide">The Right Stuff</h1>
-            <span class="hide popularity">4.17121480005103</span>
-            <small>Drama</small><small>History</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Comedy.Romance."
-          >
-            <img src="img/9758Lxrg24xBRDELlbHcstvvjlK.jpg"/>
-            <h1 class="hide">The Man with Two Brains</h1>
-            <span class="hide popularity">2.3646845986</span>
-            <small>Comedy</small><small>Romance</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Comedy.Drama.Foreign."
-          >
-            <img src="img/fcv3neVtagJNOeZTxHso3GqN4jt.jpg">
-            <h1 class="hide">Entre tinieblas</h1>
-            <span class="hide popularity">0.2</span>
-            <small>Comedy</small><small>Drama</small><small>Foreign</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Horror."
-          >
-            <img src="img/AfUxqlRUTqLKAS9quduZ1G2WLzD.jpg"/>
-            <h1 class="hide">The Evil Dead</h1>
-            <span class="hide popularity">1.44463048882522</span>
-            <small>Horror</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Action.Drama.History.Thriller."
-          >
-            <img src="img/xYgjUpEXa6JMHqpI1YkMnxsjtVg.jpg"/>
-            <h1 class="hide">Southern Comfort</h1>
-            <span class="hide popularity">2.0716836</span>
-            <small>Action</small><small>Drama</small><small>History</small><small>Thriller</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Action.Adventure.Crime.Drama.Thriller."
-          >
-            <img src="img/zr2p353wrd6j3wjLgDT4TcaestB.jpg"/>
-            <h1 class="hide">Scarface</h1>
-            <span class="hide popularity">2.17528246193726</span>
-            <small>Action</small><small>Adventure</small><small>Crime</small><small>Drama</small><small>Thriller</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Drama.History.Foreign."
-          >
-            <img src="img/2z9A4FSu1YySrhhcuqkdMIXpgyN.jpg"/>
-            <h1 class="hide">Gandhi</h1>
-            <span class="hide popularity">2.16497746732166</span>
-            <small>Drama</small><small>History</small><small>Foreign</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Action.Adventure.Comedy."
-          >
-            <img src="img/uBq4SQkKrqGyafGFPJosdj9gWTt.jpg">
-            <h1 class="hide">Nati con la camicia</h1>
-            <span class="hide popularity">1.25</span>
-            <small>Action</small><small>Adventure</small><small>Comedy</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Horror.Mistery.Science Fiction."
-          >
-            <img src="img/5uBGnab5nt9UfSPyH40M4PW4pZG.jpg"/>
-            <h1 class="hide">Halloween III: Season of the Witch</h1>
-            <span class="hide popularity">0.878576530099388</span>
-            <small>Horror</small><small>Mistery</small><small>Science Fiction</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Drama."
-          >
-            <img src="img/pEEVePNMmCyDbCtfo2ThqMLUpHF.jpg"/>
-            <h1 class="hide">Les îles</h1>
-            <span class="hide popularity">1.550552402</span>
-            <small>Drama</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Action.Horror.Thriller."
-          >
-            <img src="img/jQa0nQvbjwDT79WFi7wt1rAtKRT.jpg"/>
-            <h1 class="hide">Jaws 3</h1>
-            <span class="hide popularity">1.06249837258991</span>
-            <small>Action</small><small>Horror</small><small>Thriller</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Comedy.Foreign."
-          >
-            <img src="img/c8gtBDwwiFIUkMun4Cc62zLkD2N.jpg"/>
-            <h1 class="hide">The Meaning of Life</h1>
-            <span class="hide popularity">0.905844670635526</span>
-            <small>Comedy</small><small>Foreign</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Comedy.Drama.Holiday.Familiy."
-          >
-            <img src="img/p2yuFxAyaBjdGrU2UBAqaE02NYG.jpg"/>
-            <h1 class="hide">A Christmas Story</h1>
-            <span class="hide popularity">1.0929421280786</span>
-            <small>Comedy</small><small>Drama</small><small>Holiday</small><small>Familiy</small>
-          </li>
-          <li class="item" 
-            fiso-genres=".Drama.Music.Romance."
-          >
-            <img src="img/wOwSJWEMBqpWWdd3jNyhDwz0Cyd.jpg"/>
-            <h1 class="hide">Flashdance</h1>
-            <span class="hide popularity">1.44896584867618</span>
-            <small>Drama</small><small>Music</small><small>Romance</small>
-          </li>
-
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">Home</a></li>
+          <li><a href="example.html">Example</a></li>
+          <li><a target="_blank" href="http://github.com/mativs/fisotope">Source</a></li>
+          <li><a href="https://twitter.com/intent/tweet?hashtags=fisotope&related=mativs&text=@mativs" target="_blank">@mativs</a></li>
         </ul>
+        <h3 class="muted">Fisotope</h3>
       </div>
 
+      <hr>
 
-      <div 
-        <div class="query">
-           <input type="text" class="fiso-search" name="query" placeholder="Buscar" />
-        </div>
-        <div>
-          <a href="#" class="fiso-clear-facet" fiso-facet="all">Clear All</a>
-        </div>
+      <div class="jumbotron">
+        <h1>Filter, Query and Sort <span class="blurry-text">without</span> writing Javascript</h1>
+
+        <p class="lead">Fisotope is a library that wraps around <a target="_blank" href="http://isotope.metafizzy.co/">Isotope</a>. Makes it easier to <b>filter</b>, <b>sort</b>, and <b>query</b> by using only html (minimum Javascript) :D. Hey, wait!! Also uses the wonderfull Ben Alamn's <a target="_blank" href="http://benalman.com/projects/jquery-bbq-plugin/">BBQ Jquery Plugin</a></p>
+        <a class="btn btn-large btn-success" href="example.html">Try It</a> 
+        <a class="btn btn-large btn-success" href="http://github.com/mativs/fisotope">Download</a>
       </div>
+
+      <hr>
+
+      <div class="row-fluid marketing">
+        <div class="span6">
+          <h4>Toggle Filter Links</h4>
+          <p>Set a link to toggle the filtering for an specifc facet inside a category.</p>
+
+          <h4>Toggle Filter Operator Links</h4>
+          <p>Set a link to toggle the filtering operator. And/Or i.e. Intersection/Union.</p>
+
+          <h4>Clear Filter Links</h4>
+          <p>Set a link to clear any filtering for an specific category or other configurations.</p>
+       
+          <h4>Text Information Classes</h4>
+          <p>Update html elements text with counter information. E.g. facet selected, element visible, etc.</p>
+        </div>
+
+        <div class="span6">
+          <h4>Selector</h4>
+          <p>Populate and keep updated an html selector with all the facet for an specific category.</p>
+
+          <h4>Sort Links</h4>
+          <p>Set a link to sort your elements based on previous queries.</p>
+
+          <h4>Query Input</h4>
+          <p>Tranform you input in an automatic word filter for text inside your items.</p>
+
+          <h4>Death the Kid</h4>
+          <p>Just another text to keep my <a href="http://souleater.wikia.com/wiki/Death_the_Kid">symmetry OCD</a> at ease :D</p>
+        </div>
+
+      </div>
+
+      <hr>
+
+
     </div> <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="text/javascript" src="lib/jquery.js"></script>
-    <script type="text/javascript" src="lib/jquery.isotope.min.js"></script>
-    <script type="text/javascript" src="lib/jquery.ba-bbq.min.js"></script>
-    <script type="text/javascript" src="fisotope.js"></script>
-    <script type="text/javascript" src="index.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-transition.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-alert.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-modal.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-dropdown.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-tab.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-tooltip.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-popover.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-button.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-collapse.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-carousel.js"></script>
+    <script src="http://twitter.github.io/bootstrap/assets/js/bootstrap-typeahead.js"></script>
 
-  
-
-<div id="sbi_camera_button" class="sbi_search" style="left:0px;top:0px;position:absolute;width:29px;height:27px;border:none;margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;z-index:2147483647;display:none;"></div>
-</body>
+  </body>
 </html>
+
