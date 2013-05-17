@@ -285,7 +285,7 @@
 				var facet_op = facet + "_op";
 				var operator = hashOptions[facet_op] ? hashOptions[facet_op] : methods.getFacetOperationDefault(facet);
 
-				linkObj.removeClass('or and selected available');
+				linkObj.removeClass('or and selected available first-selected last-selected first-available last-available');
 				linkObj.addClass(operator);
 			});
 
@@ -367,7 +367,16 @@
 						if ( availableCategories.length == 0 ) {
 							selectorObj.addClass('fiso-no-available');
 						}
+	
+						// Update first/last
+						var selectedObjs = selectorObj.find('.fiso-toggle-category.selected')
+						selectedObjs.first().addClass('first-selected')
+						selectedObjs.last().addClass('last-selected')
+						var availableObjs = selectorObj.find('.fiso-toggle-category.available')
+						availableObjs.first().addClass('first-available')
+						availableObjs.last().addClass('last-available')
 
+						// Update counters
 						selectorObj.addClass('fiso-all-' + allCategories.length);
 						selectorObj.addClass('fiso-selected-' + selectedCategories.length);
 						selectorObj.addClass('fiso-available-' + availableCategories.length);
