@@ -60,7 +60,7 @@ This configuration lets you change your default operator for your specific facet
 
 ### Filters
 
-Yo can filter your cards by any number of facets. For each facet, you need to add an attribute with the name 'fiso-facetname' to the item with the values precede, separted and ended with a dot. Look at the following example where two facets are defined with different categories.
+Yo can filter your cards by any number of facets. For each facet, you need to add an attribute with the name 'fiso-facetname' to the item with the values **precede**, **separted** and **ended** with a dot. Look at the following example where two facets are defined with different categories.
 
 	<li class="item" 
 		fiso-tags=".parties.events.sports."
@@ -79,7 +79,7 @@ By only setting this values you can now filter your cards by using, for example 
     
     #tags_cats=.sports.
 
-Or for example two categories
+Or for example two facet
 
 	#tags_cats=.sports.&formats_cats='.csv'
 
