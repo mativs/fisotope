@@ -43,7 +43,6 @@ body {
 	padding-bottom: 40px;
 }
 
-/* Custom container */
 .container-narrow {
 	margin: 0 auto;
 	max-width: 700px;
@@ -52,7 +51,6 @@ body {
 	margin: 30px 0;
 }
 
-/* Main marketing message and sign up button */
 .jumbotron {
 	margin: 60px 0;
 	text-align: center;
@@ -78,7 +76,7 @@ body {
 
 
 
-
+/* Fisotope example css */
 .item {
 	margin: 10px;
 	padding: 4px;
@@ -89,13 +87,12 @@ body {
 	text-decoration: line-through;
 }
 
-
-.fiso-toggle-category.or.available {
-	color: blue;
+.fiso-toggle-category.and {
+	display:none;
 }
 
 .fiso-toggle-category.and.available {
-	color: green;
+	display: block;
 }
 
 .selectors li {
@@ -108,6 +105,40 @@ body {
 	line-height: 15px;
 	display: block;
 	text-align: center;
+}
+
+.info-genres .fiso-toggle-category {
+	display: none;
+	padding-right: 5px;
+}
+
+.info-genres .fiso-toggle-category.selected {
+	display: inline-block;
+	text-decoration: none;
+}
+
+.info-genres .fiso-toggle-category.available {
+	display: none;
+}
+
+.info-genres.and .fiso-toggle-category:after {
+	content: " and";
+	text-decoration: none;
+	color: black;
+}
+
+.info-genres.or .fiso-toggle-category:after {
+	content: " or";
+	text-decoration: none;
+	color: black;
+}
+
+.info-genres.fiso-selected-0 .fiso-toggle-facet, .info-genres.fiso-selected-1 .fiso-toggle-facet {
+	display:none;
+}
+
+.info-genres .fiso-toggle-category.last-selected:after {
+	content: "";
 }
 
 #example {
