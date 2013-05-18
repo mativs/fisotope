@@ -33,12 +33,6 @@ You need to initialize fisotope, with the same parameters as [Isotope](http://is
   		layoutMode : 'fitRows',
   		masonry: {columnWidth: 267 },
   		getSortData : {
-  		    tags_count : function ( $elem ) {
-  		    	return $elem.attr('fiso-tags').split('.').length - 2;
-  		    },
-  		    numeros_count : function ( $elem ) {
-  		    	return $elem.attr('fiso-res-format').split('.').length - 2;
-  		    },
   		    title : function ( $elem ) {
   		      return $elem.find('h1').text();
   		    }
