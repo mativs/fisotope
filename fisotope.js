@@ -17,7 +17,7 @@
 			methods.theElement = this;	
 
 			// Sort Methods to Default
-			var atributos = this.find('.item')[0].attributes
+			var atributos = this.find(options.itemSelector)[0].attributes
 			var sort_default = { getSortData: {} }
 			for ( var index = 0; index < atributos.length; index++ ){
 				var value = atributos[index].name 
@@ -303,7 +303,7 @@
 			});
 			
 			// Updated Selected And Available
-			var atributos = methods.theElement.find('.item')[0].attributes
+			var atributos = methods.theElement.find(methods.settings.itemSelector)[0].attributes
 			for ( var index = 0; index < atributos.length; index++ ){
 				var value = atributos[index].name 
 				if ( value.indexOf('fiso-') == 0 ) {
