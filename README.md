@@ -50,7 +50,7 @@ The *filter* configuration doesn't work because it's overriden by fisotope.
         tags:'or',
         res_format:'and'
       },
-      empty_behaviour: "hide"
+      empty_selection_behaviour: "hide"
     });
 
 #### default_fact_operator

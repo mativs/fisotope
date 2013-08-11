@@ -2,7 +2,8 @@
 
   	var methods = {
   		defaults: {
-  			default_operator: 'and'
+  			default_operator: 'and',
+  			empty_selection_behaviour: "show"
   		},
   		settings: {
 
@@ -444,8 +445,13 @@
 				}
 			}
 
+			var final_filter = or_filter.join();
+			if ( methods.settings.empty_selection_behaviour == "hide" && $.trim(final_filter) == '' ) {
+				final_filter = 	'.asdlkfasdlkasdfkl32923u42kj349';
+			}
+
 			methods.theElement.isotope( {
-				filter: or_filter.join(),
+				filter: final_filter,
 				sortBy : sort_str,
 				sortAscending: !(sort_order == 'desc')
 			});
