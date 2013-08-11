@@ -12,7 +12,7 @@
 
   		},
   		theElement: null,
-     	init : function( options ) {
+     	init : function( options, callback ) {
 	  		
 	  		// Save element
 			methods.theElement = this;	
@@ -33,9 +33,10 @@
 			// Init Settings
 			methods.settings = $.extend({}, methods.defaults, options)
 			$.extend(true, methods.settings, sort_default);
+			methods.settings.callback = callback;
 
 	  		// Init Isotope
-			this.isotope(methods.settings);
+			this.isotope(methods.settings, callback);
 				
 		    // Init Selectors
 	  		$('.fiso-selector').each(function(value, index) {
@@ -451,10 +452,13 @@
 			}
 
 			methods.theElement.isotope( {
-				filter: final_filter,
-				sortBy : sort_str,
-				sortAscending: !(sort_order == 'desc')
-			});
+					filter: final_filter,
+					sortBy : sort_str,
+					sortAscending: !(sort_order == 'desc')
+				},
+				methods.settings.callback
+			);
+
 		},
 		urlChanged: function() {
 		  	methods.filterDatasets();

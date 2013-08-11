@@ -37,7 +37,11 @@ You need to initialize fisotope, with the same parameters as [Isotope](http://is
   		      return $elem.find('h1').text();
   		    }
   	  	}
-  	});
+  	    },
+	    function ( $items ) {
+	    	$.scrollTo($('#nav'));
+	    }
+	);
 
 #### Configuration exception
 
