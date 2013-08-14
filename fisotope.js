@@ -2,7 +2,8 @@
 
   	var methods = {
   		defaults: {
-  			default_operator: 'and'
+  			default_operator: 'and',
+  			empty_selection_behaviour: "show"
   		},
   		settings: {
 
@@ -11,13 +12,13 @@
 
   		},
   		theElement: null,
-     	init : function( options ) {
+     	init : function( options, callback ) {
 	  		
 	  		// Save element
 			methods.theElement = this;	
 
 			// Sort Methods to Default
-			var atributos = this.find('.item')[0].attributes
+			var atributos = this.find(options.itemSelector)[0].attributes
 			var sort_default = { getSortData: {} }
 			for ( var index = 0; index < atributos.length; index++ ){
 				var value = atributos[index].name 
@@ -32,9 +33,10 @@
 			// Init Settings
 			methods.settings = $.extend({}, methods.defaults, options)
 			$.extend(true, methods.settings, sort_default);
+			methods.settings.callback = callback;
 
 	  		// Init Isotope
-			this.isotope(methods.settings);
+			this.isotope(methods.settings, callback);
 				
 		    // Init Selectors
 	  		$('.fiso-selector').each(function(value, index) {
@@ -303,7 +305,7 @@
 			});
 			
 			// Updated Selected And Available
-			var atributos = methods.theElement.find('.item')[0].attributes
+			var atributos = methods.theElement.find(methods.settings.itemSelector)[0].attributes
 			for ( var index = 0; index < atributos.length; index++ ){
 				var value = atributos[index].name 
 				if ( value.indexOf('fiso-') == 0 ) {
@@ -444,11 +446,19 @@
 				}
 			}
 
+			var final_filter = or_filter.join();
+			if ( methods.settings.empty_selection_behaviour == "hide" && $.trim(final_filter) == '' ) {
+				final_filter = 	'.asdlkfasdlkasdfkl32923u42kj349';
+			}
+
 			methods.theElement.isotope( {
-				filter: or_filter.join(),
-				sortBy : sort_str,
-				sortAscending: !(sort_order == 'desc')
-			});
+					filter: final_filter,
+					sortBy : sort_str,
+					sortAscending: !(sort_order == 'desc')
+				},
+				methods.settings.callback
+			);
+
 		},
 		urlChanged: function() {
 		  	methods.filterDatasets();

@@ -33,17 +33,19 @@ You need to initialize fisotope, with the same parameters as [Isotope](http://is
   		layoutMode : 'fitRows',
   		masonry: {columnWidth: 267 },
   		getSortData : {
-  		    tags_count : function ( $elem ) {
-  		    	return $elem.attr('fiso-tags').split('.').length - 2;
-  		    },
-  		    numeros_count : function ( $elem ) {
-  		    	return $elem.attr('fiso-res-format').split('.').length - 2;
-  		    },
   		    title : function ( $elem ) {
   		      return $elem.find('h1').text();
   		    }
   	  	}
-  	});
+  	    },
+	    function ( $items ) {
+	    	$.scrollTo($('#nav'));
+	    }
+	);
+
+#### Configuration exception
+
+The *filter* configuration doesn't work because it's overriden by fisotope. 
 
 ### Extra Configurations
      
@@ -51,12 +53,17 @@ You need to initialize fisotope, with the same parameters as [Isotope](http://is
       default_facet_operator: {
         tags:'or',
         res_format:'and'
-      }
+      },
+      empty_selection_behaviour: "hide"
     });
 
 #### default_fact_operator
 
 This configuration lets you change your default operator for your specific facets. If nothing is set the default operator will be the *and* operator
+
+#### empty_selection_behaviour
+
+Two posible values, *hide* or *show*. Defines the default operation when nothing is filtered.
 
 ### Filters
 
