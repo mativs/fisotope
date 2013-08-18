@@ -106,9 +106,11 @@ A link that lets you toggle between adding or removing a category from a facet f
 * **or** - The filter for this facet is using the *or* operator.
 * **and** (default) - The filter for this facet is using the *and* operator.
 * **selected** - The filter for this category is activated.
+* **not-selected** - The filter for this category is not activated.
 * **first-selected** - This is the first category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be selected. 
 * **last-selected** - This is the last category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be selected
 * **available** - This category appear in any of the visible items. 
+* **not-available** - This category does not appear in any of the visible items. 
 * **first-available** - This is the first category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be available. 
 * **last-available** - This is the last category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be selected
 
