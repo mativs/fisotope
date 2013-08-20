@@ -114,11 +114,13 @@
 				var theObj = $(value);
 				if ( !onlyVisible || !theObj.hasClass('isotope-hidden') ){
 					atributo = theObj.attr('fiso-' + facet);
-					elementos = atributo.split('.');
-					for ( var i = 1 ; i < elementos.length - 1; i++) {
-						var elemento = elementos[i];
-						if ( elemento.length > 0) {
-							answer.push(elemento);
+					if (atributo) {
+						elementos = atributo.split('.');
+						for ( var i = 1 ; i < elementos.length - 1; i++) {
+							var elemento = elementos[i];
+							if ( elemento.length > 0) {
+								answer.push(elemento);
+							}
 						}
 					}
 				}
