@@ -40,53 +40,51 @@
 				
 		    // Init Selectors
 	  		$('.fiso-selector').each(function(value, index) {
-				var selectorObj = $(this);
+					var selectorObj = $(this);
 
-				var facet = selectorObj.attr('fiso-facet');
-				var exampleObj = selectorObj.find('.fiso-example');
-				if ( facet && exampleObj.length > 0 ) {
-					var parentExampleObj = exampleObj.parent();
-					var categories = methods.getAllFacetCategories(facet, [], false);
-					for ( var i = 0; i < categories.length; i++ ) {
-						var category = categories[i];
-						var newEle = exampleObj.clone();
-						newEle.removeClass('fiso-example');
-						newEleLink = newEle.find('a').andSelf().filter('a');
-						newEleLink.append(category);
-						newEleLink.addClass('fiso-toggle-category');
-						newEleLink.attr('fiso-facet', facet);
-						newEleLink.attr('fiso-category', category);
-						parentExampleObj.prepend(newEle);
+					var facet = selectorObj.attr('fiso-facet');
+					var exampleObj = selectorObj.find('.fiso-example');
+					if ( facet && exampleObj.length > 0 ) {
+						var parentExampleObj = exampleObj.parent();
+						var categories = methods.getAllFacetCategories(facet, [], false);
+						for ( var i = 0; i < categories.length; i++ ) {
+							var category = categories[i];
+							var newEle = exampleObj.clone();
+							newEle.removeClass('fiso-example');
+							newEleLink = newEle.find('a').andSelf().filter('a');
+							newEleLink.append(category);
+							newEleLink.addClass('fiso-toggle-category');
+							newEleLink.attr('fiso-facet', facet);
+							newEleLink.attr('fiso-category', category);
+							parentExampleObj.prepend(newEle);
+						}
+						exampleObj.remove();
 					}
-					exampleObj.remove();
-				}
-			});
+				});
 
-			// Init Search
-	  		$.expr[':'].contains = function(a, i, m) {
-			  return methods.normalize($(a).text().toUpperCase())
-			      .indexOf(methods.normalize(m[3].toUpperCase())) >= 0;
-			};
+				// Init Search
+		  		$.expr[':'].contains = function(a, i, m) {
+				  return methods.normalize($(a).text().toUpperCase())
+				      .indexOf(methods.normalize(m[3].toUpperCase())) >= 0;
+				};
 
-			// Init Data
-			var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç"
-			var to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc"
-				
-			for(var i = 0, j = from.length; i < j; i++ ) {
-	  			methods.mapping[ from.charAt( i ) ] = to.charAt( i );
+				// Init Data
+				var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç"
+				var to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc"
+					
+				for(var i = 0, j = from.length; i < j; i++ ) {
+		  			methods.mapping[ from.charAt( i ) ] = to.charAt( i );
 	  		}
 
 	        // Bindings
-	        $(window).bind( 'hashchange.fisotope', methods.urlChanged).trigger('hashchange');
-		  	$('a.fiso-toggle-category').bind( 'click.fisotope', methods.toggleFacetCategoryUrl);
-			$('a.fiso-clear-facet').bind( 'click.fisotope', methods.clearFacet);
-			$('a.fiso-toggle-facet').bind( 'click.fisotope', methods.toggleFacet);
-			$('a.fiso-sort-facet').bind( 'click.fisotope', methods.toggleSort);
-			$('input.fiso-search').bind( 'keyup.fisotope', methods.toggleQuery) ;
+		    $(window).bind( 'hashchange.fisotope', methods.urlChanged).trigger('hashchange');
+			  $('a.fiso-toggle-category').bind( 'click.fisotope', methods.toggleFacetCategoryUrl);
+				$('a.fiso-clear-facet').bind( 'click.fisotope', methods.clearFacet);
+				$('a.fiso-toggle-facet').bind( 'click.fisotope', methods.toggleFacet);
+				$('a.fiso-sort-facet').bind( 'click.fisotope', methods.toggleSort);
+				$('input.fiso-search').bind( 'keyup.fisotope', methods.toggleQuery) ;
 
-
-
-       		return this;
+     		return this;
     	},
     	destroy: function( ) {
     		var data = this.data('fisotope');
@@ -287,7 +285,7 @@
 				var facet_op = facet + "_op";
 				var operator = hashOptions[facet_op] ? hashOptions[facet_op] : methods.getFacetOperationDefault(facet);
 
-				linkObj.removeClass('or and selected available first-selected last-selected first-available last-available');
+				linkObj.removeClass('or and selected available not-available first-selected last-selected not-selected first-available last-available');
 				linkObj.addClass(operator);
 			});
 
@@ -320,12 +318,18 @@
 					var allCategories = methods.getAllFacetCategories(facet, [], false);
 
 					// Update fiso-toggle-category Selected
+					$('.fiso-toggle-category[fiso-facet="' + facet + '"]').addClass('not-selected')
 					selectedSelectors = $.map(selectedCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
-					$(selectedSelectors.join()).addClass('selected');
+					var selectedObjects = $(selectedSelectors.join());
+					selectedObjects.removeClass('not-selected');
+					selectedObjects.addClass('selected');
 
 					// Update fiso-toggle-category Available
+					$('.fiso-toggle-category[fiso-facet="' + facet + '"]').addClass('not-available')
 					availableSelectors = $.map(availableCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
-					$(availableSelectors.join()).addClass('available');
+					var avilableObjects = $(availableSelectors.join())
+					avilableObjects.removeClass('not-available');
+					avilableObjects.addClass('available');
 
 					// Update fiso-counter-all text
 					var facetTotalCounter = $('.fiso-counter-all[fiso-facet="' +  facet + '"]');
@@ -449,7 +453,7 @@
 			var final_filter = or_filter.join();
 			if ( methods.settings.empty_selection_behaviour == "hide" && $.trim(final_filter) == '' ) {
 				final_filter = 	'.asdlkfasdlkasdfkl32923u42kj349';
-			}
+			} 
 
 			methods.theElement.isotope( {
 					filter: final_filter,
