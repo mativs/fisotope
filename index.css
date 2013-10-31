@@ -133,7 +133,9 @@ body {
 	color: black;
 }
 
-.info-genres.fiso-selected-0 .fiso-toggle-facet, .info-genres.fiso-selected-1 .fiso-toggle-facet {
+.info-genres.fiso-selected-0 .fiso-toggle-facet, 
+.info-genres.fiso-selected-1.and .fiso-toggle-facet,
+.info-genres.fiso-selected-1.or .fiso-toggle-facet{
 	display:none;
 }
 
@@ -144,8 +146,6 @@ body {
 #example {
 	padding-top: 60px;
 }
-
-
 
 .blurry-text {
    color: transparent;

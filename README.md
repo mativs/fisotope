@@ -65,6 +65,10 @@ This configuration lets you change your default operator for your specific facet
 
 Two posible values, *hide* or *show*. Defines the default operation when nothing is filtered.
 
+#### operators_pool
+
+Pool with the different operators to cycle in the toggle operator link. Default value is equal to `['and', 'or', 'unique']
+
 ### Filters
 
 Yo can filter your cards by any number of facets. For each facet, you need to add an attribute with the name 'fiso-facetname' to the item with the values **precede**, **separted** and **ended** with a dot. Look at the following example where two facets are defined with different categories.
@@ -90,6 +94,10 @@ Or for example two facet
 
 	#tags_cats=.sports.&formats_cats='.csv'
 
+## Helpers
+
+This is a list of featured classes that changes links and other objects in order to make filtering sorting and queryin an easier task.
+
 ### Toggle Filter Links (*fiso-toggle-category*)
 
 A link that lets you toggle between adding or removing a category from a facet filter.
@@ -105,6 +113,7 @@ A link that lets you toggle between adding or removing a category from a facet f
 
 * **or** - The filter for this facet is using the *or* operator.
 * **and** (default) - The filter for this facet is using the *and* operator.
+* **unique** - The filter for this facet is using the *unique* operator.
 * **selected** - The filter for this category is activated.
 * **not-selected** - The filter for this category is not activated.
 * **first-selected** - This is the first category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be selected. 
@@ -116,7 +125,7 @@ A link that lets you toggle between adding or removing a category from a facet f
 
 ### Toggle Filter Operator Links (*fiso-toggle-facet*)
 
- While filtering a list by setting many categories from an specific facet you could be searching for the intersection of all categories (*and*) or for the union of all categories (*or*). This link lets you toggle the facet operator.
+ While filtering a list by setting many categories from an specific facet you could be searching for the intersection of all categories (*and*) or for the union of all categories (*or*) or for having always only one category filtering by that facet (*unique*). This link lets you toggle between the differente facet operators. You can use the the [operators_pool](#operators_pool) config option to set the pool where the operators will be cycling. 
 
     <a href="#" class="fiso-toggle-facet" fiso-facet="tags">Cambiar Operación</a>
 
@@ -126,8 +135,9 @@ A link that lets you toggle between adding or removing a category from a facet f
 
 #### Populated Classes
 
-* **or** - The filter for this facet is using the *or* operator.
-* **and** (default) - The filter for this facet is using the *and* operator.
+* **or** - The filter for this facet is using the *or* operator. Union of categories.
+* **and** (default) - The filter for this facet is using the *and* operator. Intersection of categories.
+* **unique** - The filter for this facet is using the *unique* operator. Single selection of category for filtering.
 
 ### Clear Filter Links (*fiso-clear-facet*)
 
@@ -205,6 +215,7 @@ Fisotope will look for all html elemets with the class *fiso-selector*. Inside e
 
 * **or** - The filter for this facet is using the *or* operator.
 * **and** (default) - The filter for this facet is using the *and* operator.
+* **unique** - The filter for this facet is using the *unique* operator.
 * **fiso-no-categories** - There are no categories for this facet.
 * **fiso-no-selected** - There are no selected categories for this facet.
 * **fiso-no-available** - There are no available categories for this facet.
@@ -216,7 +227,7 @@ Fisotope will look for all html elemets with the class *fiso-selector*. Inside e
 
 A link that lets you sort your items. You have to previously configure it on your isotope setup.
 
-    <a href="#" class="fiso-sort-facet" fiso-sort="tags_count" fiso-sort-order="desc">
+    <a href="#" class="fiso-sort-facet" fiso-sort="tags_count" fiso-sort-order="desc">By count</a>
 
 #### Needed Attributes
       
