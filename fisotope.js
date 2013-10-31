@@ -3,7 +3,8 @@
   	var methods = {
   		defaults: {
   			default_operator: 'and',
-  			empty_selection_behaviour: "show"
+  			empty_selection_behaviour: "show",
+  			operators_pool: ['and', 'or', 'unique']
   		},
   		settings: {
 
@@ -138,6 +139,38 @@
 			final_answer.reverse();
 			return final_answer;
 		},
+		getSelectedCategories: function(hashOptions, facet) {
+			if (!hashOptions[facet + "_cats"])
+				return [];
+
+			var selectedCategories = hashOptions[facet + "_cats"].split('.')
+			selectedCategories.splice(0,1);
+			selectedCategories.splice(selectedCategories.length-1,1);
+
+			if (selectedCategories.length == 0)
+				return [];
+
+			var operator = methods.getOperator(hashOptions, facet)
+			switch (operator) {
+				case 'unique':
+					selectedCategories = [selectedCategories[selectedCategories.length-1]];
+					break;
+			}
+			return selectedCategories
+		},
+		getFacets: function() {
+			return $.map(
+				$.grep ( 
+					methods.theElement.find(methods.settings.itemSelector)[0].attributes, 
+					function(value, index) {
+						return value.name.indexOf('fiso-') == 0;
+					}
+				),
+				function(value, index){ 
+					return value.name.substr(5);
+				}
+			);
+		},
 		getFacetOperationDefault: function(facet)
 		{
 			var operator = null;
@@ -149,6 +182,17 @@
 		getSortDefault: function()
 		{
 			return "asc";
+		},
+		getOperator: function(hashOptions, facet) {
+			var facet_op = facet + "_op";
+			return hashOptions[facet_op] ? hashOptions[facet_op] : methods.getFacetOperationDefault(facet);
+		},
+		getNextOperator: function(actual_facet_operator)
+		{
+			var pool = methods.settings.operators_pool
+			var actual_index = pool.indexOf(actual_facet_operator)
+			var next_index = actual_index + 1 == pool.length ? 0 : actual_index + 1
+			return pool[next_index]
 		},
 		toggleQuery: function(eventObject) {
 			kwd = $(this).val();
@@ -172,22 +216,10 @@
 			var facet = $(eventObject.currentTarget).attr('fiso-facet');
 			var default_facet_operator = methods.getFacetOperationDefault(facet);
 			var hashOptions = $.deparam.fragment();
-			var facet_op = facet + "_op";
-			var actual_facet_operator = hashOptions[facet_op] ? hashOptions[facet_op] : default_facet_operator
-			var new_facet_operator = ""
-			switch (actual_facet_operator) {
-				case 'and':
-					new_facet_operator = 'or';
-					break;
-				case 'or':
-					new_facet_operator = 'and';
-					break;
-				default:
-					new_facet_operator = default_facet_operator
-					break;
-			} 
+			var actual_facet_operator = methods.getOperator(hashOptions, facet)
+			var new_facet_operator = methods.getNextOperator(actual_facet_operator)
 			var parametros = {};
-			parametros[facet_op] = new_facet_operator;
+			parametros[facet + "_op"] = new_facet_operator;
 			$.bbq.pushState( $.param( parametros ));
 			eventObject.preventDefault();
 			return true;
@@ -232,42 +264,103 @@
 			eventObject.preventDefault();
 			return true;
 		},
-		updateSelectors: function() {
-		 	var hashOptions = $.deparam.fragment();
+		updateFacet: function(facet, operator, selectedCategories) {
+			var availableCategories = methods.getAllFacetCategories(facet, selectedCategories, true)
+			var allCategories = methods.getAllFacetCategories(facet, [], false);
+			var linkObjs = $('.fiso-toggle-category[fiso-facet="' + facet + '"]')
+			var linkOpObjs = $('.fiso-toggle-facet[fiso-facet="' + facet + '"]')
+			
+			// Clean fiso-toggle-category
+			linkObjs.removeClass('or and unique selected available not-available first-selected last-selected not-selected first-available last-available');
+			linkOpObjs.removeClass('or and unique');
 
-		 	var allObj = $('.fiso-all');
-		 	allObj.removeClass('fiso-all-no-categories fiso-all-no-operators fiso-all-no-query fiso-all-no-sort');
-		 	var noContent = {
-		 		categories: true,
-		 		operators: true,
-		 		query: true,
-		 		sort: true
-		 	};
-		 	for ( facet_param in hashOptions ) {
-		 		var hasContent = hashOptions[facet_param].length > 0;
-				var facet_param = facet_param.indexOf('_cats') > 0 ? 'categories' : facet_param;
-				var facet_param = facet_param.indexOf('_op') > 0 ? 'operators' : facet_param;
-				if ( hasContent ) {
-					noContent[facet_param] = false;
-				}
-			}
-			for ( content in noContent ) {
-				if ( noContent[content] ) {
-					allObj.addClass('fiso-all-no-' + content );
-				}
-			}
+			// Update operators
+			linkObjs.addClass(operator);
+			linkOpObjs.addClass(operator);
 
-			// Update search
-			if ( $('input.fiso-search').val() == '' && hashOptions.query != '' )
+			// Update fiso-toggle-category Selected
+			linkObjs.addClass('not-selected')
+			selectedSelectors = $.map(selectedCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
+			var selectedObjects = $(selectedSelectors.join());
+			selectedObjects.removeClass('not-selected');
+			selectedObjects.addClass('selected');
+
+			// Update fiso-toggle-category Available
+			linkObjs.addClass('not-available')
+			availableSelectors = $.map(availableCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
+			var avilableObjects = $(availableSelectors.join())
+			avilableObjects.removeClass('not-available');
+			avilableObjects.addClass('available');
+
+			// Update fiso-counter-all text
+			var facetTotalCounter = $('.fiso-counter-all[fiso-facet="' +  facet + '"]');
+			facetTotalCounter.text(allCategories.length);
+
+			// Update fiso-counter-selected text
+			var facetSelectedCounter = $('.fiso-counter-selected[fiso-facet="' +  facet + '"]');
+			facetSelectedCounter.text(selectedCategories.length);
+
+			// Update fiso-counter-available text
+			var facetAvailableCounter = $('.fiso-counter-available[fiso-facet="' +  facet + '"]');
+			facetAvailableCounter.text(availableCategories.length);
+
+			// Update selector
+			$('.fiso-selector[fiso-facet="' + facet + '"]').each(function(value, index) {
+				var selectorObj = $(this);
+
+				// Clean
+				selectorObj.removeClass('or and unique fiso-no-categories fiso-no-selected fiso-no-available')
+				selectorObj.removeClass (function (index, css) {
+					var allClass = $(this).attr('class').split(' ')
+					var answerClass = []
+					for ( index in allClass ) {
+						var theClass = allClass[index];
+						if  ( theClass.indexOf('fiso-selected') == 0 || 
+							theClass.indexOf('fiso-all') == 0 || 
+							theClass.indexOf('fiso-available') == 0 ) {
+							answerClass.push(theClass);
+						}
+					}
+					return answerClass.join(' ');
+				});
+
+				// Update selector
+				selectorObj.addClass(operator);
+				if ( allCategories.length == 0){
+					selectorObj.addClass('fiso-no-categories')
+				}
+				if ( selectedCategories.length == 0) {
+					selectorObj.addClass('fiso-no-selected');
+				}
+				if ( availableCategories.length == 0 ) {
+					selectorObj.addClass('fiso-no-available');
+				}
+
+				// Update first/last
+				var selectedObjs = selectorObj.find('.fiso-toggle-category.selected')
+				selectedObjs.first().addClass('first-selected')
+				selectedObjs.last().addClass('last-selected')
+				var availableObjs = selectorObj.find('.fiso-toggle-category.available')
+				availableObjs.first().addClass('first-available')
+				availableObjs.last().addClass('last-available')
+
+				// Update counters
+				selectorObj.addClass('fiso-all-' + allCategories.length);
+				selectorObj.addClass('fiso-selected-' + selectedCategories.length);
+				selectorObj.addClass('fiso-available-' + availableCategories.length);
+			});
+		},
+		updateSearch: function(query){
+			if ( $('input.fiso-search').val() == '' && query != '' )
 			{
-				$('input.fiso-search').val(hashOptions.query);
+				$('input.fiso-search').val(query);
 			} else {
-				if ( $('input.fiso-search').val() != '' && ( !hashOptions.query || hashOptions.query == '')) {
+				if ( $('input.fiso-search').val() != '' && ( !query || query == '')) {
 					$('input.fiso-search').val('');
 				}
 			}
-
-			// Update totals
+		},
+		updateTotals: function() {
 			var totalCounterObj = $('.fiso-total-counter');
 			var totalHiddenCounterObj = $('.fiso-total-hidden');
 			var totalVisibleCounterObj = $('.fiso-total-visible');
@@ -277,120 +370,19 @@
 			totalCounterObj.text(totalItems);
 			totalHiddenCounterObj.text(totalHidden);
 			totalVisibleCounterObj.text(totalVisible);
+		},
+		updateClasses: function() {
+		 	var hashOptions = $.deparam.fragment();
 
-			// Update Toggle Filter Links
-			$('.fiso-toggle-category').each(function(value, index) {
-				var linkObj = $(this);
+			methods.updateSearch(hashOptions.query)
+			methods.updateTotals()
 
-				var facet = linkObj.attr('fiso-facet');
-				var facet_cats = facet + "_cats";
-				var facet_op = facet + "_op";
-				var operator = hashOptions[facet_op] ? hashOptions[facet_op] : methods.getFacetOperationDefault(facet);
-
-				linkObj.removeClass('or and selected available not-available first-selected last-selected not-selected first-available last-available');
-				linkObj.addClass(operator);
-			});
-
-			// Update Toggle Opertor Links
-			$('.fiso-toggle-facet').each(function(value, index){
-				var linkObj = $(this);
-
-				var facet = linkObj.attr('fiso-facet');
-				var facet_cats = facet + "_cats";
-				var facet_op = facet + "_op";
-				var operator = hashOptions[facet_op] ? hashOptions[facet_op] : methods.getFacetOperationDefault(facet);
-
-				linkObj.removeClass('or and');
-				linkObj.addClass(operator);
-			});
-			
-			// Updated Selected And Available
-			var atributos = methods.theElement.find(methods.settings.itemSelector)[0].attributes
-			for ( var index = 0; index < atributos.length; index++ ){
-				var value = atributos[index].name 
-				if ( value.indexOf('fiso-') == 0 ) {
-					facet = value.substr(5)
-					var facet_cats = facet + "_cats";
-					var facet_op = facet + "_op";
-					var operator = hashOptions[facet_op] ? hashOptions[facet_op] : methods.getFacetOperationDefault(facet);
-					var selectedCategories = hashOptions[facet_cats] ? hashOptions[facet_cats].split('.') : []
-					selectedCategories.splice(0,1);
-					selectedCategories.splice(selectedCategories.length-1,1);
-					var availableCategories = methods.getAllFacetCategories(facet, selectedCategories, true)
-					var allCategories = methods.getAllFacetCategories(facet, [], false);
-
-					// Update fiso-toggle-category Selected
-					$('.fiso-toggle-category[fiso-facet="' + facet + '"]').addClass('not-selected')
-					selectedSelectors = $.map(selectedCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
-					var selectedObjects = $(selectedSelectors.join());
-					selectedObjects.removeClass('not-selected');
-					selectedObjects.addClass('selected');
-
-					// Update fiso-toggle-category Available
-					$('.fiso-toggle-category[fiso-facet="' + facet + '"]').addClass('not-available')
-					availableSelectors = $.map(availableCategories, function(value, index){ return '.fiso-toggle-category[fiso-category="' + value + '"]'; });
-					var avilableObjects = $(availableSelectors.join())
-					avilableObjects.removeClass('not-available');
-					avilableObjects.addClass('available');
-
-					// Update fiso-counter-all text
-					var facetTotalCounter = $('.fiso-counter-all[fiso-facet="' +  facet + '"]');
-					facetTotalCounter.text(allCategories.length);
-
-					// Update fiso-counter-selected text
-					var facetSelectedCounter = $('.fiso-counter-selected[fiso-facet="' +  facet + '"]');
-					facetSelectedCounter.text(selectedCategories.length);
-
-					// Update fiso-counter-available text
-					var facetAvailableCounter = $('.fiso-counter-available[fiso-facet="' +  facet + '"]');
-					facetAvailableCounter.text(availableCategories.length);
-
-					$('.fiso-selector[fiso-facet="' + facet + '"]').each(function(value, index) {
-						var selectorObj = $(this);
-
-						// Clean
-						selectorObj.removeClass('or and fiso-no-categories fiso-no-selected fiso-no-available')
-						selectorObj.removeClass (function (index, css) {
-							var allClass = $(this).attr('class').split(' ')
-							var answerClass = []
-							for ( index in allClass ) {
-								var theClass = allClass[index];
-								if  ( theClass.indexOf('fiso-selected') == 0 || 
-									theClass.indexOf('fiso-all') == 0 || 
-									theClass.indexOf('fiso-available') == 0 ) {
-									answerClass.push(theClass);
-								}
-							}
-							return answerClass.join(' ');
-						});
-
-						// Update selector
-						selectorObj.addClass(operator);
-						if ( allCategories.length == 0){
-							selectorObj.addClass('fiso-no-categories')
-						}
-						if ( selectedCategories.length == 0) {
-							selectorObj.addClass('fiso-no-selected');
-						}
-						if ( availableCategories.length == 0 ) {
-							selectorObj.addClass('fiso-no-available');
-						}
-	
-						// Update first/last
-						var selectedObjs = selectorObj.find('.fiso-toggle-category.selected')
-						selectedObjs.first().addClass('first-selected')
-						selectedObjs.last().addClass('last-selected')
-						var availableObjs = selectorObj.find('.fiso-toggle-category.available')
-						availableObjs.first().addClass('first-available')
-						availableObjs.last().addClass('last-available')
-
-						// Update counters
-						selectorObj.addClass('fiso-all-' + allCategories.length);
-						selectorObj.addClass('fiso-selected-' + selectedCategories.length);
-						selectorObj.addClass('fiso-available-' + availableCategories.length);
-					});
-
-				}
+			var facets = methods.getFacets();
+			for ( var index = 0; index < facets.length; index++ ){
+				var facet = facets[index];
+				var operator = methods.getOperator(hashOptions, facet)
+				var selectedCategories = methods.getSelectedCategories(hashOptions, facet)
+				methods.updateFacet(facet, operator, selectedCategories )
 			}
 
 			
@@ -423,8 +415,7 @@
 				var cat_index = facet_cats.indexOf('_cats');
 				if (cat_index > 0) {
 					var facet = facet_cats.split('_')[0];
-					var facet_op = facet + "_op";
-					var operator = hashOptions[facet_op] ? hashOptions[facet_op] : methods.getFacetOperationDefault(facet);
+					var operator = methods.getOperator(hashOptions, facet)
 					var categories = hashOptions[facet_cats].split('.');
 					categories.splice(0,1);
 					categories.splice(categories.length-1,1);
@@ -436,6 +427,9 @@
 								break;
 							case 'and':
 								big_table.push([categories_mapped.join('')])
+								break;
+							case 'unique':
+								big_table.push([categories_mapped[categories_mapped.length-1]]);
 								break;
 						}
 					}
@@ -468,7 +462,7 @@
 		},
 		urlChanged: function() {
 		  	methods.filterDatasets();
-		  	methods.updateSelectors();
+		  	methods.updateClasses();
 		},
 		toggleFacetCategoryUrl: function(eventObject) {
 			var theObj = $(this);
@@ -477,13 +471,18 @@
 			var category = theObj.attr('fiso-category');
 
 			var hashOptions = $.deparam.fragment();
+			var operator = methods.getOperator(hashOptions, facet)
 			if (hashOptions[facet_cats]) {
 				var index = hashOptions[facet_cats].indexOf("." + category + ".");
 				if ( index < 0 ) {
-					hashOptions[facet_cats] = hashOptions[facet_cats] + category + '.';
+					if ( operator == 'unique') {
+						hashOptions[facet_cats] = "." + category + ".";
+					} else {
+						hashOptions[facet_cats] = hashOptions[facet_cats] + category + '.';
+					}
 				} else {
 					hashOptions[facet_cats] = hashOptions[facet_cats].replace("." + category + ".", ".");
-					if ( hashOptions[facet_cats] == '.' )
+					if ( hashOptions[facet_cats] == '.' || operator == 'unique')
 						hashOptions[facet_cats] = ''
 				}
 			}
