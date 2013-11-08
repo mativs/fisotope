@@ -118,10 +118,14 @@ A link that lets you toggle between adding or removing a category from a facet f
 * **not-selected** - The filter for this category is not activated.
 * **first-selected** - This is the first category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be selected. 
 * **last-selected** - This is the last category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be selected
-* **available** - This category appear in any of the visible items. 
-* **not-available** - This category does not appear in any of the visible items. 
+* **available** - This category appear in any of the visible items and is not selected.
+* **not-available** - This category does not appear in any of the visible items and is not selected.
 * **first-available** - This is the first category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be available. 
-* **last-available** - This is the last category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be selected
+* **last-available** - This is the last category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be available
+* **eligible** - If you toggle this category one or more results are ensured.
+* **not-eligible** - If you toggle this category you will have an empty result set.
+* **first-eligible** - This is the first category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be eligible. 
+* **last-eligible** - This is the last category in a [selector](#fisotope-selector-fiso-selectorfiso-example) to be eligible
 
 ### Toggle Filter Operator Links (*fiso-toggle-facet*)
 
@@ -219,9 +223,11 @@ Fisotope will look for all html elemets with the class *fiso-selector*. Inside e
 * **fiso-no-categories** - There are no categories for this facet.
 * **fiso-no-selected** - There are no selected categories for this facet.
 * **fiso-no-available** - There are no available categories for this facet.
+* **fiso-no-eligible** - There are no eligible categories for this facet.
 * **fiso-all-`number`** - The number part of the class is completed with the categories count for this facet.
 * **fiso-selected-`number`** - The number part of the class is completed with the selected categories count for this facet.
 * **fiso-available-`number`** - The number part of the class is completed with the available categories count for this facet.
+* **fiso-eligible-`number`** - The number part of the class is completed with the eligible categories count for this facet.
 
 ### Sort Links (*fiso-sort-facet*)
 
