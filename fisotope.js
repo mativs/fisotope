@@ -39,42 +39,48 @@
 	  		// Init Isotope
 			this.isotope(methods.settings, callback);
 				
+			// Init text for queries
+			$(methods.settings.itemSelector).each(function() {
+				var search_text = $(this).text().replace(/\s+/g, ' ').toLowerCase();
+	  			$(this).attr('search-text', search_text)
+	  		})
+
 		    // Init Selectors
 	  		$('.fiso-selector').each(function(value, index) {
-					var selectorObj = $(this);
+				var selectorObj = $(this);
 
-					var facet = selectorObj.attr('fiso-facet');
-					var exampleObj = selectorObj.find('.fiso-example');
-					if ( facet && exampleObj.length > 0 ) {
-						var parentExampleObj = exampleObj.parent();
-						var categories = methods.getAllFacetCategories(facet);
-						for ( var i = 0; i < categories.length; i++ ) {
-							var category = categories[i];
-							var newEle = exampleObj.clone();
-							newEle.removeClass('fiso-example');
-							newEleLink = newEle.find('a').andSelf().filter('a');
-							newEleLink.append(category);
-							newEleLink.addClass('fiso-toggle-category');
-							newEleLink.attr('fiso-facet', facet);
-							newEleLink.attr('fiso-category', category);
-							parentExampleObj.prepend(newEle);
-						}
-						exampleObj.remove();
+				var facet = selectorObj.attr('fiso-facet');
+				var exampleObj = selectorObj.find('.fiso-example');
+				if ( facet && exampleObj.length > 0 ) {
+					var parentExampleObj = exampleObj.parent();
+					var categories = methods.getAllFacetCategories(facet);
+					for ( var i = 0; i < categories.length; i++ ) {
+						var category = categories[i];
+						var newEle = exampleObj.clone();
+						newEle.removeClass('fiso-example');
+						newEleLink = newEle.find('a').andSelf().filter('a');
+						newEleLink.append(category);
+						newEleLink.addClass('fiso-toggle-category');
+						newEleLink.attr('fiso-facet', facet);
+						newEleLink.attr('fiso-category', category);
+						parentExampleObj.prepend(newEle);
 					}
-				});
+					exampleObj.remove();
+				}
+			});
 
-				// Init Search
-		  		$.expr[':'].contains = function(a, i, m) {
-				  return methods.normalize($(a).text().toUpperCase())
-				      .indexOf(methods.normalize(m[3].toUpperCase())) >= 0;
-				};
+			// Init Search
+	  		$.expr[':'].contains = function(a, i, m) {
+			  return methods.normalize($(a).text().toUpperCase())
+			      .indexOf(methods.normalize(m[3].toUpperCase())) >= 0;
+			};
 
-				// Init Data
-				var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç"
-				var to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc"
-					
-				for(var i = 0, j = from.length; i < j; i++ ) {
-		  			methods.mapping[ from.charAt( i ) ] = to.charAt( i );
+			// Init Data
+			var from = "ÃÀÁÄÂÈÉËÊÌÍÏÎÒÓÖÔÙÚÜÛãàáäâèéëêìíïîòóöôùúüûÑñÇç"
+			var to   = "AAAAAEEEEIIIIOOOOUUUUaaaaaeeeeiiiioooouuuunncc"
+				
+			for(var i = 0, j = from.length; i < j; i++ ) {
+	  			methods.mapping[ from.charAt( i ) ] = to.charAt( i );
 	  		}
 
 	        // Bindings
@@ -110,15 +116,20 @@
 		    });
 		},
 		isEligible: function(hashOptions, facet, category) {
+
 			var hashOptionsCopy = {}
+			
 			var operator = methods.getOperator(hashOptionsCopy, facet)
-			$.extend(true, hashOptionsCopy,hashOptions )
+			$.extend(true, hashOptionsCopy, hashOptions )
 			var newHashOptions = methods.toggleFacetCategory(hashOptionsCopy, facet, category, operator)
+
+			var jsonString = JSON.stringify(newHashOptions);
 			var selector = methods.getJqueryFilter(newHashOptions)
+			var answer = true;
 			if (selector) {
-				return $(selector).length > 0;
+				answer = $(selector).length > 0;
 			} 
-			return true;
+			return answer;
 		},
 		getCategoriesFromAttribute: function(attribute) {
 			var answer = []
@@ -152,16 +163,14 @@
 			}
 			return selectedCategories
 		},
-		getEligibleCategories: function(hashOptions, facet) {
+		getEligibleCategories: function(hashOptions, facet, allCategories) {
 			var eligibleCategories = []
-			var linkObjs = $('.fiso-toggle-category[fiso-facet="' + facet + '"]')
-			linkObjs.each(function() {
-				var category = $(this).attr('fiso-category');
-				if ( methods.isEligible(hashOptions, facet, category )){
-					eligibleCategories.push(category)
+			for ( index in allCategories) {
+				if ( methods.isEligible(hashOptions, facet, allCategories[index] )){
+					eligibleCategories.push(allCategories[index])
 				}
-			});
-			return methods.unique(eligibleCategories);
+			}
+			return eligibleCategories
 		},
 		getAvailableCategories: function(facet, selectedCategories) {
 			var answer = []
@@ -331,10 +340,10 @@
 			var facet_cats = facet + "_cats";
 			var linkObjs = $('.fiso-toggle-category[fiso-facet="' + facet + '"]')
 			var linkOpObjs = $('.fiso-toggle-facet[fiso-facet="' + facet + '"]')
+			var allCategories = methods.getAllFacetCategories(facet);
 			var selectedCategories = methods.getSelectedCategories(hashOptions, facet)
 			var availableCategories = methods.getAvailableCategories(facet, selectedCategories)
-			var allCategories = methods.getAllFacetCategories(facet);
-			var eligibleCategories = methods.getEligibleCategories(hashOptions, facet);
+			var eligibleCategories = methods.getEligibleCategories(hashOptions, facet, allCategories);
 
 			// Clean fiso-toggle-category
 			linkObjs.removeClass('or and unique selected eligible not-eligible available not-available first-selected last-selected not-selected first-available last-available');
@@ -418,14 +427,14 @@
 
 			
 		},
-		recursiveFilter: function(big_table) {
+		recursiveFilter: function(big_table, query) {
+			// var containsStr = query ? ":contains('" + query + "')" : "";
+			var containsStr = query ? "[search-text*='"+query.toLowerCase()+"']" : "";
 			if (big_table.length == 0) {
-				return []
-			} else if (big_table.length == 1 ) {
-				return big_table[0];
-			} else {
+				return [containsStr]
+			}  else {
 				var actualFacets = big_table.pop();
-				var otherFacets = methods.recursiveFilter(big_table);
+				var otherFacets = methods.recursiveFilter(big_table, query);
 				var answer=[]
 				for (filter_x in actualFacets) {
 					for (filter_y in otherFacets) {
@@ -448,7 +457,9 @@
 					categories.splice(0,1);
 					categories.splice(categories.length-1,1);
 					if (categories.length > 0) {
-						var categories_mapped = $.map(categories, function(value, index){ return '[fiso-'+ facet+'*=".' + value + '."]'; });
+						var categories_mapped = $.map(categories, function(value, index){
+							return "[fiso-"+ facet+"*='." + value + ".']"; 
+						} );
 						switch (operator) {
 							case 'or':
 								big_table.push(categories_mapped);
@@ -464,16 +475,7 @@
 				}	
 			}
 			
-			or_filter = methods.recursiveFilter(big_table);
-			if (hashOptions.query) {
-				var containsStr = ":contains('" + hashOptions.query + "')";
-				if ( or_filter.length > 0) {
-					or_filter = $.map(or_filter, function(value, index){ return value + containsStr; } );
-				} else {
-					or_filter = [containsStr];
-				}
-			}
-
+			or_filter = methods.recursiveFilter(big_table, hashOptions.query);
 			var final_filter = or_filter.join();
 			if ( methods.settings.empty_selection_behaviour == "hide" && $.trim(final_filter) == '' ) {
 				final_filter = 	'.asdlkfasdlkasdfkl32923u42kj349';
@@ -552,9 +554,3 @@
     };
 
 })( jQuery );
-
-
-
-
-
-	
