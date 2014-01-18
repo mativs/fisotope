@@ -92,7 +92,7 @@ By only setting this values you can now filter your cards by using, for example 
 
 Or for example two facet
 
-	#tags_cats=.sports.&formats_cats='.csv'
+	#tags_cats=.sports.&formats_cats='.csv.'
 
 ## Helpers
 
