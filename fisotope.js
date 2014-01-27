@@ -419,7 +419,7 @@
 				var childVisible = totalItems - totalHidden
 				theObj.attr('visible', childVisible)
 				theObj.attr('hidden', childHidden)
-			}
+			});
 		},
 		updateClasses: function() {
 		 	var hashOptions = $.deparam.fragment();
