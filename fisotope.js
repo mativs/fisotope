@@ -411,6 +411,15 @@
 			totalCounterObj.text(totalItems);
 			totalHiddenCounterObj.text(totalHidden);
 			totalVisibleCounterObj.text(totalVisible);
+
+			$('.global-info-childs').each(function(){
+				var theObj = $(this)
+				var childItems = theObj.children('.isotope-item').length;
+				var childHidden = theObj.children('.isotope-item.isotope-hidden').length;
+				var childVisible = totalItems - totalHidden
+				theObj.attr('visible', childVisible)
+				theObj.attr('hidden', childHidden)
+			});
 		},
 		updateClasses: function() {
 		 	var hashOptions = $.deparam.fragment();
