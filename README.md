@@ -1,5 +1,4 @@
-FIsotope
-========
+# FIsotope [![Build Status](https://travis-ci.org/mativs/fisotope.svg?branch=master)](https://travis-ci.org/mativs/fisotope)
 
 A wrapper to the exquisite jQuery plugin for magical layouts [Isotope](http://isotope.metafizzy.co). Make it easy to filter, sort, and query words by using html attributes and classes.
 
