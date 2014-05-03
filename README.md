@@ -1,9 +1,7 @@
 FIsotope
 ========
 
-**A wrapper to the exquisite jQuery plugin for magical layouts [Isotope](http://isotope.metafizzy.co). Make it easy to filter, sort, and query words by using html attributes and classes.
-
-**Also uses the wonderfull Ben Alamn's [BBQ Jquery Plugin](http://benalman.com/projects/jquery-bbq-plugin/)
+A wrapper to the exquisite jQuery plugin for magical layouts [Isotope](http://isotope.metafizzy.co). Make it easy to filter, sort, and query words by using html attributes and classes.
 
 This package has all the documentation and demos to get you started.
 
@@ -250,4 +248,3 @@ A link that lets you sort your items. You have to previously configure it on you
 An html input where you can search for any text element inside any of your items.
 
     <input type="text" class="fiso-search" name="query" placeholder="Search" />
-

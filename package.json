@@ -1,0 +1,40 @@
+{
+  "name": "fisotope",
+  "title": "Fisotope",
+  "description": "A wrapper to the exquisite jQuery plugin for magical layouts Isotope. Make it easy to filter, sort, and query words by using html attributes and classes.",
+  "keywords": [
+    "isotope",
+    "jquery"
+  ],
+  "version": "0.1.0",
+  "author": {
+    "name": "Matias Saguir",
+    "email": "mativs@gmail.com",
+    "url": "https://github.com/mativs"
+  },
+  "licenses": [
+    {
+      "type": "ISC"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/mativs/fisotope/issues"
+  },
+  "homepage": "https://github.com/mativs/fisotope",
+  "private": true,
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.13",
+    "grunt-contrib-jshint": "~0.8.0",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.3.2"
+  },
+  "scripts": {
+    "test": "grunt travis --verbose"
+  },
+  "main": "Gruntfile.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mativs/fisotope.git"
+  }  
+}

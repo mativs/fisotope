@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Fisotope</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="description" content="Isotope Wrapper ">
+		<meta name="author" content="Matias Saguir">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+		<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="demo.css">
+
+
+	</head>
+
+	<body>
+
+		<div class="container">
+
+			<div class="masthead">
+				<ul class="nav nav-pills pull-right">
+					<li><a href="index.html">Home</a></li>
+					<li class="active"><a href="#">Example</a></li>
+					<li><a target="_blank" href="http://github.com/mativs/fisotope">Source</a></li>
+					<li><a href="https://twitter.com/intent/tweet?hashtags=fisotope&related=mativs&text=@mativs" target="_blank">@mativs</a></li>
+				</ul>
+				<h3 class="muted">Fisotope</h3>
+			</div>
+
+
+			<hr>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<span class="fiso-selector info-genres" fiso-facet="genres" >
+						<small class="fiso-example"><a href="#"></a></small>
+						<a class="btn btn-success btn-mini fiso-toggle-facet" fiso-facet="genres" href="#">Try Toggle Genre Operator</a>
+					</span>
+
+
+
+					<div class="btn-group fiso-selector pull-right" fiso-facet="genres" >
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							Genres (<span class="fiso-counter-available" fiso-facet="genres"></span>)
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+							<li class="fiso-example"><a href="#"></a></li>
+							<li class="divider"></li>
+							<li><a href="#" class="fiso-toggle-facet" fiso-facet="genres">Toggle Operator</a></li>
+							<li><a href="#" class="fiso-clear-facet" fiso-facet="genres">Clear  <span class="fiso-counter-selected" fiso-facet="genres"></span> selected</a></li>
+
+
+						</ul>
+					</div>
+
+					<div class="btn-group pull-right" >
+						<a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+							Sort
+							<span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+								<li><a href="#" class="toggle-sort" sort-by="genres_count">By Genres Count</a></li>
+								<li><a href="#" class="toggle-sort" sort-by="genres_count" sort-order="desc">By Genres Count (desc)</a></li>
+								<li><a href="#" class="toggle-sort" sort-by="title">By Title</a></li>
+								<li><a href="#" class="toggle-sort" sort-by="title" sort-order="desc">By Title (desc)</a></li>
+								<li><a href="#" class="toggle-sort" sort-by="original-order">Original Order</a></li>
+								<li><a href="#" class="toggle-sort" sort-by="original-order" sort-order="desc">Original Order (desc)</a></li>
+								<li><a href="#" class="toggle-sort" sort-by="random">Random</a></li>
+								<li class="divider"></li>
+								<li><a href="#" class="fiso-clear-facet" fiso-facet="sort">Clear</a></li>
+						</ul>
+					</div>
+
+					<input type="text" class="fiso-search pull-right" name="query" placeholder="Buscar" />
+
+
+
+
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+						<small class="pull-right">
+							<span class="fiso-total-hidden"></span> Hidden and
+							<span class="fiso-total-visible"></span> Visible from
+							<span class="fiso-total-counter"></span> Movies
+						</small>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+						<small class="pull-right">
+							<a href="#" class="fiso-clear-facet" fiso-facet="query">Clear Query</a>
+							or
+								<a href="#" class="fiso-clear-facet" fiso-facet="all"> Clear All</a>.
+						</small>
+				</div>
+			</div>
+
+			<ul class="elementos">
+				<li class="item"
+					fiso-genres=".Action.Adventure.Fantasy.Science Fiction.Family."
+				>
+					<img src="img/jx5p0aHlbPXqe3AH9G15NvmWaqQ.jpg"/>
+					<h1 class="hide">Star Wars: Episode VI - Return of the Jedi</h1>
+					<small>Action</small> <small>Adventure</small> <small>Fantasy</small> <small>Science Fiction</small> <small>Family</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Action.Adventure.Thriller.War."
+				>
+					<img src="img/v0sPtM5lGkLwtfDlWpn07nqJPyf.jpg"/>
+					<h1 class="hide">Rambo First Blood</h1>
+					<small>Action</small><small>Adventure</small><small>Thriller</small><small>War</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Drama.Mistery.Foreign.Fantasy."
+				>
+					<img src="img/heMf02wkJBa4BH1wEK2b9TAfGfQ.jpg"/>
+					<h1 class="hide">Fanny och Alexander</h1>
+					<small>Drama</small><small>Mistery</small><small>Foreign</small><small>Fantasy</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Crime.Drama."
+				>
+					<img src="img/u8X6d72tKila3BDblA5IzE04dIU.jpg"/>
+					<h1 class="hide">The Outsiders</h1>
+					<small>Crime</small><small>Drama</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Comedy."
+				>
+					<img src="img/nopK3L1aJYCuEiSQTqwpZD7uff7.jpg"/>
+					<h1 class="hide">Eddie Murphy: Delirious</h1>
+					<small>Comedy</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Action.Adventure.Thriller.Foreign."
+				>
+					<img src="img/r8WbgQvQxO3Z92AnosCXq582Q8V.jpg"/>
+					<h1 class="hide">Never Say Never Again</h1>
+					<small>Action</small><small>Adventure</small><small>Thriller</small><small>Foreign</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Drama.History."
+				>
+					<img src="img/o2t9jnHHJL0j4P7GDuGmovc1lAH.jpg"/>
+					<h1 class="hide">The Right Stuff</h1>
+					<small>Drama</small><small>History</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Comedy.Romance."
+				>
+					<img src="img/9758Lxrg24xBRDELlbHcstvvjlK.jpg"/>
+					<h1 class="hide">The Man with Two Brains</h1>
+					<small>Comedy</small><small>Romance</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Comedy.Drama.Foreign."
+				>
+					<img src="img/fcv3neVtagJNOeZTxHso3GqN4jt.jpg">
+					<h1 class="hide">Entre tinieblas</h1>
+					<small>Comedy</small><small>Drama</small><small>Foreign</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Horror."
+				>
+					<img src="img/AfUxqlRUTqLKAS9quduZ1G2WLzD.jpg"/>
+					<h1 class="hide">The Evil Dead</h1>
+					<small>Horror</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Action.Drama.History.Thriller."
+				>
+					<img src="img/xYgjUpEXa6JMHqpI1YkMnxsjtVg.jpg"/>
+					<h1 class="hide">Southern Comfort</h1>
+					<small>Action</small><small>Drama</small><small>History</small><small>Thriller</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Action.Adventure.Crime.Drama.Thriller."
+				>
+					<img src="img/zr2p353wrd6j3wjLgDT4TcaestB.jpg"/>
+					<h1 class="hide">Scarface</h1>
+					<small>Action</small><small>Adventure</small><small>Crime</small><small>Drama</small><small>Thriller</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Drama.History.Foreign."
+				>
+					<img src="img/2z9A4FSu1YySrhhcuqkdMIXpgyN.jpg"/>
+					<h1 class="hide">Gandhi</h1>
+					<small>Drama</small><small>History</small><small>Foreign</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Action.Adventure.Comedy."
+				>
+					<img src="img/uBq4SQkKrqGyafGFPJosdj9gWTt.jpg">
+					<h1 class="hide">Nati con la camicia</h1>
+					<small>Action</small><small>Adventure</small><small>Comedy</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Horror.Mistery.Science Fiction."
+				>
+					<img src="img/5uBGnab5nt9UfSPyH40M4PW4pZG.jpg"/>
+					<h1 class="hide">Halloween III: Season of the Witch</h1>
+					<small>Horror</small><small>Mistery</small><small>Science Fiction</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Drama."
+				>
+					<img src="img/pEEVePNMmCyDbCtfo2ThqMLUpHF.jpg"/>
+					<h1 class="hide">Les îles</h1>
+					<small>Drama</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Action.Horror.Thriller."
+				>
+					<img src="img/jQa0nQvbjwDT79WFi7wt1rAtKRT.jpg"/>
+					<h1 class="hide">Jaws 3</h1>
+					<small>Action</small><small>Horror</small><small>Thriller</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Comedy.Foreign."
+				>
+					<img src="img/c8gtBDwwiFIUkMun4Cc62zLkD2N.jpg"/>
+					<h1 class="hide">The Meaning of Life</h1>
+					<small>Comedy</small><small>Foreign</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Comedy.Drama.Holiday.Family."
+				>
+					<img src="img/p2yuFxAyaBjdGrU2UBAqaE02NYG.jpg"/>
+					<h1 class="hide">A Christmas Story</h1>
+					<small>Comedy</small><small>Drama</small><small>Holiday</small><small>Family</small>
+				</li>
+				<li class="item"
+					fiso-genres=".Drama.Music.Romance."
+				>
+					<img src="img/wOwSJWEMBqpWWdd3jNyhDwz0Cyd.jpg"/>
+					<h1 class="hide">Flashdance</h1>
+					<small>Drama</small><small>Music</small><small>Romance</small>
+				</li>
+
+			</ul>
+
+		</div>
+
+		<!-- Le javascript
+		================================================== -->
+		<!-- Placed at the end of the document so the pages load faster -->
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+		<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+		<script src="http://isotope.metafizzy.co/isotope.pkgd.min.js"></script>
+		<script src="../src/jquery.fisotope.js"></script>
+		<script type="text/javascript">
+			$( document ).ready( function() {
+				$('.elementos').fisotope({
+					itemSelector : '.item',
+					layoutMode : 'fitRows',
+					getSortData : {
+						title : function ( itemElem ) {
+							return $(itemElem).find('h1').text();
+						}
+					},
+					default_facet_operator: {
+						tags:'or',
+						res_format:'and'
+					}
+				});
+
+			});
+		</script>
+	</body>
+</html>
+

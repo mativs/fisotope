@@ -1,0 +1,17 @@
+{
+	"name": "fisotope",
+	"version": "0.1.0",
+	"homepage": "https://github.com/mativs/fisotope",
+	"authors": [
+		"Matias Saguir <mativs@gmail.com.com>"
+	],
+	"description": "A wrapper to the exquisite jQuery plugin for magical layouts Isotope. Make it easy to filter, sort, and query words by using html attributes and classes.",
+	"main": "src/jquery.fisotope.js",
+	"keywords": [
+		"jquery",
+		"plugin",
+		"isotope",
+		"jquery-plugin"
+	],
+	"license": "ISC"
+}
