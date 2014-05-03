@@ -1,6 +1,6 @@
 {
 	"name": "fisotope",
-	"version": "1.0.0-beta",
+	"version": "0.0.3",
 	"homepage": "https://github.com/mativs/fisotope",
 	"authors": [
 		"Matias Saguir <mativs@gmail.com.com>"
@@ -22,8 +22,9 @@
 	  "*.md",
 	  "Gruntfile.js",
 	  "package.json",
-	  "src/*",
-	  "demo/*"
+	  "src",
+	  "demo",
+	  "bower.json"
 	],
 	"license": "ISC"
 }
