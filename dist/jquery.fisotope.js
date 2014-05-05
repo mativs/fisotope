@@ -1,5 +1,5 @@
 /*
- *  Fisotope - v0.1.0
+ *  Fisotope - v1.0.0-beta
  *  A wrapper to the exquisite jQuery plugin for magical layouts Isotope. Make it easy to filter, sort, and query words by using html attributes and classes.
  *  https://github.com/mativs/fisotope
  *
@@ -69,13 +69,9 @@
                 return index === $.inArray(el,array);
             });
           },
-          getMapFacetSelector: function(facet, skipFacet, skipCategory){
+          getMapFacetSelector: function(facet){
             return function(value) {
-              if (facet === skipFacet && skipCategory === value) {
-                return "";
-              } else {
-                return "[fiso-"+ facet+"*='." + value + ".']";
-              }
+              return "[fiso-"+ facet+"*='." + value + ".']";
             };
           },
           combineSelectors: function(selectors_list, query) {
@@ -129,8 +125,9 @@
           },
           switchFacetCategory: function(category, operator, categories){
             var new_categories = "." + category + ".",
-                category_exist = categories.indexOf("." + category + ".") >= 0;
+                category_exist;
             categories = categories ? categories : ".";
+            category_exist = categories.indexOf("." + category + ".") >= 0;
             switch (operator) {
               case "and":
               case "or":
@@ -152,8 +149,7 @@
             }
             return new_categories !== "." ? new_categories : "";
           },
-          getJqueryFilter: function(facets, operators, query, settings,
-            skipFacet, skipCategory) {
+          getJqueryFilter: function(facets, operators, query, settings) {
             var facets_selectors_list = [], facet, operator, categories,
                 categories_mapped, selectors_list;
             for (facet in facets) {
@@ -162,7 +158,7 @@
               categories = facets[facet];
               if (categories.length > 0) {
                 categories_mapped = $.map(categories,
-                  this.getMapFacetSelector(facet, skipFacet, skipCategory));
+                  this.getMapFacetSelector(facet));
                 switch (operator) {
                   case "or":
                     facets_selectors_list.push(categories_mapped);
@@ -187,9 +183,22 @@
             return selectors_list.join();
           },
           isEligible: function(facet, category, plugin) {
-            var selector = this.getJqueryFilter(plugin.selectedFacets,
+            var newSelectedFacets = jQuery.extend(true, {}, plugin.selectedFacets),
+                index, selector;
+            if ( ! newSelectedFacets[facet] ) {
+              newSelectedFacets[facet] = [category];
+            } else {
+              index = newSelectedFacets[facet].indexOf(category);
+              if (index < 0 ) {
+                newSelectedFacets[facet].push(category);
+              } else {
+                newSelectedFacets[facet].splice(index,1);
+              }
+
+            }
+            selector = this.getJqueryFilter(newSelectedFacets,
               plugin.selectedOperators,
-              plugin.hashDict.query, plugin.settings, facet, category);
+              plugin.hashDict.query, plugin.settings);
             if (selector) {
               return $(selector).length > 0;
             }
@@ -215,21 +224,21 @@
             }
             return eligibleCategories;
           },
-          getAvailableCategories: function(facet, itemSelector,
-              selectedCategories) {
-            var answer = [], utils = this, theObj, atributo;
-            $(itemSelector).each(function(index, value) {
+          getAvailableCategories: function(facet, plugin) {
+            var answer = [], utils = this, theObj, atributo, selector;
+            selector = this.getJqueryFilter(plugin.selectedFacets,
+              plugin.selectedOperators,
+              plugin.hashDict.query, plugin.settings);
+            $(selector).each(function(index, value) {
               theObj = $(value);
-              if ( !theObj.hasClass("isotope-hidden") ){
-                atributo = theObj.attr("fiso-" + facet);
-                answer = answer.concat(
-                  utils.getCategoriesFromAttribute(atributo));
-              }
+              atributo = theObj.attr("fiso-" + facet);
+              answer = answer.concat(
+                utils.getCategoriesFromAttribute(atributo));
             });
 
             answer = this.unique(answer);
             answer = $.grep(answer, function(value){
-              return $.inArray(value, selectedCategories) < 0;
+              return $.inArray(value, plugin.selectedCategories) < 0;
             });
             answer.sort();
             answer.reverse();
@@ -306,9 +315,9 @@
                 selectedCategories = this.getSelectedCategories(
                   facet, operator, plugin.selectedFacets[facet]),
                 availableCategories = this.getAvailableCategories(
-                  facet, plugin.settings.itemSelector, plugin.selectedCategories),
+                  facet, plugin),
                 eligibleCategories = this.getEligibleCategories(
-                  facet, selectedCategories, plugin),
+                  facet, plugin.categories[facet], plugin),
                 removeClasses,
                 utils,
                 selectorObj,
@@ -631,7 +640,8 @@
 
           for (index in this.facets) {
             facet = this.facets[index];
-            operator =  this.hashDict[facet + "_op"];
+            operator =  this.utils.getOperator(facet,
+                  this.hashDict[facet + "_op"], this.settings);
             this.utils.getOperator(facet, operator, this.settings);
             this.utils.updateFacet(facet, operator, this);
           }
