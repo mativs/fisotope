@@ -221,17 +221,23 @@
             selector = this.getJqueryFilter(plugin.selectedFacets,
               plugin.selectedOperators,
               plugin.hashDict.query, plugin.settings);
-            $(selector).each(function(index, value) {
-              theObj = $(value);
-              atributo = theObj.attr("fiso-" + facet);
-              answer = answer.concat(
-                utils.getCategoriesFromAttribute(atributo));
-            });
+            if (selector) {
+              $(selector).each(function(index, value) {
+                theObj = $(value);
+                atributo = theObj.attr("fiso-" + facet);
+                answer = answer.concat(
+                  utils.getCategoriesFromAttribute(atributo));
+              });
 
-            answer = this.unique(answer);
-            answer = $.grep(answer, function(value){
-              return $.inArray(value, plugin.selectedCategories) < 0;
-            });
+              answer = this.unique(answer);
+              answer = $.grep(answer, function(value){
+                return $.inArray(value, plugin.selectedCategories) < 0;
+              });
+            } else {
+              answer = plugin.categories[facet];
+            }
+
+
             answer.sort();
             answer.reverse();
             return answer;
