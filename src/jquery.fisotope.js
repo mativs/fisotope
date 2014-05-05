@@ -42,6 +42,7 @@
         this.facets = [];
         this.selectedFacets = {};
         this.selectedOperators = [];
+        this.filterSelector = "";
 
         this.utils = {
           normalize: function(str) {
@@ -217,12 +218,9 @@
             return eligibleCategories;
           },
           getAvailableCategories: function(facet, plugin) {
-            var answer = [], utils = this, theObj, atributo, selector;
-            selector = this.getJqueryFilter(plugin.selectedFacets,
-              plugin.selectedOperators,
-              plugin.hashDict.query, plugin.settings);
-            if (selector) {
-              $(selector).each(function(index, value) {
+            var answer = [], utils = this, theObj, atributo;
+            if (plugin.filterSelector) {
+              $(plugin.filterSelector).each(function(index, value) {
                 theObj = $(value);
                 atributo = theObj.attr("fiso-" + facet);
                 answer = answer.concat(
@@ -246,13 +244,13 @@
             var $search = $("input.fiso-search");
             $search.val(query);
           },
-          updateTotals:function() {
+          updateTotals:function(plugin) {
             var totalCounterObj = $(".fiso-total-counter"),
                 totalHiddenCounterObj = $(".fiso-total-hidden"),
                 totalVisibleCounterObj = $(".fiso-total-visible"),
-                totalItems = $(".isotope-item").length,
-                totalHidden = $(".isotope-item.isotope-hidden").length,
-                totalVisible = totalItems - totalHidden,
+                totalItems = $(plugin.settings.itemSelector).length,
+                totalVisible = plugin.filterSelector ? $(plugin.filterSelector).length : totalItems,
+                totalHidden = totalItems - totalVisible,
                 theObj,
                 childHidden,
                 childVisible;
@@ -260,14 +258,14 @@
             totalHiddenCounterObj.text(totalHidden);
             totalVisibleCounterObj.text(totalVisible);
 
-            $(".global-info-childs").each(function(){
-              theObj = $(this);
-              childHidden = theObj.children(
-                ".isotope-item.isotope-hidden").length;
-              childVisible = totalItems - totalHidden;
-              theObj.attr("visible", childVisible);
-              theObj.attr("hidden", childHidden);
-            });
+            // $(".global-info-childs").each(function(){
+            //   theObj = $(this);
+            //   childHidden = theObj.children(
+            //     ".isotope-item.isotope-hidden").length;
+            //   childVisible = totalItems - totalHidden;
+            //   theObj.attr("visible", childVisible);
+            //   theObj.attr("hidden", childHidden);
+            // });
           },
           updateCategoryStatus: function(facet, status, linkObjs, statusCategories) {
             var statusSelectors, statusObjects, facetStatusCounter;
@@ -618,11 +616,12 @@
           sort_order = sort_order ? sort_order : this.default_sort_order;
           query = this.hashDict.query ? this.hashDict.query : "";
 
+          this.filterSelector = this.utils.getJqueryFilter(
+            this.selectedFacets, this.selectedOperators,
+            query, this.settings);
 
           this.$element.isotope( {
-              filter: this.utils.getJqueryFilter(
-                this.selectedFacets, this.selectedOperators,
-                query, this.settings),
+              filter: this.filterSelector,
               sortBy : sort ? sort : this.settings.default_sort_name,
               sortAscending: sort_order !== "desc"
             },
@@ -634,7 +633,7 @@
           var index, facet, operator;
 
           this.utils.updateSearch(this.hashDict.query);
-          this.utils.updateTotals();
+          this.utils.updateTotals(this);
 
           for (index in this.facets) {
             facet = this.facets[index];
