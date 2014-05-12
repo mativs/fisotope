@@ -250,10 +250,10 @@
                 totalVisibleCounterObj = $(".fiso-total-visible"),
                 totalItems = $(plugin.settings.itemSelector).length,
                 totalVisible = plugin.filterSelector ? $(plugin.filterSelector).length : totalItems,
-                totalHidden = totalItems - totalVisible,
-                theObj,
-                childHidden,
-                childVisible;
+                totalHidden = totalItems - totalVisible;
+                // theObj,
+                // childHidden,
+                // childVisible;
             totalCounterObj.text(totalItems);
             totalHiddenCounterObj.text(totalHidden);
             totalVisibleCounterObj.text(totalVisible);
